@@ -1,13 +1,13 @@
 # dependencies
-/node_modules
+**/node_modules
 /.pnp
 .pnp.js
 
 # testing
-/coverage
+
 
 # production
-/build
+**/build
 
 # misc
 .DS_Store
@@ -24,12 +24,6 @@ yarn-debug.log*
 yarn-error.log*
 
 # Client
-/public/
 
 # Server
-/config/
-/db/
-/routes/
-/models/
-/controllers/
 app.yaml
