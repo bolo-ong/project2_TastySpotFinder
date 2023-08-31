@@ -1,15 +1,16 @@
 import googleLogo from "../assets/logo/logo_google.png";
 import kakaoLogo from "../assets/logo/logo_kakao.png";
+import { useEscapeKeyHandler } from "../hooks/useEscapeKeyHandler";
 
 interface LogInModalProps {
   setLogInForm: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const LogInModal: React.FC<LogInModalProps> = ({ setLogInForm }) => {
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    // 여기에서 폼 데이터 처리 또는 전달
-  };
+  //ESC키로 폼 닫기
+  useEscapeKeyHandler(() => {
+    setLogInForm(false);
+  });
 
   return (
     <div className="fixed w-full h-full z-30">
@@ -19,7 +20,16 @@ const LogInModal: React.FC<LogInModalProps> = ({ setLogInForm }) => {
           setLogInForm(false);
         }}
       ></div>
+
       <div className="bg-gray-100 container w-5/6 sm:w-1/3 absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 border-8 border-gray-100 rounded-lg">
+        <button
+          className="absolute w-5 h-5 -right-8 -top-10 m-1 mr-3 hover:scale-110 text-white border-2 rounded-full flex justify-center items-center"
+          onMouseDown={() => {
+            setLogInForm(false);
+          }}
+        >
+          x
+        </button>
         <div className="h-11 bg-gray-100 flex flex-row items-center border-2 border-gray-300 my-1 rounded-lg">
           <img
             className="w-10 h-10"

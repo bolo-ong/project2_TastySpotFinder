@@ -23,7 +23,9 @@ const Navbar: React.FC = () => {
             </li>
           </ul>
         </nav>
-        <button onClick={() => setLogInForm(!logInForm)}>logIn</button>
+        <button onClick={() => setLogInForm(!logInForm)} disabled={logInForm}>
+          logIn
+        </button>
       </header>
     </>
   );
