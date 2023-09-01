@@ -5,7 +5,7 @@ import express, { Express, Request, Response, NextFunction } from "express";
 import cors from "cors";
 import mongoose from "mongoose";
 import path from "path";
-// import routes from './routes';
+import routes from "./routes";
 
 const app: Express = express();
 const dbUrl: string | undefined = process.env.DB_URL;
@@ -30,7 +30,7 @@ app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
 
-// app.use('/api', routes);
+app.use("/api", routes);
 
 app.use(express.static(path.join(__dirname, "build")));
 
