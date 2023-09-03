@@ -1,7 +1,5 @@
-// const Routine = require('./Routine');
-const User = require("./User");
+import { User } from "./User";
 
 module.exports = {
-  // Routine,
   User,
 };

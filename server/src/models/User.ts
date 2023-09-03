@@ -1,14 +1,23 @@
-// User.ts
-import mongoose from "mongoose";
-const Schema = mongoose.Schema;
+// models/User.ts 파일
+import { Schema, model } from "mongoose";
 
-const userSchema = new Schema(
+interface KakaoProfile {
+  userId: string;
+  userName: string;
+  provider: string;
+}
+
+const userSchema = new Schema<KakaoProfile>(
   {
-    kakao: {
-      kakaoId: String,
-    },
+    userId: String,
+    userName: String,
+    provider: String,
   },
-  { timestamps: true }
+  {
+    timestamps: true,
+  }
 );
 
-export default mongoose.model("User", userSchema);
+const User = model<KakaoProfile>("User", userSchema);
+
+export { User, KakaoProfile };

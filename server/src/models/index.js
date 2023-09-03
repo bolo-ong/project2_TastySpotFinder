@@ -1,7 +1,6 @@
 "use strict";
-// const Routine = require('./Routine');
-// const User = require('./User');
+Object.defineProperty(exports, "__esModule", { value: true });
+const User_1 = require("./User");
 module.exports = {
-// Routine,
-// User,
+    User: User_1.User,
 };
