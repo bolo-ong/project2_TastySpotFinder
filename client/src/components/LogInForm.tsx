@@ -70,9 +70,7 @@ const LogInModal: React.FC<LogInModalProps> = ({ setLogInForm }) => {
             />
             <span className="mx-auto">카카오 로그인</span>
           </Link>
-          <Link to="http://localhost:8080/api/auth/kakao/logout">
-            로그아웃하기
-          </Link>
+          <Link to="http://localhost:8080/api/auth/logout">로그아웃하기</Link>
         </div>
       </div>
     </>

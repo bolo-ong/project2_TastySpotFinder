@@ -27,3 +27,4 @@ yarn-error.log*
 
 # Server
 app.yaml
+**/dist

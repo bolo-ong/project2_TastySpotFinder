@@ -1,23 +1,17 @@
-// models/User.ts 파일
 import { Schema, model } from "mongoose";
 
-interface KakaoProfile {
-  userId: string;
-  userName: string;
-  provider: string;
-}
-
-const userSchema = new Schema<KakaoProfile>(
+const userSchema = new Schema(
   {
-    userId: String,
-    userName: String,
     provider: String,
+    id: String,
+    displayName: String,
+    profile_image: String,
   },
   {
     timestamps: true,
   }
 );
 
-const User = model<KakaoProfile>("User", userSchema);
+const User = model("User", userSchema);
 
-export { User, KakaoProfile };
+export { User };
