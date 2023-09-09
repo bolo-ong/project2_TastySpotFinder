@@ -1,25 +1,20 @@
-import passport, { Profile } from "passport";
+import passport from "passport";
 import { kakaoStrategy } from "./kakaoStrategy";
-import { User } from "../models/User";
-
-interface User extends Express.User {
-  provider: string;
-  id: string;
-  displayName: string;
-  profile_image: string;
-}
+import { User, UserType } from "../models/User";
 
 passport.serializeUser(
-  (user: Express.User, done: (err: any, id?: unknown) => void) => {
-    done(null, user);
+  (user: UserType, done: (err: Error | null, id?: string) => void) => {
+    done(null, user.userId);
   }
 );
 
-passport.deserializeUser((userId: string, done) => {
-  User.findOne({ userId: userId }, (err: Error | null, user: User | null) => {
-    done(err, user);
-  });
-});
+passport.deserializeUser(
+  (userId: string, done: (err: Error | null, user?: UserType) => void) => {
+    User.findOne({ userId: userId }, (err: Error | null, user?: UserType) => {
+      done(err, user);
+    });
+  }
+);
 
 passport.use("kakao", kakaoStrategy);
 

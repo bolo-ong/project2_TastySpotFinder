@@ -27,7 +27,7 @@ export const kakaoStrategy = new KakaoStrategy(
       } else {
         const newUser = new User({
           provider: "kakao",
-          id: profile.id,
+          userId: profile.id,
           displayName: profile.displayName,
           profile_image: profile._json.properties.profile_image,
         });

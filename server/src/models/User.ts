@@ -1,9 +1,16 @@
-import { Schema, model } from "mongoose";
+import { Schema, model, Document } from "mongoose";
 
-const userSchema = new Schema(
+interface UserType {
+  provider: string;
+  userId: string;
+  displayName: string;
+  profile_image: string;
+}
+
+const userSchema = new Schema<UserType>(
   {
     provider: String,
-    id: String,
+    userId: String,
     displayName: String,
     profile_image: String,
   },
@@ -12,6 +19,6 @@ const userSchema = new Schema(
   }
 );
 
-const User = model("User", userSchema);
+const UserModel = model<UserType & Document>("User", userSchema);
 
-export { User };
+export { UserModel as User, UserType };
