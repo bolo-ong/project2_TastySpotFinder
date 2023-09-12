@@ -3,16 +3,22 @@ import { kakaoStrategy } from "./kakaoStrategy";
 import { User, UserType } from "../models/User";
 
 passport.serializeUser(
-  (user: UserType, done: (err: Error | null, id?: string) => void) => {
+  (user: UserType, done: (err: Error | null, userId: string) => void) => {
+    // console.log("serialize", user);
     done(null, user.userId);
   }
 );
 
 passport.deserializeUser(
-  (userId: string, done: (err: Error | null, user?: UserType) => void) => {
-    User.findOne({ userId: userId }, (err: Error | null, user?: UserType) => {
-      done(err, user);
-    });
+  (user: string, done: (err: Error | null, user: UserType | null) => void) => {
+    User.findOne({ userId: user })
+      .then((user: UserType | null) => {
+        done(null, user);
+        console.log("deserialize", user);
+      })
+      .catch((err) => {
+        done(err, null);
+      });
   }
 );
 

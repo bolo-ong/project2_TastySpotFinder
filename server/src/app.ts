@@ -9,6 +9,9 @@ import routes from "./routes";
 import passport from "./passport";
 import cookieParser from "cookie-parser";
 import session from "express-session";
+import FileStore from "session-file-store";
+
+const FileStoreWithSession = FileStore(session);
 
 const app: Express = express();
 const dbUrl: string | undefined = process.env.DB_URL;
@@ -25,20 +28,16 @@ app.use(express.json());
 app.use(cookieParser(process.env.COOKIE_SECRET));
 app.use(
   session({
+    store: new FileStoreWithSession(),
     secret: process.env.COOKIE_SECRET || "",
     resave: false,
     saveUninitialized: true,
     cookie: {
       httpOnly: true,
-      secure: true,
+      // secure: true,
     },
   })
 );
-
-// app.use((req, res, next) => {
-//   console.log("Session Data:", req.session);
-//   next();
-// });
 
 app.use(passport.initialize());
 app.use(passport.session());
@@ -54,7 +53,6 @@ mongoose.connection.on("error", (error: Error) => {
   console.error("MongoDB connection error:", error);
 });
 
-// Express 서버 실행
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
