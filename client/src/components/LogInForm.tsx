@@ -1,8 +1,6 @@
 import googleLogo from "../assets/logo/logo_google.png";
 import kakaoLogo from "../assets/logo/logo_kakao.png";
 import { useEscapeKeyHandler } from "../hooks/useEscapeKeyHandler";
-import { useSocialLoginQuery } from "../queries/useSocialLoginQuery";
-import { useState } from "react";
 import { Link } from "react-router-dom";
 
 interface LogInModalProps {
@@ -15,19 +13,8 @@ const LogInModal: React.FC<LogInModalProps> = ({ setLogInForm }) => {
     setLogInForm(false);
   });
 
-  const [platform, setPlatform] = useState<string>("");
-
-  const {
-    isSocialLogInLoading,
-    socialLogInError,
-    socialLogInData,
-    isSocialLogInSuccess,
-  } = useSocialLoginQuery(platform);
-
   return (
     <>
-      {isSocialLogInLoading && <span>Loading...</span>}
-
       <div className="fixed w-full h-full z-30">
         <div
           className="w-full h-full bg-black opacity-80"
@@ -45,10 +32,7 @@ const LogInModal: React.FC<LogInModalProps> = ({ setLogInForm }) => {
           >
             x
           </button>
-          <div
-            className="h-11 bg-gray-100 flex flex-row items-center border-2 border-gray-300 my-1 rounded-lg"
-            onClick={() => setPlatform("google")}
-          >
+          <div className="h-11 bg-gray-100 flex flex-row items-center border-2 border-gray-300 my-1 rounded-lg">
             <img
               className="w-10 h-10"
               src={googleLogo}
