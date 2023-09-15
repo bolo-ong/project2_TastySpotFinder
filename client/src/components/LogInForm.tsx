@@ -2,11 +2,9 @@ import googleLogo from "../assets/logo/logo_google.png";
 import kakaoLogo from "../assets/logo/logo_kakao.png";
 import { useEscapeKeyHandler } from "../hooks/useEscapeKeyHandler";
 import { Link } from "react-router-dom";
-
 interface LogInModalProps {
   setLogInForm: React.Dispatch<React.SetStateAction<boolean>>;
 }
-
 const LogInModal: React.FC<LogInModalProps> = ({ setLogInForm }) => {
   // ESC 키로 폼 닫기
   useEscapeKeyHandler(() => {

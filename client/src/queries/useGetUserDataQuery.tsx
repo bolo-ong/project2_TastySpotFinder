@@ -12,8 +12,10 @@ export const useGetUserDataQuery = () => {
     error: getUserDataError,
     data: userData,
     isSuccess: getUserDataSuccess,
-  } = useQuery([`userData`], () => getUserData(), {
+  } = useQuery(["userData"], () => getUserData(), {
     select: (res) => res.data,
+    refetchOnMount: false,
+    refetchOnWindowFocus: false,
   });
 
   return {

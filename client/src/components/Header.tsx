@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import LogInForm from "./LogInForm";
 import { useGetUserDataQuery } from "../queries/useGetUserDataQuery";
 
-const Navbar: React.FC = () => {
+const Header: React.FC = () => {
   const [logInForm, setLogInForm] = useState(false);
 
   const { getUserDataError, userData, getUserDataSuccess } =
@@ -36,4 +36,4 @@ const Navbar: React.FC = () => {
   );
 };
 
-export default Navbar;
+export default Header;

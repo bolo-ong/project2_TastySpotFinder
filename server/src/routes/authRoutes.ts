@@ -19,16 +19,14 @@ authRouter.get(
 
 const KAKAO_LOGOUT_URL = `https://kauth.kakao.com/oauth/logout?client_id=${process.env.KAKAO_CLIENT_ID}&logout_redirect_uri=${CLIENT_URL}`;
 authRouter.get("/logout", (req, res, next) => {
-  if (req.isAuthenticated()) {
-    req.logout((err) => {
-      if (err) {
-        console.log("logout", err);
-      }
-      req.session.save(() => {
-        res.redirect(KAKAO_LOGOUT_URL);
-      });
+  req.logout((err) => {
+    if (err) {
+      console.log("logout", err);
+    }
+    req.session.save(() => {
+      res.redirect(KAKAO_LOGOUT_URL);
     });
-  }
+  });
 });
 
 authRouter.get("/user", (req, res) => {
