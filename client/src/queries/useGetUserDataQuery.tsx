@@ -12,6 +12,7 @@ export const useGetUserDataQuery = () => {
     error: getUserDataError,
     data: userData,
     isSuccess: getUserDataSuccess,
+    isLoading: getUserDataLoading,
   } = useQuery(["userData"], () => getUserData(), {
     select: (res) => res.data,
     refetchOnMount: false,
@@ -22,5 +23,6 @@ export const useGetUserDataQuery = () => {
     getUserDataError,
     userData,
     getUserDataSuccess,
+    getUserDataLoading,
   };
 };

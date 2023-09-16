@@ -2,19 +2,20 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import LogInForm from "./LogInForm";
 import { useGetUserDataQuery } from "../queries/useGetUserDataQuery";
+import { useQuery } from "@tanstack/react-query";
 
 const Header: React.FC = () => {
-  const [logInForm, setLogInForm] = useState(false);
+  const [logInFormOpen, setLogInFormOpen] = useState(false);
+  const [dropBoxOpen, setDropBoxOpen] = useState(false);
 
-  const { getUserDataError, userData, getUserDataSuccess } =
-    useGetUserDataQuery();
+  const { userData, getUserDataLoading } = useGetUserDataQuery();
   console.log(userData);
 
   return (
     <>
-      {logInForm === true && <LogInForm setLogInForm={setLogInForm} />}
+      {logInFormOpen === true && <LogInForm setLogInForm={setLogInFormOpen} />}
 
-      <header className="w-full flex justify-around items-center p-3 text-gray-600 sticky z-20 border-b border-b-gray-300">
+      <header className=" w-full flex justify-around items-center p-3 text-gray-600 sticky z-20 border-b border-b-gray-300 shadow">
         <Link to="/" className="title-font font-medium">
           Title
         </Link>
@@ -28,9 +29,33 @@ const Header: React.FC = () => {
             </li>
           </ul>
         </nav>
-        <button onClick={() => setLogInForm(!logInForm)} disabled={logInForm}>
-          logIn
-        </button>
+        {userData ? (
+          <div>
+            <img
+              className="h-8 w-8 rounded-full cursor-pointer"
+              src={userData.profile_image}
+              alt="profile_image"
+              onClick={() => setDropBoxOpen(!dropBoxOpen)}
+            />
+            {dropBoxOpen && (
+              <div className="absolute z-30 bg-white border border-gray-300 p-1 mt-1 text-sm rounded-full shadow hover:bg-gray-200 transition duration-150 ease-in-out">
+                <Link
+                  to={`http://localhost:8080/api/auth/logout/${userData.provider}`}
+                >
+                  Log Out
+                </Link>
+              </div>
+            )}
+          </div>
+        ) : (
+          <button
+            className="h-8"
+            onClick={() => setLogInFormOpen(!logInFormOpen)}
+            disabled={logInFormOpen}
+          >
+            LogIn
+          </button>
+        )}
       </header>
     </>
   );

@@ -6,10 +6,11 @@ import { User } from "../models/User";
 
 const KAKAO_CLIENT_ID: string | undefined = process.env.KAKAO_CLIENT_ID;
 const KAKAO_CLIENT_SECRET: string | undefined = process.env.KAKAO_CLIENT_SECRET;
-const LOGIN_REDIRECT_URI: string =
-  process.env.LOGIN_REDIRECT_URI || "http://localhost:8080/oauth";
+const KAKAO_LOGIN_REDIRECT_URI: string =
+  process.env.KAKAO_LOGIN_REDIRECT_URI ||
+  "http://localhost:8080/api/auth/oauth/kakao";
 
-if (!KAKAO_CLIENT_ID || !KAKAO_CLIENT_SECRET || !LOGIN_REDIRECT_URI) {
+if (!KAKAO_CLIENT_ID || !KAKAO_CLIENT_SECRET || !KAKAO_LOGIN_REDIRECT_URI) {
   throw new Error("Kakao OAuth configuration missing");
 }
 
@@ -17,7 +18,7 @@ export const kakaoStrategy = new KakaoStrategy(
   {
     clientID: KAKAO_CLIENT_ID,
     clientSecret: KAKAO_CLIENT_SECRET,
-    callbackURL: LOGIN_REDIRECT_URI,
+    callbackURL: KAKAO_LOGIN_REDIRECT_URI,
   },
   async (accessToken, refreshToken, profile: KakaoProfile, done) => {
     try {
@@ -35,7 +36,7 @@ export const kakaoStrategy = new KakaoStrategy(
         return done(null, newUser);
       }
     } catch (error) {
-      return done(error);
+      return done(error as Error);
     }
   }
 );

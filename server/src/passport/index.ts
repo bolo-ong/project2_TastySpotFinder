@@ -1,5 +1,6 @@
 import passport from "passport";
 import { kakaoStrategy } from "./kakaoStrategy";
+import { googleStrategy } from "./googleStrategy";
 import { User, UserType } from "../models/User";
 
 passport.serializeUser(
@@ -23,5 +24,6 @@ passport.deserializeUser(
 );
 
 passport.use("kakao", kakaoStrategy);
+passport.use("google", googleStrategy);
 
 export default passport;

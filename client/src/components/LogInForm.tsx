@@ -30,7 +30,10 @@ const LogInModal: React.FC<LogInModalProps> = ({ setLogInForm }) => {
           >
             x
           </button>
-          <div className="h-11 bg-gray-100 flex flex-row items-center border-2 border-gray-300 my-1 rounded-lg">
+          <Link
+            to="http://localhost:8080/api/auth/google"
+            className="h-11 bg-gray-100 flex flex-row items-center border-2 border-gray-300 my-1 rounded-lg"
+          >
             <img
               className="w-10 h-10"
               src={googleLogo}
@@ -38,7 +41,7 @@ const LogInModal: React.FC<LogInModalProps> = ({ setLogInForm }) => {
               style={{ backgroundImage: `url(${googleLogo})` }}
             />
             <span className="mx-auto">구글 로그인</span>
-          </div>
+          </Link>
 
           <Link
             to="http://localhost:8080/api/auth/kakao"
@@ -52,7 +55,6 @@ const LogInModal: React.FC<LogInModalProps> = ({ setLogInForm }) => {
             />
             <span className="mx-auto">카카오 로그인</span>
           </Link>
-          <Link to="http://localhost:8080/api/auth/logout">로그아웃하기</Link>
         </div>
       </div>
     </>
