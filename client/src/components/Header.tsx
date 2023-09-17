@@ -8,13 +8,12 @@ const Header: React.FC = () => {
   const [logInFormOpen, setLogInFormOpen] = useState(false);
   const [dropBoxOpen, setDropBoxOpen] = useState(false);
 
-  const { userData, getUserDataLoading } = useGetUserDataQuery();
+  const { userData, getUserDataSuccess } = useGetUserDataQuery();
   console.log(userData);
 
   return (
     <>
       {logInFormOpen === true && <LogInForm setLogInForm={setLogInFormOpen} />}
-
       <header className=" w-full flex justify-around items-center p-3 text-gray-600 sticky z-20 border-b border-b-gray-300 shadow">
         <Link to="/" className="title-font font-medium">
           Title
@@ -29,8 +28,10 @@ const Header: React.FC = () => {
             </li>
           </ul>
         </nav>
-        {userData ? (
-          <div>
+        {/* 새로고침 시 userData가 undefined로 초기화 되면서 UI가 망가지는 현상을 div를 생성해서 막아줌 */}
+        {userData === undefined && <div className="w-10	h-8"></div>}
+        {userData && userData !== "Login information not found." && (
+          <div className="w-10 h-8">
             <img
               className="h-8 w-8 rounded-full cursor-pointer"
               src={userData.profile_image}
@@ -47,9 +48,10 @@ const Header: React.FC = () => {
               </div>
             )}
           </div>
-        ) : (
+        )}
+        {userData === "Login information not found." && (
           <button
-            className="h-8"
+            className="w-10	h-8"
             onClick={() => setLogInFormOpen(!logInFormOpen)}
             disabled={logInFormOpen}
           >

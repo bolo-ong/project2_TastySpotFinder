@@ -54,6 +54,8 @@ authRouter.get("/logout/google", (req, res, next) => {
 authRouter.get("/user", (req, res) => {
   if (req.isAuthenticated()) {
     res.send(req.user);
+  } else {
+    res.send("Login information not found.");
   }
 });
 
