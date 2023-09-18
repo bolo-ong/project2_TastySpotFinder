@@ -6,7 +6,7 @@ import { useQuery } from "@tanstack/react-query";
 
 const Header: React.FC = () => {
   const [logInFormOpen, setLogInFormOpen] = useState(false);
-  const [dropBoxOpen, setDropBoxOpen] = useState(false);
+  const [dropDownOpen, setDropDownOpen] = useState(false);
 
   const { userData, getUserDataSuccess } = useGetUserDataQuery();
   console.log(userData);
@@ -36,9 +36,9 @@ const Header: React.FC = () => {
               className="h-8 w-8 rounded-full cursor-pointer"
               src={userData.profile_image}
               alt="profile_image"
-              onClick={() => setDropBoxOpen(!dropBoxOpen)}
+              onClick={() => setDropDownOpen(!dropDownOpen)}
             />
-            {dropBoxOpen && (
+            {dropDownOpen && (
               <div className="absolute z-30 bg-white border border-gray-300 p-1 mt-1 text-sm rounded-full shadow hover:bg-gray-200 transition duration-150 ease-in-out">
                 <Link
                   to={`http://localhost:8080/api/auth/logout/${userData.provider}`}
