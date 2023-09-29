@@ -1,3 +1,9 @@
+import { NaverMap } from "../components/NaverMap";
+
 export const Main = () => {
-  return <div className=""></div>;
+  return (
+    <div className="">
+      <NaverMap />
+    </div>
+  );
 };
