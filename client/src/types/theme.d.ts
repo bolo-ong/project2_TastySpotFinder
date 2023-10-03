@@ -10,13 +10,10 @@ declare module "@emotion/react" {
     colors: {
       white: string;
       black: string;
-      blackLight: string;
       gray: string;
-      grayLight: string;
       darkgray: string;
-      darkgrayLight: string;
       main: string;
-      mainLight: string;
     };
+    pxToRem: (px: number) => string;
   }
 }

@@ -1,7 +1,6 @@
 import styled from "@emotion/styled";
-import { theme } from "../../styles/theme";
+import { makeLightColor } from "utils/makeLightColor";
 
-//theme provider위치 확인, 타입 지정 확인, remcal만들어서 rem으로 치횐, ... 호버 이벤트쪽 로직 수정
 interface Props {
   size?: string | number;
   weight?: string | number;
@@ -9,19 +8,9 @@ interface Props {
   hoverable?: boolean;
 }
 
-const getLightColor = (color: string | undefined) => {
-  switch (color) {
-    case theme.colors.main:
-      return theme.colors.mainLight;
-    case "black":
-      return theme.colors.blackLight;
-    default:
-      return theme.colors.blackLight;
-  }
-};
-
 export const Text = styled.span<Props>`
-  font-size: ${({ size }) => (size ? `${size}` : `16px`)};
+  font-size: ${({ size, theme }) =>
+    size ? theme.pxToRem(parseInt(`${size}`)) : theme.pxToRem(16)};
   font-weight: ${({ weight }) => weight || ""};
   color: ${({ color, theme }) => (color ? `${color}` : theme.colors.black)};
 
@@ -29,7 +18,9 @@ export const Text = styled.span<Props>`
     hoverable &&
     `
     &:hover {
-        color: ${color ? getLightColor(color) : theme.colors.blackLight};
+        color: ${
+          color ? makeLightColor(color) : makeLightColor(theme.colors.black)
+        };
     }
   `}
 `;

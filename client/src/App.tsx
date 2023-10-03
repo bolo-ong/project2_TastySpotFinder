@@ -1,11 +1,10 @@
+import styled from "@emotion/styled";
+import { ThemeProvider } from "@emotion/react";
+import { theme, GlobalStyle } from "./styles";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import { Main, Board } from "./pages";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
-import styled from "@emotion/styled";
-import { GlobalStyle } from "./styles/GlobalStyle";
-import { ThemeProvider } from "@emotion/react";
-import { theme } from "./styles/theme";
+import { Main, Board } from "./pages";
 
 const queryClient = new QueryClient({
   defaultOptions: {
