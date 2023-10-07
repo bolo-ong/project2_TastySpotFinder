@@ -10,13 +10,14 @@ interface Props {
 
 export const Text = styled.span<Props>`
   font-size: ${({ size, theme }) =>
-    size ? theme.pxToRem(parseInt(`${size}`)) : theme.pxToRem(16)};
-  font-weight: ${({ weight }) => weight || ""};
+    size ? theme.pxToRem(parseInt(`${size}`)) : "1rem"};
+  font-weight: ${({ weight }) => weight};
   color: ${({ color, theme }) => (color ? `${color}` : theme.colors.black)};
 
   ${({ hoverable, color, theme }) =>
     hoverable &&
     `
+    transition: color 0.3s ease-in-out;
     &:hover {
         color: ${
           color ? makeLightColor(color) : makeLightColor(theme.colors.black)
