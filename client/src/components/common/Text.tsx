@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { makeLightColor } from "utils/makeLightColor";
+import { makeLightColor } from "utils/colorUtils";
 
 interface Props {
   size?: string | number;
