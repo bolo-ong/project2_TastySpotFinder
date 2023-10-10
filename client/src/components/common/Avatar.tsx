@@ -2,7 +2,7 @@ import styled from "@emotion/styled";
 
 export const Avatar = ({ size, src, hoverable }: Props) => {
   return (
-    <AvatarWrapper size={size} hoverable>
+    <AvatarWrapper size={size} hoverable={hoverable}>
       <StyledAvatar src={src} alt="profile_img" />
     </AvatarWrapper>
   );

@@ -1,4 +1,3 @@
-import styled from "@emotion/styled";
 import { ThemeProvider } from "@emotion/react";
 import { theme, GlobalStyle } from "./styles";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
