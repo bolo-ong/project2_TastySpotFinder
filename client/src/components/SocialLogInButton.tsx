@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 import { Link } from "react-router-dom";
-import { Image } from "./index";
+import { Image } from ".";
 
 export const SocialLogInButton = ({ children, platform }: Props) => {
   return (
@@ -32,8 +32,8 @@ const StyledSocialLogInButton = styled.button<Props>`
   font-weight: 600;
   border-radius: 0.25rem;
 
+  transition: filter 0.2s ease-in-out;
   &:hover {
-    transition: 0.2s ease-in-out;
     filter: brightness(0.9);
   }
   ${({ platform }) => {
