@@ -17,7 +17,7 @@ export const Text = styled.span<Props>`
   ${({ hoverable, color, theme }) =>
     hoverable &&
     `
-    transition: color 0.3s ease-in-out;
+    transition: color 0.2s ease-in-out;
     &:hover {
         color: ${
           color ? makeLightColor(color) : makeLightColor(theme.colors.black)
