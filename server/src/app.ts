@@ -10,6 +10,7 @@ import passport from "./passport";
 import cookieParser from "cookie-parser";
 import session from "express-session";
 import FileStore from "session-file-store";
+import bodyParser from "body-parser";
 
 const FileStoreWithSession = FileStore(session);
 
@@ -29,7 +30,7 @@ app.use(cookieParser(process.env.COOKIE_SECRET));
 app.use(
   session({
     store: new FileStoreWithSession(),
-    secret: process.env.COOKIE_SECRET || "",
+    secret: process.env.COOKIE_SECRET ?? "",
     resave: false,
     saveUninitialized: true,
     cookie: {
@@ -42,6 +43,9 @@ app.use(
 
 app.use(passport.initialize());
 app.use(passport.session());
+
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 
 mongoose.Promise = Promise;
 mongoose.connect(`${dbUrl}`);
