@@ -237,57 +237,12 @@ const url = "https://naver.me/x3qhEqMD";
           }
 
           const priceXpathSelectors = [
-            `//*[@id="app-root"]/div/div/div/div[7]/div[2]/div[1]/div/ul/li[${
+            `//*[@id="app-root"]/div/div/div/div[7]/div/div/div/ul/li[${
               j + 1
             }]/a/div/div`,
-            `//*[@id="app-root"]/div/div/div/div[7]/div[2]/div[1]/div/ul/li[${
+            `//*[@id="root"]/div[3]/div/div/div/div/div/ul/li[${
               j + 1
-            }]/a/div/div[2]`,
-            `//*[@id="app-root"]/div/div/div/div[7]/div[2]/div[1]/div/ul/li[${
-              j + 1
-            }]/a/div/div[3]`,
-            `//*[@id="app-root"]/div/div/div/div[7]/div[2]/div[1]/div/ul/li[${
-              j + 1
-            }]/a/div[2]/div[2]`,
-            `//*[@id="app-root"]/div/div/div/div[7]/div/div[3]/div/ul/li[${
-              j + 1
-            }]/a/div[2]/div[2]`,
-            `//*[@id="app-root"]/div/div/div/div[7]/div[2]/div[1]/div[1]/ul/li[${
-              j + 1
-            }]/a/div[2]/div[2]`,
-            `//*[@id="app-root"]/div/div/div/div[7]/div[2]/div[1]/div[1]/ul/li[${
-              j + 1
-            }]/a/div[2]/div[3]`,
-            `//*[@id="app-root"]/div/div/div/div[7]/div[2]/div[1]/div/ul/li[${
-              j + 1
-            }]/a/div[2]/div[3]`,
-            `//*[@id="app-root"]/div/div/div/div[7]/div/div[3]/div/ul/li[${
-              j + 1
-            }]/a/div[2]/div[3]`,
-            `//*[@id="root"]/div[3]/div/div/div[2]/div[2]/div[1]/ul/li[${
-              j + 1
-            }]/div/a/div[2]/div[4]`,
-            `//*[@id="root"]/div[3]/div/div/div[2]/div[2]/div[1]/ul/li[${
-              j + 1
-            }]/div/a[1]/div[2]/div[3]`,
-            `//*[@id="root"]/div[3]/div/div/div[2]/div[2]/div[1]/ul/li[${
-              j + 1
-            }]/div/a[1]/div[2]/div[4]`,
-            `//*[@id="root"]/div[3]/div/div/div[2]/div[2]/div[1]/ul/li[${
-              j + 1
-            }]/div/a[1]/div/div[4]`,
-            `//*[@id="root"]/div[3]/div/div/div[2]/div[2]/div/ul/li[${
-              j + 1
-            }]/div/a/div/div[3]`,
-            `//*[@id="root"]/div[3]/div/div/div[2]/div[2]/div[1]/ul/li[${
-              j + 1
-            }]/div/a[1]/div[2]/div[4]`,
-            `//*[@id="root"]/div[3]/div/div/div[2]/div[2]/div[2]/ul/li[${
-              j + 1
-            }]/div/a/div[2]/div[4]`,
-            `//*[@id="root"]/div[3]/div/div/div[2]/div[2]/div[1]/ul/li[${
-              j + 1
-            }]/div/a/div/div[4]`,
+            }]/div/a/div/div`,
           ];
 
           let priceElementHandles;
@@ -313,7 +268,7 @@ const url = "https://naver.me/x3qhEqMD";
               }
             }
             // console.log(priceText);
-            await page.waitForTimeout(1000);
+
             priceFindRetryCount++;
           }
 
