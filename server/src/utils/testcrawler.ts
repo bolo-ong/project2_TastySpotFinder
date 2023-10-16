@@ -59,13 +59,14 @@ const url = "https://naver.me/x3qhEqMD";
     const iframeSelector = "#entryIframe";
     // iframe 요소에 대한 핸들을 가져옴
     const iframeHandle = await page
-      .waitForSelector(iframeSelector, { timeout: 5000 })
+      .waitForSelector(iframeSelector, { timeout: 1000 })
       .catch(() => null);
 
     if (!iframeHandle) {
       console.log("아이프레임이 존재하지 않으므로 다음으로 넘어갑니다.");
       await listItemHandles[i].click();
       await page.waitForTimeout(3000);
+
       continue;
     }
 
@@ -181,41 +182,17 @@ const url = "https://naver.me/x3qhEqMD";
       if (menuElementHandles) {
         for (let j = 0; j < menuElementHandles.length; j++) {
           const nameXpathSelectors = [
-            `//*[@id="app-root"]/div/div/div/div[7]/div/div/div/ul/li[${
+            `//*[@id="app-root"]/div/div/div/div/div/div/div/ul/li[${
               j + 1
-            }]/a/div[2]/div[1]/div/span`,
-            `//*[@id="app-root"]/div/div/div/div[7]/div[2]/div[1]/div/ul/li[${
+            }]/a/div/div/div/span`,
+            `//*[@id="root"]/div[3]/div/div/div[2]/div[2]/div/ul/li[${
               j + 1
-            }]/a/div/div[1]/div/span[1]`,
-            `//*[@id="app-root"]/div/div/div/div[7]/div[2]/div[1]/div/ul/li[${
-              j + 1
-            }]/a/div/div[1]/div/span`,
-            `//*[@id="app-root"]/div/div/div/div[6]/div/div/div/ul/li[${
-              j + 1
-            }]/a/div[2]/div[1]/div/span`,
-            `//*[@id="app-root"]/div/div/div/div[6]/div/div/div/ul/li[${
-              j + 1
-            }]/a/div[2]/div[1]/div/span[1]`,
-            `//*[@id="app-root"]/div/div/div/div[6]/div/div/div/ul/li[${
-              j + 1
-            }]/a/div[2]/div[1]/div`,
-            `//*[@id="root"]/div[3]/div/div/div[2]/div[2]/div[1]/ul/li[${
-              j + 1
-            }]/div/a/div[2]/div[1]`,
-            `//*[@id="root"]/div[3]/div/div/div[2]/div[2]/div[1]/ul/li[${
-              j + 1
-            }]/div/a/div/div[1]`,
-            `//*[@id="root"]/div[3]/div/div/div[2]/div[2]/div[1]/ul/li[${
-              j + 1
-            }]/div/a[1]/div[2]/div[1]`,
-            `//*[@id="root"]/div[3]/div/div/div[2]/div[2]/div[2]/ul/li[${
-              j + 1
-            }]/div/a/div[2]/div[1]`,
+            }]/div/a/div/div`,
           ];
 
           let nameElementHandles;
           let nameText;
-          const nameFindMaxRetries = nameXpathSelectors.length;
+          const nameFindMaxRetries = 3;
           let nameFindRetryCount = 0;
 
           while (
@@ -248,7 +225,7 @@ const url = "https://naver.me/x3qhEqMD";
           let priceElementHandles;
           let priceText;
           let isFind = false;
-          const priceFindMaxRetries = priceXpathSelectors.length;
+          const priceFindMaxRetries = 3;
           let priceFindRetryCount = 0;
 
           while (priceFindRetryCount < priceFindMaxRetries && isFind == false) {
@@ -267,8 +244,6 @@ const url = "https://naver.me/x3qhEqMD";
                 }
               }
             }
-            // console.log(priceText);
-
             priceFindRetryCount++;
           }
 
