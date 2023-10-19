@@ -1,6 +1,7 @@
 import { Schema, model, Document } from "mongoose";
 
-interface UserType {
+// TypeScript 인터페이스 정의
+interface UserType extends Document {
   provider: string;
   userId: string;
   displayName: string;
@@ -9,16 +10,16 @@ interface UserType {
 
 const userSchema = new Schema<UserType>(
   {
-    provider: String,
-    userId: String,
-    displayName: String,
-    profile_image: String,
+    provider: { type: String },
+    userId: { type: String },
+    displayName: { type: String },
+    profile_image: { type: String },
   },
   {
     timestamps: true,
   }
 );
 
-const UserModel = model<UserType & Document>("User", userSchema);
+const User = model<UserType>("User", userSchema);
 
-export { UserModel as User, UserType };
+export { User, UserType };

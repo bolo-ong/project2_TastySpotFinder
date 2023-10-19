@@ -188,6 +188,7 @@ export async function crawlData(url: string) {
         menu: menuDataArray,
         img: imgDataArray,
       };
+
       //메뉴 데이터가 없으면 식당이 아닌걸로 판단
       if (menuDataArray.length > 0) {
         dataSetArray.push(dataObject);
