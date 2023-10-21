@@ -1,7 +1,6 @@
-import { Schema, model, Document } from "mongoose";
+import { Schema, model } from "mongoose";
 
-// TypeScript 인터페이스 정의
-interface UserType extends Document {
+interface UserType {
   provider: string;
   userId: string;
   displayName: string;

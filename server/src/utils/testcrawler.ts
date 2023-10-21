@@ -5,7 +5,7 @@ export async function crawlData(url: string): Promise<RestaurantType[]> {
   const dataSetArray = [];
   //페이지 초기 세팅
   const browser = await puppeteer.launch({
-    headless: "new",
+    headless: false,
   });
 
   const page = await browser.newPage();
@@ -204,12 +204,18 @@ export async function crawlData(url: string): Promise<RestaurantType[]> {
       };
 
       //메뉴 데이터가 없으면 식당이 아닌걸로 판단
-      if (menuDataArray.length > 0) {
-        dataSetArray.push(dataObject);
-      }
+      // if (menuDataArray.length > 0) {
+      dataSetArray.push(dataObject);
+      // }
+      console.log(menuDataArray);
+      console.log(imgDataArray);
     }
   }
   await browser.close();
-
+  console.log(dataSetArray);
+  console.log(dataSetArray.length);
   return dataSetArray;
 }
+
+// crawlData("https://naver.me/IxWIraXF");
+crawlData("https://naver.me/IgDvylC0");
