@@ -5,7 +5,7 @@ export async function crawlData(url: string): Promise<RestaurantType[]> {
   const dataSetArray = [];
   //페이지 초기 세팅
   const browser = await puppeteer.launch({
-    headless: false,
+    headless: "new",
   });
 
   const page = await browser.newPage();
@@ -50,21 +50,6 @@ export async function crawlData(url: string): Promise<RestaurantType[]> {
 
     if (iframeHandle) {
       const frame = await iframeHandle.contentFrame();
-
-      //스크롤 끝까지 내려가기
-      let prevHeight = 0;
-      while (true) {
-        await frame.evaluate("scrollTo(0, document.body.scrollHeight)");
-        await new Promise((resolve) => setTimeout(resolve, 700));
-        // 현재 iframe 내부의 스크롤 높이 가져오기
-        const currentHeight = await frame.evaluate(
-          "document.body.scrollHeight"
-        );
-        if (currentHeight === prevHeight) {
-          break;
-        }
-        prevHeight = currentHeight;
-      }
 
       let nameText = "등록되어 있지 않습니다.";
       const nameXpathSelector = `//*[@id="_title"]/span[1]`;
@@ -115,84 +100,166 @@ export async function crawlData(url: string): Promise<RestaurantType[]> {
         }
       }
 
-      const menuDataArray = [];
-      const menuXpathSelector = [
-        `//*[@id="app-root"]/div/div/div/div/div/div[3]/div[1]/ul/li`,
-        `//*[@id="app-root"]/div/div/div/div/div/div[2]/div[1]/ul/li`,
-        `//*[@id="app-root"]/div/div/div/div/div/div[3]/div/ul/li`,
-        `//*[@id="app-root"]/div/div/div/div/div/div[2]/div/ul/li`,
-        `//*[@id="app-root"]/div/div/div/div/div/div[3]/div/div/ul/li`,
-        `//*[@id="app-root"]/div/div/div/div/div/div[2]/div/div/ul/li`,
-
-        // `//*[@id="app-root"]/div/div/div/div[6]/div/div[2]/div/ul/li`,
-        // `//*[@id="app-root"]/div/div/div/div[6]/div/div[3]/div/ul/li`,
-        // `//*[@id="app-root"]/div/div/div/div[6]/div/div[2]/div/div/ul/li`,
-        // `//*[@id="app-root"]/div/div/div/div[6]/div/div[3]/div/div/ul/li`,
-        // `//*[@id="app-root"]/div/div/div/div[7]/div/div[2]/div/ul/li`,
-        // `//*[@id="app-root"]/div/div/div/div[7]/div/div[3]/div/ul/li`,
-        // `//*[@id="app-root"]/div/div/div/div[7]/div/div[2]/div/div/ul/li`,
-        // `//*[@id="app-root"]/div/div/div/div[7]/div/div[3]/div/div/ul/li`,
+      const menuTabXpathSelector = [
+        `//*[@id="app-root"]/div/div/div/div[4]/div/div/div/div/a[2]/span`,
+        `//*[@id="app-root"]/div/div/div/div[4]/div/div/div/div/a[3]/span`,
       ];
-      let menuElementHandles;
-      let menuText;
-      for (const selector of menuXpathSelector) {
-        menuElementHandles = await frame.$x(selector);
-        menuText = await menuElementHandles[0]?.evaluate(
+      const menuDataArray = [];
+      const menuNameArray = [];
+      const menuPriceArray = [];
+      for (const selector of menuTabXpathSelector) {
+        const menuTabElementHandles = await frame.$x(selector);
+        const menuTabText = await menuTabElementHandles[0]?.evaluate(
           (element: Element) => element.textContent
         );
-        if (
-          (menuText && menuText.includes("00원")) ||
-          (menuText && menuText.includes("변동"))
-        ) {
-          for (let j = 0; j < menuElementHandles.length && j < 4; j++) {
-            menuText = await menuElementHandles[j].evaluate(
-              (element: Element) => element.textContent
-            );
-            let cleanedText = menuText
-              .replace(/(사진|대표)/g, "")
-              .replace(/변동.*/, " 변동")
-              .replace(/원.*/, "원")
-              .replace(/(\d+(,\d+)원)/, " $1");
-            await menuDataArray.push(cleanedText);
+        if (menuTabText && menuTabText === "메뉴") {
+          await menuTabElementHandles[0].click();
+          await new Promise((resolve) => setTimeout(resolve, 2000));
+
+          const menuNameXpathSelector = [
+            `//*[@id="root"]/div[3]/div/div/div[2]/div[2]/div[2]/ul/li/div/a[1]/div[2]/div[1]`,
+            `//*[@id="app-root"]/div/div/div/div[6]/div/div/div/ul/li/a/div/div/div/span[1]`,
+          ];
+          for (const selector of menuNameXpathSelector) {
+            const menuNameElementHandles = await frame.$x(selector);
+            if (menuNameElementHandles.length > 0) {
+              for (let i = 0; i < menuNameElementHandles.length; i++) {
+                let menuName = await menuNameElementHandles[i].evaluate(
+                  (element: Element) => element.textContent
+                );
+                let cleanedMenuName = menuName.replace(/(사진|대표|인기)/g, "");
+                menuNameArray.push(cleanedMenuName);
+              }
+              break;
+            }
+          }
+          const menuPriceXpathSelector = [
+            `//*[@id="root"]/div[3]/div/div/div[2]/div[2]/div[2]/ul/li/div/a[1]/div[2]/div[4]`,
+            `//*[@id="app-root"]/div/div/div/div[6]/div/div/div/ul/li/a/div/div`,
+          ];
+          for (const selector of menuPriceXpathSelector) {
+            const menuPriceElementHandles = await frame.$x(selector);
+            if (menuPriceElementHandles.length > 0) {
+              for (let i = 0; i < menuPriceElementHandles.length; i++) {
+                let menuPrice = await menuPriceElementHandles[i].evaluate(
+                  (element: Element) => element.textContent
+                );
+                if (
+                  menuPrice &&
+                  (menuPrice.includes("00원") || menuPrice.includes("변동"))
+                ) {
+                  menuPriceArray.push(menuPrice);
+                }
+              }
+              break;
+            }
           }
           break;
         }
       }
+      const setMenuArray = [...new Set(menuNameArray)];
+      for (let i = 0; i < setMenuArray.length; i++) {
+        menuDataArray.push(setMenuArray[i] + " " + menuPriceArray[i]);
+      }
 
-      const imgDataArray: string[] = [];
       const imgTabXpathSelector = [
-        `//*[@id="app-root"]/div/div/div/div/div/div[5]/div[1]/ul/li`,
-        `//*[@id="app-root"]/div/div/div/div/div/div[6]/div[1]/ul/li`,
-        `//*[@id="app-root"]/div/div/div/div/div/div[4]/div[1]/ul/li`,
-        `//*[@id="app-root"]/div/div/div/div/div/div[3]/div[1]/ul/li`,
+        `//*[@id="app-root"]/div/div/div/div[4]/div/div/div/div/a[4]/span`,
+        `//*[@id="app-root"]/div/div/div/div[4]/div/div/div/div/a[5]/span`,
+        `//*[@id="app-root"]/div/div/div/div[4]/div/div/div/div/a[6]/span`,
+        `//*[@id="root"]/div[2]/div/header/div[2]/div/a[6]`,
+        `//*[@id="root"]/div[2]/div/header/div[2]/div/a[5]`,
+        `//*[@id="root"]/div[2]/div/header/div[2]/div/a[4]`,
       ];
-      let imgTabElementHandles;
-      let isFound = false;
-      while (!isFound) {
-        for (const selector of imgTabXpathSelector) {
-          imgTabElementHandles = await frame.$x(selector);
-          // imgTabElementHandles = await frame.waitForXPath(selector)
-          if (imgTabElementHandles.length === 9) {
-            let src;
-            for (let j = 0; j < 4; j++) {
-              await imgTabElementHandles[j].click();
-              await new Promise((resolve) => setTimeout(resolve, 300));
-              const imgElementHandles = await page.$x(
-                `/html/body/div[3]/div/div[1]/div/div/img | /html/body/div[3]/div/div[1]/div/div/video`
+      const imgDataArray: string[] = [];
+      for (const selector of imgTabXpathSelector) {
+        const imgTabElementHandles = await frame.$x(selector);
+        const imgTabText = await imgTabElementHandles[0]?.evaluate(
+          (element: Element) => element.textContent
+        );
+
+        if (imgTabText && imgTabText === "사진") {
+          await imgTabElementHandles[0].click();
+          await new Promise((resolve) => setTimeout(resolve, 3000));
+
+          const visitorXpathSelector = [
+            `//*[@id="app-root"]/div/div/div/div[6]/div/div/div/div/div/span`,
+            `//*[@id="app-root"]/div/div/div/div[5]/div/div/div/div/div/span`,
+            `//*[@id="app-root"]/div/div/div/div[4]/div/div/div/div/div/span`,
+          ];
+          for (const selector of visitorXpathSelector) {
+            const visitorElementHandles = await frame.$x(selector);
+            console.log(visitorElementHandles);
+            for (let i = 0; i < visitorElementHandles.length; i++) {
+              const visitorText = await visitorElementHandles[i].evaluate(
+                (element: Element) => element.textContent
               );
-              for (const imgElementHandle of imgElementHandles) {
-                src = await imgElementHandle.evaluate((element: Element) =>
-                  element.getAttribute("src")
-                );
+              console.log(visitorText);
+              if (visitorText === "방문자") {
+                await visitorElementHandles[i].click();
+                await new Promise((resolve) => setTimeout(resolve, 2000));
+
+                const imgSelector = [
+                  `//*[@id="app-root"]/div/div/div/div[6]/div[4]/div/div/div/div`,
+                  `//*[@id="app-root"]/div/div/div/div[5]/div[4]/div/div/div/div`,
+                  `//*[@id="app-root"]/div/div/div/div[4]/div[4]/div/div/div/div`,
+                  `//*[@id="app-root"]/div/div/div/div[6]/div[3]/div/div/div/div`,
+                  `//*[@id="app-root"]/div/div/div/div[5]/div[3]/div/div/div/div`,
+                  `//*[@id="app-root"]/div/div/div/div[4]/div[3]/div/div/div/div`,
+                ];
+                for (const selector of imgSelector) {
+                  const imgElementHandles = await frame.$x(selector);
+                  console.log(imgElementHandles);
+                  for (let i = 0; i < 4; i++) {
+                    await imgElementHandles[i].click();
+                    await new Promise((resolve) => setTimeout(resolve, 300));
+                    const imgSrcElementHandle = await page.$x(
+                      `/html/body/div[3]/div/div[1]/div/div/img | /html/body/div[3]/div/div[1]/div/div/video`
+                    );
+                    const src = await imgSrcElementHandle[0].evaluate(
+                      (element: Element) => element.getAttribute("src")
+                    );
+                    await imgDataArray.push(src);
+                    await page.keyboard.press("Escape");
+                  }
+                  break;
+                }
               }
-              await imgDataArray.push(src);
-              await page.keyboard.press("Escape");
             }
-            isFound = true;
             break;
           }
         }
       }
+
+      // const imgTabXpathSelector = [
+      //   `//*[@id="app-root"]/div/div/div/div/div/div[5]/div[1]/ul/li`,
+      //   `//*[@id="app-root"]/div/div/div/div/div/div[6]/div[1]/ul/li`,
+      //   `//*[@id="app-root"]/div/div/div/div/div/div[4]/div[1]/ul/li`,
+      //   `//*[@id="app-root"]/div/div/div/div/div/div[3]/div[1]/ul/li`,
+      // ];
+      // let imgTabElementHandles;
+
+      // for (const selector of imgTabXpathSelector) {
+      //   imgTabElementHandles = await frame.$x(selector);
+      //   if (imgTabElementHandles.length === 9) {
+      //     let src;
+      //     for (let j = 0; j < 4; j++) {
+      //       await imgTabElementHandles[j].click();
+      //       await new Promise((resolve) => setTimeout(resolve, 300));
+      //       const imgElementHandles = await page.$x(
+      //         `/html/body/div[3]/div/div[1]/div/div/img | /html/body/div[3]/div/div[1]/div/div/video`
+      //       );
+      //       for (const imgElementHandle of imgElementHandles) {
+      //         src = await imgElementHandle.evaluate((element: Element) =>
+      //           element.getAttribute("src")
+      //         );
+      //       }
+      //       await imgDataArray.push(src);
+      //       await page.keyboard.press("Escape");
+      //     }
+
+      //     break;
+      //   }
+      // }
 
       const dataObject: RestaurantType = {
         name: nameText,
@@ -204,11 +271,9 @@ export async function crawlData(url: string): Promise<RestaurantType[]> {
       };
 
       //메뉴 데이터가 없으면 식당이 아닌걸로 판단
-      // if (menuDataArray.length > 0) {
-      dataSetArray.push(dataObject);
-      // }
-      console.log(menuDataArray);
-      console.log(imgDataArray);
+      if (menuDataArray.length > 0) {
+        dataSetArray.push(dataObject);
+      }
     }
   }
   await browser.close();
@@ -217,5 +282,5 @@ export async function crawlData(url: string): Promise<RestaurantType[]> {
   return dataSetArray;
 }
 
-// crawlData("https://naver.me/IxWIraXF");
-crawlData("https://naver.me/IgDvylC0");
+crawlData("https://naver.me/IxWIraXF");
+//crawlData("https://naver.me/IgDvylC0");
