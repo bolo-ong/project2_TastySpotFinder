@@ -1,43 +1,92 @@
 import styled from "@emotion/styled";
+import { theme } from "styles/theme";
+
+export const Button = ({
+  variant = "filled",
+  size = "md",
+  children,
+  startIcon,
+  endIcon,
+}: Props) => {
+  return (
+    <StyledButton size={size} variant={variant}>
+      {startIcon}
+      {children}
+      {endIcon}
+    </StyledButton>
+  );
+};
 
 interface Props {
-  bgColor?: string;
-  color?: string;
-  fontSize?: string | number;
-  fontWeight?: string | number;
-  width?: string | number;
-  height?: string | number;
-  borderColor?: string;
-  rounded?: boolean;
+  variant: "filled" | "outlined" | "warning";
+  size: "lg" | "md" | "sm";
+  children?: React.ReactNode;
+  startIcon?: React.ReactNode;
+  endIcon?: React.ReactNode;
 }
 
-export const Button = styled.button<Props>`
+const variants = {
+  filled: {
+    color: theme.colors.white,
+    backgroundColor: theme.colors.main,
+  },
+  outlined: {
+    color: theme.colors.main,
+    backgroundColor: theme.colors.white,
+  },
+  warning: {
+    color: theme.colors.white,
+    backgroundColor: theme.colors.warning,
+  },
+};
+
+const sizes = {
+  lg: {
+    fontSize: "1rem",
+    height: "2.75rem",
+  },
+  md: {
+    fontSize: "0.875rem",
+    height: "2.5rem",
+  },
+  sm: {
+    fontSize: "0.75rem",
+    height: "2.25rem",
+  },
+};
+
+const StyledButton = styled.button<Props>`
   display: flex;
+  flex-direction: row;
   justify-content: center;
   align-items: center;
 
-  font-size: ${({ fontSize, theme }) =>
-    fontSize ? theme.pxToRem(parseInt(`${fontSize}`)) : "1rem"};
-  font-weight: ${({ fontWeight }) => fontWeight};
-  color: ${({ color, theme }) => (color ? `${color}` : theme.colors.black)};
+  gap: 0.5rem;
+  padding: 0 1rem;
+  font-weight: 500;
+  border-radius: 12px;
 
-  width: ${({ width, theme }) =>
-    width ? theme.pxToRem(parseInt(`${width}`)) : "100%"};
-  height: ${({ height, theme }) =>
-    height ? theme.pxToRem(parseInt(`${height}`)) : "100%"};
-  background-color: ${({ bgColor, theme }) =>
-    bgColor ? `${bgColor}` : theme.colors.main};
-  border-radius: ${({ rounded }) => (rounded ? "100%" : "0.25rem")};
-  border: ${({ borderColor }) =>
-    borderColor ? `0.0625rem solid ${borderColor}` : "none"};
+  font-size: ${({ size }) => sizes[size].fontSize};
+  height: ${({ size }) => sizes[size].height};
+
+  /* border */
+  color: ${({ variant }) => variants[variant].color};
+  background-color: ${({ variant }) => variants[variant].backgroundColor};
+
+  > svg {
+    width: ${({ size }) => sizes[size].fontSize};
+    height: ${({ size }) => sizes[size].fontSize};
+    fill: ${({ variant }) => variants[variant].color};
+  }
 
   &:hover:not(:disabled) {
-    transition: 0.2s ease-in-out;
-    filter: brightness(0.9);
   }
+
+  &:focus:not(:disabled) {
+  }
+  &:active:not(:disabled) {
+  }
+
   &:disabled {
-    cursor: auto;
-    color: ${({ theme }) => theme.colors.white};
-    background-color: ${({ theme }) => theme.colors.gray};
   }
 `;

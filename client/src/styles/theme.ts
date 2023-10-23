@@ -2,16 +2,17 @@ import { Theme } from "@emotion/react";
 
 export const theme: Theme = {
   fontSizes: {
-    sm: "14px",
-    md: "16px",
-    lg: "18px",
+    sm: "12px",
+    md: "14px",
+    lg: "16px",
   },
   colors: {
     white: "#ffffff",
     black: "#333333",
-    gray: "#F1F4F5",
-    darkgray: "#9b9ea1",
+    // gray: "#F1F4F5",
+    // darkgray: "#9b9ea1",
     main: "#79482d",
+    warning: "#D10000",
   },
   pxToRem: (px) => `${px / 16}rem`,
 };
