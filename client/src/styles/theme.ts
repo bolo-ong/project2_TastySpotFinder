@@ -1,19 +1,46 @@
 import { Theme } from "@emotion/react";
 
 export const theme: Theme = {
-  fontSizes: {
-    sm: "12px",
-    md: "14px",
-    lg: "16px",
-  },
+  //color: [50,100,200,300,400,500,600,700,800,900]
   colors: {
     white: "#ffffff",
     black: "#333333",
-    // gray: "#F1F4F5",
-    // darkgray: "#9b9ea1",
-    main: "#79482d",
-    warning: "#D10000",
+    main: [
+      "#F2EDEA",
+      "#D5C6BE",
+      "#C1AB9F",
+      "#A58473",
+      "#946D58",
+      "#79482E",
+      "#6E422A",
+      "#563321",
+      "#432819",
+      "#331E13",
+    ],
+    warning: [
+      "#FAE6E6",
+      "#F1B0B0",
+      "#EA8A8A",
+      "#E05454",
+      "#DA3333",
+      "#D10000",
+      "#BE0000",
+      "#940000",
+      "#730000",
+      "#580000",
+    ],
+    gray: [
+      "#E9EBF8",
+      "#E2E2E2",
+      "#D4D3D3",
+      "#C1BFBF",
+      "#B5B3B3",
+      "#A2A0A0",
+      "#939292",
+      "#737272",
+      "#595858",
+      "#444343",
+    ],
   },
   pxToRem: (px) => `${px / 16}rem`,
 };
-//gray: [#F8F9FA,#F1F4F5,#DDE0E2,#C1C4C6,#9B9EA1]
