@@ -5,6 +5,7 @@ export const GlobalStyle = () => {
   return (
     <Global
       styles={css`
+        @import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.8/dist/web/variable/pretendardvariable-dynamic-subset.css");
         ${reset}
         *, *::after, *::before {
           box-sizing: border-box;
@@ -12,19 +13,14 @@ export const GlobalStyle = () => {
           -webkit-font-smoothing: antialiased;
         }
 
-        @font-face {
-          font-family: "Pretendard Variable";
-          src: url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.8/dist/web/variable/pretendardvariable-dynamic-subset.css");
-        }
-        :root {
+        #root {
+          height: 100%;
           font-family: "Pretendard Variable", Pretendard, -apple-system,
             BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI",
             "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic",
             "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
         }
-        #root {
-          height: 100%;
-        }
+
         html,
         body {
           height: 100%;
