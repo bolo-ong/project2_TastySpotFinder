@@ -34,7 +34,6 @@ const AvatarWrapper = styled.div<Props>`
       border-radius: 100%;
       background-color: #220c0c;
       opacity: 0;
-      transition: opacity 0.2s ease-in-out;
     }
     &:hover::after {
       opacity: 0.2;
