@@ -4,7 +4,10 @@ import styled from "@emotion/styled";
 export const Image = ({ width, height, name, extension }: Props) => {
   return (
     <ImageWrapper width={width} height={height}>
-      <StyledImage src={`/images/${name}.${extension}`} alt={name} />
+      <StyledImage
+        src={require(`assets/images/${name}.${extension}`)}
+        alt={name}
+      />
     </ImageWrapper>
   );
 };
