@@ -13,11 +13,11 @@ export const Text = styled.span<Props>`
     size ? theme.pxToRem(parseInt(`${size}`)) : "1rem"};
   font-weight: ${({ weight }) => weight};
   color: ${({ color, theme }) => (color ? `${color}` : theme.colors.black)};
+  transition: color 0.2s ease-in-out;
 
   ${({ hoverable, color, theme }) =>
     hoverable &&
     `
-    transition: color 0.2s ease-in-out;
     &:hover {
         color: ${
           color ? makeLightColor(color) : makeLightColor(theme.colors.black)
