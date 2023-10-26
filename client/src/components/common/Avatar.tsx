@@ -1,8 +1,8 @@
 import styled from "@emotion/styled";
 
-export const Avatar = ({ size, src, hoverable }: Props) => {
+export const Avatar = ({ size, src, hoverable, onClick }: Props) => {
   return (
-    <AvatarWrapper size={size} hoverable={hoverable}>
+    <AvatarWrapper size={size} hoverable={hoverable} onClick={onClick}>
       <StyledAvatar src={src} alt="profile_img" />
     </AvatarWrapper>
   );
@@ -12,6 +12,7 @@ interface Props {
   size?: string | number;
   src?: string;
   hoverable?: boolean;
+  onClick?: () => void;
 }
 
 const AvatarWrapper = styled.div<Props>`
@@ -26,6 +27,7 @@ const AvatarWrapper = styled.div<Props>`
     `
     &::after {
       content: "";
+      cursor: pointer;
       position: absolute;
       top: 0;
       left: 0;
