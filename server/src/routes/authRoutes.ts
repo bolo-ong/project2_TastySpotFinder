@@ -10,6 +10,7 @@ import {
 const authRouter = express.Router();
 const CLIENT_URL = process.env.CLIENT_URL ?? "http://localhost:3000";
 
+//kakao
 authRouter.get("/kakao", passport.authenticate("kakao"));
 authRouter.get(
   "/oauth/kakao",
@@ -19,6 +20,7 @@ authRouter.get(
 authRouter.get("/logout/kakao", logOutKakao);
 authRouter.get("/logout/kakao/callback", logOutUser);
 
+//google
 authRouter.get("/google", passport.authenticate("google"));
 authRouter.get(
   "/oauth/google",

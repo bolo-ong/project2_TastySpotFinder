@@ -4,6 +4,7 @@ import { SocialLogInButton } from "components/";
 
 export const LogIn = () => {
   useGetUserDataQuery();
+
   return (
     <Container>
       <SocialLogInButtonContainer>
