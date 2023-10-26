@@ -1,5 +1,6 @@
 import { Global, css } from "@emotion/react";
 import reset from "emotion-reset";
+import { theme } from "styles/theme";
 
 export const GlobalStyle = () => {
   return (
@@ -15,6 +16,9 @@ export const GlobalStyle = () => {
 
         #root {
           height: 100%;
+          word-break: break-all;
+          word-wrap: break-word;
+          color: ${theme.colors.black};
           font-family: "Pretendard Variable", Pretendard, -apple-system,
             BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI",
             "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic",
