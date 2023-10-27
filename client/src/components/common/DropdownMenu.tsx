@@ -5,9 +5,9 @@ import { useEscape } from "hooks";
 
 export const DropdownMenu = ({ DropdownButton, children }: Props) => {
   const [isOpen, setIsOpen] = useState(false);
-  const ref = useRef<HTMLDivElement | null>(null);
+  const ref = useRef(null);
 
-  //esc키를 누르거나, 박스 외부 클릭 시 닫힘
+  //useEscape hook을 이용해서 esc키를 누르거나, 박스 외부 클릭 시 닫힘
   useEscape(() => {
     setIsOpen(false);
   }, ref);
