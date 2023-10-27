@@ -34,6 +34,9 @@ export const GlobalStyle = () => {
           color: inherit;
           text-decoration: none;
         }
+        a.active {
+          color: ${theme.colors.main[5]};
+        }
         button {
           padding: 0;
           text-align: inherit;
