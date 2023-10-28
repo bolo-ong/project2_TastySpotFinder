@@ -1,6 +1,7 @@
 import styled from "@emotion/styled";
 import { Link } from "react-router-dom";
 import { Image } from ".";
+import { theme } from "styles/theme";
 
 export const SocialLogInButton = ({ children, platform }: Props) => {
   return (
@@ -17,7 +18,7 @@ export const SocialLogInButton = ({ children, platform }: Props) => {
 
 interface Props {
   platform: "kakao" | "google" | "naver";
-  children: React.ReactNode;
+  children?: React.ReactNode;
 }
 
 const StyledSocialLogInButton = styled.button<Props>`
@@ -33,31 +34,38 @@ const StyledSocialLogInButton = styled.button<Props>`
   border-radius: 0.25rem;
 
   transition: filter 0.2s ease-in-out;
+
+  color: ${({ platform }) => platforms[platform].color};
+  background-color: ${({ platform }) => platforms[platform].backgroundColor};
+  border: ${({ platform }) => platforms[platform].border};
+
   &:hover {
     filter: brightness(0.9);
   }
-  ${({ platform }) => {
-    switch (platform) {
-      case "kakao":
-        return `
-            background-color: #ffdf00;
-            color: #3B1D1B;
-          `;
-      case "naver":
-        return `
-            background-color: #00BC3D;
-            color: #E1F7E8;
-          `;
-      case "google":
-        return `
-            background-color: #ffffff;
-            border: 0.0625rem solid #D3D3D3;
-          `;
-    }
-  }};
 `;
 
 const ImageWrapper = styled.div`
   position: absolute;
   left: 1.125rem;
 `;
+
+interface PlatformProps {
+  backgroundColor?: string;
+  color?: string;
+  border?: string;
+}
+
+const platforms: Record<string, PlatformProps> = {
+  kakao: {
+    backgroundColor: "#ffdf00",
+    color: "#3B1D1B",
+  },
+  naver: {
+    backgroundColor: "#00BC3D",
+    color: "#E1F7E8",
+  },
+  google: {
+    backgroundColor: theme.colors.white,
+    border: `0.0625rem solid ${theme.colors.gray[2]}`,
+  },
+};

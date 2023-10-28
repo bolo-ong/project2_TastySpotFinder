@@ -42,10 +42,8 @@ const StyledButton = styled.button<Props>`
   font-weight: 500;
   border-radius: 0.75rem;
 
-  padding: ${({ variant }) =>
-    variant === "outlined" ? "0 .9375rem" : "0 1rem"};
-  border: ${({ variant, theme }) =>
-    variant === "outlined" ? `.0625rem solid ${theme.colors.gray[3]}` : ""};
+  padding: ${({ variant }) => variants[variant].padding || "0 1rem"};
+  border: ${({ variant }) => variants[variant].border};
 
   font-size: ${({ size }) => sizes[size].fontSize};
   height: ${({ size }) => sizes[size].height};
@@ -66,23 +64,19 @@ const StyledButton = styled.button<Props>`
 
   &:active:not(:disabled) {
     background-color: ${({ variant }) =>
-      variant === "outlined"
-        ? variants[variant].activeBackgroundColor
-        : variants[variant].backgroundColor};
+      variants[variant].activeBackgroundColor ||
+      variants[variant].backgroundColor};
     padding: 0 0.875rem;
-    border: 0.125rem solid
-      ${({ variant }) => variants[variant].activeBorderColor};
+    border: ${({ variant }) => variants[variant].activeBorder};
   }
 
   &:disabled {
     cursor: auto;
     color: ${({ variant }) => variants[variant].disabledColor};
     background-color: ${({ variant }) =>
-      variant === "outlined"
-        ? variants[variant].backgroundColor
-        : variants[variant].disabledBackgroundColor};
-    border: ${({ variant }) =>
-      variant === "outlined" ? `.0625rem solid ${theme.colors.gray[1]}` : ""};
+      variants[variant].disabledBackgroundColor ||
+      variants[variant].backgroundColor};
+    border: ${({ variant }) => variants[variant].disabledBorder};
   }
 `;
 
@@ -102,15 +96,32 @@ const sizes = {
   },
 };
 
-const variants = {
+interface VariantProps {
+  //default
+  color?: string;
+  backgroundColor?: string;
+  border?: string;
+  padding?: string;
+  //hover
+  hoverBackgroundColor?: string;
+  //active
+  activeBorder?: string;
+  activeBackgroundColor?: string;
+  //disabled
+  disabledColor?: string;
+  disabledBackgroundColor?: string;
+  disabledBorder?: string;
+}
+
+const variants: Record<string, VariantProps> = {
   filled: {
     //default
     color: theme.colors.white,
     backgroundColor: theme.colors.main[5],
-    //hover & focus
+    //hover
     hoverBackgroundColor: theme.colors.main[7],
     //active
-    activeBorderColor: theme.colors.main[7],
+    activeBorder: `0.125rem solid ${theme.colors.main[7]}`,
     //disabled
     disabledColor: theme.colors.gray[5],
     disabledBackgroundColor: theme.colors.gray[1],
@@ -122,7 +133,7 @@ const variants = {
     //hover & focus
     hoverBackgroundColor: theme.colors.warning[7],
     //active
-    activeBorderColor: theme.colors.warning[7],
+    activeBorder: `0.125rem solid ${theme.colors.warning[7]}`,
     //disabled
     disabledColor: theme.colors.warning[1],
     disabledBackgroundColor: theme.colors.warning[0],
@@ -131,13 +142,15 @@ const variants = {
     //default
     color: theme.colors.main[5],
     backgroundColor: theme.colors.white,
+    border: `.0625rem solid ${theme.colors.gray[3]}`,
+    padding: `0 .9375rem`,
     //hover & focus
     hoverBackgroundColor: theme.colors.main[0],
     //active
     activeBackgroundColor: theme.colors.main[0],
-    activeBorderColor: theme.colors.main[1],
+    activeBorder: `0.125rem solid ${theme.colors.main[1]}`,
     //disabled
     disabledColor: theme.colors.gray[4],
-    disabledBorderColor: theme.colors.gray[1],
+    disabledBorder: `.0625rem solid ${theme.colors.gray[1]}`,
   },
 };
