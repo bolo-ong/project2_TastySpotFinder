@@ -9,16 +9,23 @@ export const authenticateUser = (req: Request, res: Response) => {
 export const logOutUser = (req: Request, res: Response) => {
   req.logOut((err: Error) => {
     if (err) {
-      console.log("logOut", err);
+      res.status(500).send({ message: err.message });
+    }
+    req.session.save(() => {
+      res.send("Log out successful.");
+    });
+  });
+};
+
+export const logOutKakao = async (req: Request, res: Response) => {
+  req.logOut((err: Error) => {
+    if (err) {
+      res.status(500).send({ message: err.message });
     }
     req.session.save(() => {
       res.redirect(CLIENT_URL);
     });
   });
-};
-export const logOutKakao = (req: Request, res: Response) => {
-  const KAKAO_LOGOUT_URL = `https://kauth.kakao.com/oauth/logout?client_id=${process.env.KAKAO_CLIENT_ID}&logout_redirect_uri=${process.env.KAKAO_LOGOUT_REDIRECT_URI}`;
-  res.redirect(KAKAO_LOGOUT_URL);
 };
 
 export const getUser = (req: Request, res: Response) => {

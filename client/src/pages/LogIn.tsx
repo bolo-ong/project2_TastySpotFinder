@@ -8,9 +8,9 @@ export const LogIn = () => {
   return (
     <Container>
       <SocialLogInButtonContainer>
-        <SocialLogInButton platform="naver">네이버 로그인</SocialLogInButton>
-        <SocialLogInButton platform="kakao">카카오 로그인</SocialLogInButton>
-        <SocialLogInButton platform="google">구글 로그인</SocialLogInButton>
+        <SocialLogInButton provider="naver">네이버 로그인</SocialLogInButton>
+        <SocialLogInButton provider="kakao">카카오 로그인</SocialLogInButton>
+        <SocialLogInButton provider="google">구글 로그인</SocialLogInButton>
       </SocialLogInButtonContainer>
     </Container>
   );

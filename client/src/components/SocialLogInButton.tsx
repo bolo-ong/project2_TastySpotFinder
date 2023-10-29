@@ -3,12 +3,12 @@ import { Link } from "react-router-dom";
 import { Image } from ".";
 import { theme } from "styles/theme";
 
-export const SocialLogInButton = ({ children, platform }: Props) => {
+export const SocialLogInButton = ({ children, provider }: Props) => {
   return (
-    <Link to={`${process.env.REACT_APP_SERVER_URL}/api/auth/${platform}`}>
-      <StyledSocialLogInButton platform={platform}>
+    <Link to={`${process.env.REACT_APP_SERVER_URL}/api/auth/${provider}`}>
+      <StyledSocialLogInButton provider={provider}>
         <ImageWrapper>
-          <Image name={`logo_${platform}`} extension="svg" />
+          <Image name={`logo_${provider}`} extension="svg" />
         </ImageWrapper>
         {children}
       </StyledSocialLogInButton>
@@ -17,7 +17,7 @@ export const SocialLogInButton = ({ children, platform }: Props) => {
 };
 
 interface Props {
-  platform: "kakao" | "google" | "naver";
+  provider: "kakao" | "google" | "naver";
   children?: React.ReactNode;
 }
 
@@ -35,9 +35,9 @@ const StyledSocialLogInButton = styled.button<Props>`
 
   transition: filter 0.2s ease-in-out;
 
-  color: ${({ platform }) => platforms[platform].color};
-  background-color: ${({ platform }) => platforms[platform].backgroundColor};
-  border: ${({ platform }) => platforms[platform].border};
+  color: ${({ provider }) => providers[provider].color};
+  background-color: ${({ provider }) => providers[provider].backgroundColor};
+  border: ${({ provider }) => providers[provider].border};
 
   &:hover {
     filter: brightness(0.9);
@@ -55,7 +55,7 @@ interface PlatformProps {
   border?: string;
 }
 
-const platforms: Record<string, PlatformProps> = {
+const providers: Record<string, PlatformProps> = {
   kakao: {
     backgroundColor: "#ffdf00",
     color: "#3B1D1B",
