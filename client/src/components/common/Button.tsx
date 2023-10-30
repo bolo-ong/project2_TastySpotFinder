@@ -2,15 +2,16 @@ import styled from "@emotion/styled";
 import { theme } from "styles/theme";
 
 export const Button = ({
-  variant,
-  size,
+  variant = "filled",
+  size = "md",
+  type,
   children,
   startIcon,
   endIcon,
   disabled,
 }: Props) => {
   return (
-    <StyledButton size={size} variant={variant} disabled={disabled}>
+    <StyledButton type={type} size={size} variant={variant} disabled={disabled}>
       {startIcon}
       {children}
       {endIcon}
@@ -18,19 +19,15 @@ export const Button = ({
   );
 };
 
-interface Props {
-  variant: "filled" | "warning" | "outlined";
-  size: "lg" | "md" | "sm";
+export interface Props {
+  variant?: "filled" | "warning" | "outlined";
+  size?: "lg" | "md" | "sm";
+  type?: "submit" | "reset" | "button";
   children?: React.ReactNode;
   startIcon?: React.ReactNode;
   endIcon?: React.ReactNode;
   disabled?: boolean;
 }
-
-Button.defaultProps = {
-  variant: "filled",
-  size: "md",
-};
 
 const StyledButton = styled.button<Props>`
   display: flex;
@@ -42,59 +39,45 @@ const StyledButton = styled.button<Props>`
   font-weight: 500;
   border-radius: 0.75rem;
 
-  padding: ${({ variant }) => variants[variant].padding || "0 1rem"};
-  border: ${({ variant }) => variants[variant].border};
+  padding: ${({ variant }) =>
+    variant === "outlined" ? variants[variant].padding : "0 1rem"};
+  border: ${({ variant }) => variant && variants[variant].border};
 
-  font-size: ${({ size }) => sizes[size].fontSize};
-  height: ${({ size }) => sizes[size].height};
+  font-size: ${({ size }) => size && sizes[size].fontSize};
+  height: ${({ size }) => size && sizes[size].height};
 
-  color: ${({ variant }) => variants[variant].color};
-  background-color: ${({ variant }) => variants[variant].backgroundColor};
+  color: ${({ variant }) => variant && variants[variant].color};
+  background-color: ${({ variant }) =>
+    variant && variants[variant].backgroundColor};
 
   > svg {
-    width: ${({ size }) => sizes[size].fontSize};
-    height: ${({ size }) => sizes[size].fontSize};
+    width: ${({ size }) => size && sizes[size].fontSize};
+    height: ${({ size }) => size && sizes[size].fontSize};
   }
 
   &:hover:not(:disabled) {
     background-color: ${({ variant }) =>
-      variants[variant].hoverBackgroundColor};
+      variant && variants[variant].hoverBackgroundColor};
     box-shadow: 0 0 0.125rem #202020;
   }
 
   &:active:not(:disabled) {
     background-color: ${({ variant }) =>
-      variants[variant].activeBackgroundColor ||
-      variants[variant].backgroundColor};
+      (variant && variants[variant].activeBackgroundColor) ||
+      (variant && variants[variant].backgroundColor)};
     padding: 0 0.875rem;
-    border: ${({ variant }) => variants[variant].activeBorder};
+    border: ${({ variant }) => variant && variants[variant].activeBorder};
   }
 
   &:disabled {
     cursor: auto;
-    color: ${({ variant }) => variants[variant].disabledColor};
+    color: ${({ variant }) => variant && variants[variant].disabledColor};
     background-color: ${({ variant }) =>
-      variants[variant].disabledBackgroundColor ||
-      variants[variant].backgroundColor};
-    border: ${({ variant }) => variants[variant].disabledBorder};
+      (variant && variants[variant].disabledBackgroundColor) ||
+      (variant && variants[variant].backgroundColor)};
+    border: ${({ variant }) => variant && variants[variant].disabledBorder};
   }
 `;
-
-//constants
-const sizes = {
-  lg: {
-    fontSize: "1rem",
-    height: "2.75rem",
-  },
-  md: {
-    fontSize: "0.875rem",
-    height: "2.5rem",
-  },
-  sm: {
-    fontSize: "0.75rem",
-    height: "2.25rem",
-  },
-};
 
 interface VariantProps {
   //default
@@ -113,6 +96,7 @@ interface VariantProps {
   disabledBorder?: string;
 }
 
+//constants
 const variants: Record<string, VariantProps> = {
   filled: {
     //default
@@ -152,5 +136,20 @@ const variants: Record<string, VariantProps> = {
     //disabled
     disabledColor: theme.colors.gray[4],
     disabledBorder: `.0625rem solid ${theme.colors.gray[1]}`,
+  },
+};
+
+const sizes = {
+  lg: {
+    fontSize: "1rem",
+    height: "2.75rem",
+  },
+  md: {
+    fontSize: "0.875rem",
+    height: "2.5rem",
+  },
+  sm: {
+    fontSize: "0.75rem",
+    height: "2.25rem",
   },
 };
