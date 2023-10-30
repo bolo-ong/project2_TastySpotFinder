@@ -3,22 +3,27 @@ import { Link } from "react-router-dom";
 import { Image } from ".";
 import { theme } from "styles/theme";
 
-export const SocialLogInButton = ({ children, provider }: Props) => {
+export const SocialLogInButton = ({ children, provider, ...rest }: Props) => {
   return (
-    <Link to={`${process.env.REACT_APP_SERVER_URL}/api/auth/${provider}`}>
-      <StyledSocialLogInButton provider={provider}>
-        <ImageWrapper>
-          <Image name={`logo_${provider}`} extension="svg" />
-        </ImageWrapper>
-        {children}
-      </StyledSocialLogInButton>
-    </Link>
+    <StyledSocialLogInButton
+      as={Link}
+      to={`${process.env.REACT_APP_SERVER_URL}/api/auth/${provider}`}
+      provider={provider}
+      {...rest}
+    >
+      <ImageWrapper>
+        <Image name={`logo_${provider}`} extension="svg" />
+      </ImageWrapper>
+      {children}
+    </StyledSocialLogInButton>
   );
 };
 
 export interface Props {
   provider: "kakao" | "google" | "naver";
   children?: React.ReactNode;
+  as?: React.ElementType;
+  to?: string;
 }
 
 const StyledSocialLogInButton = styled.button<Props>`

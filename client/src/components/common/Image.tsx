@@ -1,8 +1,8 @@
 import styled from "@emotion/styled";
 
-export const Image = ({ width, height, name, extension }: Props) => {
+export const Image = ({ width, height, name, extension, ...rest }: Props) => {
   return (
-    <ImageWrapper width={width} height={height}>
+    <ImageWrapper width={width} height={height} {...rest}>
       <StyledImage
         src={require(`assets/images/${name}.${extension}`)}
         alt={name}

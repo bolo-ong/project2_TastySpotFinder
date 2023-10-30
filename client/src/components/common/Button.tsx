@@ -5,13 +5,22 @@ export const Button = ({
   variant = "filled",
   size = "md",
   type,
+  disabled,
   children,
   startIcon,
   endIcon,
-  disabled,
+  fullWidth,
+  ...rest
 }: Props) => {
   return (
-    <StyledButton type={type} size={size} variant={variant} disabled={disabled}>
+    <StyledButton
+      variant={variant}
+      size={size}
+      type={type}
+      disabled={disabled}
+      fullWidth={fullWidth}
+      {...rest}
+    >
       {startIcon}
       {children}
       {endIcon}
@@ -22,11 +31,14 @@ export const Button = ({
 export interface Props {
   variant?: "filled" | "warning" | "outlined";
   size?: "lg" | "md" | "sm";
-  type?: "submit" | "reset" | "button";
+  type?: "button" | "submit" | "reset";
   children?: React.ReactNode;
   startIcon?: React.ReactNode;
   endIcon?: React.ReactNode;
   disabled?: boolean;
+  fullWidth?: boolean;
+  as?: React.ElementType;
+  to?: string;
 }
 
 const StyledButton = styled.button<Props>`
@@ -38,6 +50,8 @@ const StyledButton = styled.button<Props>`
   gap: 0.5rem;
   font-weight: 500;
   border-radius: 0.75rem;
+
+  width: ${({ fullWidth }) => fullWidth && "100%"};
 
   padding: ${({ variant }) =>
     variant === "outlined" ? variants[variant].padding : "0 1rem"};

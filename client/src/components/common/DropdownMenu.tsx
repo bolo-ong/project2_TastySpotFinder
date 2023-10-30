@@ -3,7 +3,7 @@ import { theme } from "styles/theme";
 import React, { useState, useRef } from "react";
 import { useEscape } from "hooks";
 
-export const DropdownMenu = ({ DropdownButton, children }: Props) => {
+export const DropdownMenu = ({ DropdownButton, children, ...rest }: Props) => {
   const [isOpen, setIsOpen] = useState(false);
   const ref = useRef(null);
 
@@ -13,7 +13,7 @@ export const DropdownMenu = ({ DropdownButton, children }: Props) => {
   }, ref);
 
   return (
-    <DropdownBox ref={ref}>
+    <DropdownBox ref={ref} {...rest}>
       {React.cloneElement(DropdownButton, {
         onClick: () => setIsOpen(!isOpen),
       })}
