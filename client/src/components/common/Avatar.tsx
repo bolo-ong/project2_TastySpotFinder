@@ -8,7 +8,7 @@ export const Avatar = ({ size, src, hoverable, onClick }: Props) => {
   );
 };
 
-interface Props {
+export interface Props {
   size?: string | number;
   src?: string;
   hoverable?: boolean;
@@ -18,8 +18,10 @@ interface Props {
 const AvatarWrapper = styled.div<Props>`
   position: relative;
 
-  width: ${({ size, theme }) => theme.pxToRem(parseInt(`${size}`)) || "100%"};
-  height: ${({ size, theme }) => theme.pxToRem(parseInt(`${size}`)) || "100%"};
+  width: ${({ size, theme }) =>
+    size ? theme.pxToRem(parseInt(`${size}`)) : "100%"};
+  height: ${({ size, theme }) =>
+    size ? theme.pxToRem(parseInt(`${size}`)) : "100%"};
   ${({ hoverable }) =>
     hoverable &&
     `

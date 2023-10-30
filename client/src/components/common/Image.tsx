@@ -11,7 +11,7 @@ export const Image = ({ width, height, name, extension }: Props) => {
   );
 };
 
-interface Props {
+export interface Props {
   name: string;
   extension: string;
   width?: string | number;
@@ -20,9 +20,10 @@ interface Props {
 
 type ImageWrapperProps = Pick<Props, "width" | "height">;
 const ImageWrapper = styled.div<ImageWrapperProps>`
-  width: ${({ width, theme }) => theme.pxToRem(parseInt(`${width}`)) || "100%"};
+  width: ${({ width, theme }) =>
+    width ? theme.pxToRem(parseInt(`${width}`)) : "100%"};
   height: ${({ height, theme }) =>
-    theme.pxToRem(parseInt(`${height}`)) || "100%"};
+    height ? theme.pxToRem(parseInt(`${height}`)) : "100%"};
 `;
 
 const StyledImage = styled.img`

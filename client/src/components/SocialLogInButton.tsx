@@ -16,7 +16,7 @@ export const SocialLogInButton = ({ children, provider }: Props) => {
   );
 };
 
-interface Props {
+export interface Props {
   provider: "kakao" | "google" | "naver";
   children?: React.ReactNode;
 }

@@ -22,7 +22,7 @@ export const DropdownMenu = ({ DropdownButton, children }: Props) => {
   );
 };
 
-interface Props {
+export interface Props {
   DropdownButton: React.ReactElement;
   children: React.ReactNode;
 }
