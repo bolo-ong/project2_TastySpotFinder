@@ -1,4 +1,4 @@
-export const makeLightColor = (color: string): string => {
+export const makeLightenColor = (color: string): string => {
   // 입력된 컬러 코드를 16진수 형식에서 파싱
   const r = parseInt(color.slice(1, 3), 16);
   const g = parseInt(color.slice(3, 5), 16);
@@ -7,11 +7,11 @@ export const makeLightColor = (color: string): string => {
   // alpha 0.8로 변경해서 밝은 컬러로 변환
   const alpha = 0.8;
 
-  const lightColor = `rgba(${r}, ${g}, ${b}, ${alpha})`;
-  return lightColor;
+  const lightenColor = `rgba(${r}, ${g}, ${b}, ${alpha})`;
+  return lightenColor;
 };
 
-export const makeDarkColor = (color: string): string => {
+export const makeDarkenColor = (color: string): string => {
   // 입력된 컬러 코드를 16진수 형식에서 파싱
   const r = parseInt(color.slice(1, 3), 16);
   const g = parseInt(color.slice(3, 5), 16);
@@ -23,9 +23,9 @@ export const makeDarkColor = (color: string): string => {
   const darkB = Math.max(0, Math.round(b * 0.9));
 
   // 새로운 RGB 값을 16진수로 변환
-  const darkColor = `#${darkR.toString(16).padStart(2, "0")}${darkG
+  const darkenColor = `#${darkR.toString(16).padStart(2, "0")}${darkG
     .toString(16)
     .padStart(2, "0")}${darkB.toString(16).padStart(2, "0")}`;
 
-  return darkColor;
+  return darkenColor;
 };

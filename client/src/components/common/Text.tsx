@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { makeLightColor } from "utils/colorUtils";
+import { makeLightenColor } from "utils/colorUtils";
 
 export interface Props {
   size?: string | number;
@@ -20,7 +20,7 @@ export const Text = styled.span<Props>`
     `
     &:hover {
         color: ${
-          color ? makeLightColor(color) : makeLightColor(theme.colors.black)
+          color ? makeLightenColor(color) : makeLightenColor(theme.colors.black)
         };
     }
   `}
