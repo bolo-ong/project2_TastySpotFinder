@@ -1,59 +1,66 @@
 import styled from "@emotion/styled";
-import { Link } from "react-router-dom";
-import { Text } from "./common/Text";
-import { theme } from "../styles/theme";
+import { css } from "@emotion/react";
+import { Link, NavLink } from "react-router-dom";
+import { theme } from "styles/theme";
+import { Avatar, Button, DropdownMenu } from ".";
+import { useGetUserDataQuery } from "queries/useGetUserDataQuery";
+import { userLogOut } from "apis/authAPI";
 
 export const Navgation = () => {
+  const { userData } = useGetUserDataQuery();
+  console.log(userData);
+
   return (
     <Container>
-      <Nav>
-        <Link to="/board">
-          <Text
-            size="18px"
-            weight="600"
-            color={theme.colors.main}
-            hoverable={true}
+      <StyledLink to="/board">맛집보기</StyledLink>
+      {userData === "Login information not found." && (
+        <StyledLink to="/Login">로그인</StyledLink>
+      )}
+      {userData?.profile_image && (
+        <>
+          <DropdownMenu
+            DropdownButton={
+              <Avatar size="36" src={userData.profile_image} hoverable />
+            }
           >
-            menu1
-          </Text>
-        </Link>
-      </Nav>
-      <LoginContainer>
-        <LoginText>Login</LoginText>
-      </LoginContainer>
+            <NavLink to="/">저장한 리스트</NavLink>
+            <NavLink to="/board">저장한 맛집</NavLink>
+            <NavLink to="#">나의 맛집</NavLink>
+            <button onClick={() => userLogOut(userData.provider)}>
+              로그아웃
+            </button>
+          </DropdownMenu>
+
+          <Button as={Link} to="/posting">
+            맛집추천하기
+          </Button>
+        </>
+      )}
     </Container>
   );
 };
 
-const Container = styled.div`
+const Container = styled.nav`
   display: flex;
   align-items: center;
   justify-content: center;
-  flex-direction: row;
+  gap: 1.875rem;
 `;
 
-const Nav = styled.nav`
+const NavItemStyle = css`
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 132px;
-  height: 40px;
-`;
 
-const NavItem = styled.a`
+  height: 2.5rem;
+  font-size: 1.125rem;
   font-weight: 600;
+  color: ${theme.colors.black};
+  padding: 0 0.5rem;
   &:hover {
+    color: ${theme.colors.main[5]};
   }
 `;
-
-const LoginContainer = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 132px;
-  height: 40px;
-`;
-
-const LoginText = styled.div`
-  font-weight: 600;
+const StyledLink = styled(Link)`
+  ${NavItemStyle}
 `;

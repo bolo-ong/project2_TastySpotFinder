@@ -1,38 +1,30 @@
 import styled from "@emotion/styled";
 import { theme } from "styles/theme";
-import React, { useState, useRef } from "react";
+import React, { useRef } from "react";
 import { useEscape } from "hooks";
+import { useRecoilState } from "recoil";
+import { isOpenDropDownState } from "recoil/atoms";
 
-export const DropdownMenu = ({ DropdownButton, children, ...rest }: Props) => {
-  const [isOpen, setIsOpen] = useState(false);
-  const ref = useRef(null);
+export const DropdownList = ({ children, ...rest }: Props) => {
+  const [isOpen, setIsOpen] = useRecoilState(isOpenDropDownState);
+  const ref = useRef<HTMLUListElement>(null);
 
-  //useEscape hook을 이용해서 esc키를 누르거나, 박스 외부 클릭 시 닫힘
   useEscape(() => {
     setIsOpen(false);
   }, ref);
 
   return (
-    <DropdownBox ref={ref} {...rest}>
-      {React.cloneElement(DropdownButton, {
-        onClick: () => setIsOpen(!isOpen),
-      })}
-      {isOpen && <DropdownList>{children}</DropdownList>}
-    </DropdownBox>
+    <StyledUl ref={ref} {...rest}>
+      {children}
+    </StyledUl>
   );
 };
 
 export interface Props {
-  DropdownButton: React.ReactElement;
   children: React.ReactNode;
 }
 
-const DropdownBox = styled.div`
-  display: flex;
-  justify-content: flex-end;
-`;
-
-const DropdownList = styled.ul`
+const StyledUl = styled.ul`
   position: absolute;
   margin-top: 2.5rem;
   display: flex;
