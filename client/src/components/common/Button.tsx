@@ -9,7 +9,7 @@ export const Button = ({
   children,
   startIcon,
   endIcon,
-  fullWidth,
+  wide,
   ...rest
 }: Props) => {
   return (
@@ -18,7 +18,7 @@ export const Button = ({
       size={size}
       type={type}
       disabled={disabled}
-      fullWidth={fullWidth}
+      wide={wide}
       {...rest}
     >
       {startIcon}
@@ -32,11 +32,11 @@ export interface Props {
   variant?: "filled" | "warning" | "outlined";
   size?: "lg" | "md" | "sm";
   type?: "button" | "submit" | "reset";
+  wide?: boolean;
+  disabled?: boolean;
   children?: React.ReactNode;
   startIcon?: React.ReactNode;
   endIcon?: React.ReactNode;
-  disabled?: boolean;
-  fullWidth?: boolean;
   as?: React.ElementType;
   to?: string;
 }
@@ -51,7 +51,7 @@ const StyledButton = styled.button<Props>`
   font-weight: 500;
   border-radius: 0.75rem;
 
-  width: ${({ fullWidth }) => fullWidth && "100%"};
+  width: ${({ wide }) => wide && "100%"};
 
   padding: ${({ variant }) =>
     variant === "outlined" ? variants[variant].padding : "0 1rem"};
