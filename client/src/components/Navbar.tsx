@@ -1,11 +1,19 @@
 import styled from "@emotion/styled";
-import { Logo } from "./common/Logo";
-import { Navgation } from "./Navgation";
+import { css } from "@emotion/react";
+import { Image, Navgation } from ".";
+import { Link } from "react-router-dom";
 
 export const Navbar = () => {
   return (
     <Container>
-      <Logo />
+      <Image
+        as={Link}
+        to="/"
+        width="28"
+        height="28"
+        name="logo_main"
+        extension="png"
+      />
       <Navgation />
     </Container>
   );
@@ -13,13 +21,13 @@ export const Navbar = () => {
 
 const Container = styled.div`
   position: sticky;
-  width: 100%;
+  z-index: 10;
+  padding: 0 0.5rem 0 1.25rem;
+  width: 66rem;
+  height: 2.5rem;
   display: flex;
-  flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  text-align: center;
-  font-weight: 600;
-  font-size: var(--font-size-lg);
-  color: var(--color-black);
+  margin: 0 auto;
+  margin-top: 1rem;
 `;

@@ -16,6 +16,8 @@ export interface Props {
   extension: string;
   width?: string | number;
   height?: string | number;
+  as?: React.ElementType;
+  to?: string;
 }
 
 type ImageWrapperProps = Pick<Props, "width" | "height">;
