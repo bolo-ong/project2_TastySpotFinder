@@ -51,7 +51,7 @@ const StyledButton = styled.button<Props>`
   font-weight: 500;
   border-radius: 0.75rem;
 
-  width: ${({ wide }) => wide && "100%"};
+  width: ${({ wide }) => (wide ? "100%" : "fit-content")};
 
   padding: ${({ variant }) =>
     variant === "outlined" ? variants[variant].padding : "0 1rem"};
