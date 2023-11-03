@@ -1,5 +1,4 @@
 import styled from "@emotion/styled";
-import { theme } from "styles/theme";
 import React, { useRef } from "react";
 import { useEscape } from "hooks";
 
@@ -41,6 +40,5 @@ const StyledUl = styled.ul`
 
   padding: 1rem 1.25rem;
   border-radius: 0.5rem;
-  background-color: ${theme.colors.white};
   box-shadow: 0 0.125rem 0.625rem rgba(63, 71, 77, 0.25);
 `;

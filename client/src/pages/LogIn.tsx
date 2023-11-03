@@ -1,10 +1,7 @@
 import styled from "@emotion/styled";
-import { useGetUserDataQuery } from "queries/useGetUserDataQuery";
 import { SocialLogInButton } from "components/";
 
 export const LogIn = () => {
-  useGetUserDataQuery();
-
   return (
     <Container>
       <SocialLogInButtonContainer>
