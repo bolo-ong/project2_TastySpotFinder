@@ -11,7 +11,12 @@ export const useEscape = (
   };
 
   const handleClick = (e: MouseEvent) => {
-    if (ref && ref.current && !ref.current.contains(e.target as Node)) {
+    if (
+      ref &&
+      ref.current &&
+      ref.current.parentElement &&
+      !ref.current.parentElement.contains(e.target as Node)
+    ) {
       callback();
     }
   };
