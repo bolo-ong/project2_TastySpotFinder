@@ -6,10 +6,10 @@ export const Button = ({
   size = "md",
   type,
   disabled,
-  children,
-  startIcon,
-  endIcon,
   wide,
+  startIcon,
+  children,
+  endIcon,
   ...rest
 }: Props) => {
   return (

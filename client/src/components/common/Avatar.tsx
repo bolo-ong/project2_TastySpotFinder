@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 
-export const Avatar = ({ size, src, hoverable, onClick, ...rest }: Props) => {
+export const Avatar = ({ size, hoverable, onClick, src, ...rest }: Props) => {
   return (
     <AvatarWrapper
       size={size}
