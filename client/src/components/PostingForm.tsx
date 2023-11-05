@@ -34,6 +34,7 @@ export const PostingForm = () => {
     setValues((prev) => {
       return { ...prev, [name]: value };
     });
+
     switch (name) {
       case "link":
         const regex1 = /^https:\/\/naver\.me\/[a-zA-Z0-9]/;
@@ -54,6 +55,11 @@ export const PostingForm = () => {
         }
         break;
       case "title":
+        if (value.trim()) {
+          setErrorMessage((prev) => {
+            return { ...prev, [name]: "" };
+          });
+        }
         break;
       case "description":
         break;
