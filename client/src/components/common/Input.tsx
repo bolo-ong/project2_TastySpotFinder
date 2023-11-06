@@ -1,13 +1,13 @@
 import React, { ChangeEvent, FocusEvent } from "react";
 import styled from "@emotion/styled";
 import { theme } from "styles/theme";
-import { ReactComponent as RequireMarker } from "assets/images/marker_required.svg";
+import { ReactComponent as RequireMarker } from "assets/images/icon_required_marker.svg";
 
-export interface InputProps {
+export interface Props {
   label?: string;
   type?: string;
-  name: string;
-  value: string;
+  name?: string;
+  value?: string;
   maxLength?: number;
   placeholder?: string;
   errorMessage?: string;
@@ -16,7 +16,7 @@ export interface InputProps {
   ref?: React.Ref<HTMLInputElement>;
   required?: boolean;
 }
-export const Input = React.forwardRef<HTMLInputElement, InputProps>(
+export const Input = React.forwardRef<HTMLInputElement, Props>(
   (
     {
       label,
@@ -66,7 +66,7 @@ const InputWrapper = styled.div`
   gap: 0.3125rem;
 `;
 
-const StyledInput = styled.input<InputProps>`
+const StyledInput = styled.input<Props>`
   width: 100%;
   height: 3rem;
   text-align: left;
