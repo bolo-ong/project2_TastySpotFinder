@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { SocialLogInButton } from "components/";
+import { SocialLogInButton } from "components";
 
 export const LogIn = () => {
   return (

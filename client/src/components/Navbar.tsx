@@ -3,7 +3,7 @@ import { theme } from "styles/theme";
 import { Link } from "react-router-dom";
 import { userLogOut } from "apis/authAPI";
 import { useGetUserDataQuery } from "queries/useGetUserDataQuery";
-import { Image, Avatar, Button, DropdownMenu, MenuItem } from ".";
+import { Image, Avatar, Button, DropdownMenu, MenuItem } from "components";
 
 export const Navbar = () => {
   const { userData } = useGetUserDataQuery();

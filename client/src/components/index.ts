@@ -3,6 +3,7 @@ export { Button } from "./common/Button";
 export { Image } from "./common/Image";
 export { Input } from "./common/Input";
 export { MenuItem } from "./common/MenuItem";
+export { SearchBar } from "./common/SearchBar";
 export { Text } from "./common/Text";
 
 export { PostingForm } from "./PostingForm";

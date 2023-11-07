@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { PostingForm } from "components/PostingForm";
+import { PostingForm } from "components";
 
 export const Posting = () => {
   return (

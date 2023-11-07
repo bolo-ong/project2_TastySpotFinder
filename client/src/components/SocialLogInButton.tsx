@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 import { Link } from "react-router-dom";
-import { Image } from ".";
+import { Image } from "components";
 import { theme } from "styles/theme";
 
 export const SocialLogInButton = ({ children, provider, ...rest }: Props) => {

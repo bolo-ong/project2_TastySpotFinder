@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 import React, { useState } from "react";
-import { DropdownMenuGroup } from "./DropdownMenuGroup";
+import { DropdownMenuGroup } from "./index";
 
 export const DropdownMenu = ({ trigger, children, ...rest }: Props) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);

@@ -1,4 +1,4 @@
-import axios from ".";
+import axios from "apis";
 
 export const getUserData = async () => {
   try {

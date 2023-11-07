@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "@emotion/styled";
-import { Navbar } from "../components";
+import { Navbar } from "components";
 
 export const Board = () => {
   return (
