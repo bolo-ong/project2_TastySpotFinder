@@ -38,7 +38,9 @@ export const Input = React.forwardRef<HTMLInputElement, Props>(
         {label && (
           <StyledLabel>
             {label}
-            {required && <RequireMarker width={"0.125rem"} />}
+            {required && (
+              <RequireMarker width={"0.125rem"} height={"0.125rem"} />
+            )}
           </StyledLabel>
         )}
         <StyledInput
