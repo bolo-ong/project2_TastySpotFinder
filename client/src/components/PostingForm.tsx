@@ -29,37 +29,39 @@ export const PostingForm = () => {
     }
   }, []);
 
+  const validateLink = (value: string) => {
+    const regex1 = /^https:\/\/naver\.me\/[a-zA-Z0-9]/;
+    const regex2 = /^https:\/\/map\.naver\.com\/p\/[a-zA-Z0-9]/;
+
+    if (
+      !regex1.test(value.trim()) &&
+      !regex2.test(value.trim()) &&
+      value.trim()
+    ) {
+      return "올바른 양식이 아닙니다.";
+    }
+
+    return "";
+  };
+
+  const validateTitle = (value: string) => {
+    return value.trim() ? "" : "필수 입력값 입니다.";
+  };
+
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    setValues((prev) => {
-      return { ...prev, [name]: value };
-    });
+
+    setValues((prev) => ({ ...prev, [name]: value }));
 
     switch (name) {
       case "link":
-        const regex1 = /^https:\/\/naver\.me\/[a-zA-Z0-9]/;
-        const regex2 = /^https:\/\/map\.naver\.com\/p\/[a-zA-Z0-9]/;
-
-        if (
-          !regex1.test(value.trim()) &&
-          !regex2.test(value.trim()) &&
-          value.trim()
-        ) {
-          setErrorMessage((prev) => {
-            return { ...prev, [name]: "올바른 양식이 아닙니다." };
-          });
-        } else {
-          setErrorMessage((prev) => {
-            return { ...prev, [name]: "" };
-          });
-        }
+        setErrorMessage((prev) => ({ ...prev, [name]: validateLink(value) }));
         break;
       case "title":
-        if (value.trim()) {
-          setErrorMessage((prev) => {
-            return { ...prev, [name]: "" };
-          });
-        }
+        setErrorMessage((prev) => ({
+          ...prev,
+          [name]: validateTitle(value),
+        }));
         break;
       case "description":
         break;
@@ -79,16 +81,13 @@ export const PostingForm = () => {
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
 
-    if (!values.link.trim()) {
-      setErrorMessage((prev) => {
-        return { ...prev, link: "필수 입력값 입니다." };
-      });
-    }
-    if (!values.title.trim()) {
-      setErrorMessage((prev) => {
-        return { ...prev, title: "필수 입력값 입니다." };
-      });
-    }
+    ["link", "title"].forEach((name) => {
+      if (!values[name].trim()) {
+        setErrorMessage((prev) => {
+          return { ...prev, [name]: "필수 입력값 입니다." };
+        });
+      }
+    });
 
     //todo - 서버에 post요청
   };
