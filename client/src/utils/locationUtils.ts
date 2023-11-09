@@ -18,6 +18,11 @@ export const getLocation = () => {
               latitude: initializeLatitude,
               longitude: initializeLongitude,
             });
+          },
+          {
+            enableHighAccuracy: false,
+            maximumAge: 3600000,
+            timeout: 15000,
           }
         );
       } else {
