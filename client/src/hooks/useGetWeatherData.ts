@@ -3,13 +3,13 @@ import { getWeatherData } from "apis/weatherAPI";
 import { getLocation } from "utils";
 
 export const useGetWeatherData = () => {
-  const [temperature, setTemperature] = useState<string>("");
-  const [condition, setCondition] = useState<string>("");
+  const [temperature, setTemperature] = useState<string>();
+  const [condition, setCondition] = useState<string>();
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        let { latitude, longitude } = await getLocation();
+        const { latitude, longitude } = await getLocation();
 
         const { tempCelsius, condition } = await getWeatherData(
           latitude,
