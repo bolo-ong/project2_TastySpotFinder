@@ -2,7 +2,7 @@ import axios from "apis";
 
 export const getUserData = async () => {
   try {
-    const res = await axios.get(`/api/auth/user`);
+    const res = await axios.get(`/api/auth/user`, { withCredentials: true });
     return res.data;
   } catch (err) {
     console.error(err);
