@@ -20,11 +20,11 @@
       "@apis/*": ["apis/*"],
       "@assets/*": ["assets/*"],
       "@components/*": ["components/*"],
+      "@constants/*": ["constants/*"],
       "@hooks/*": ["hooks/*"],
       "@pages/*": ["pages/*"],
       "@queries/*": ["queries/*"],
       "@styles/*": ["styles/*"],
-      "@templates/*": ["templates/*"],
       "@types/*": ["types/*"],
       "@utils/*": ["utils/*"]
     }
