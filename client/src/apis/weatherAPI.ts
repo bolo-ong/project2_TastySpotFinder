@@ -6,10 +6,10 @@ export const getWeatherData = async (lat: number, lon: number) => {
     const res = await axios.get(apiUrl);
 
     const tempKelvin = res.data.main.temp; //화씨
-    const tempCelsius = (tempKelvin - 273.15).toFixed(); //섭씨
-    const condition = res.data.weather[0].main; //눈,비,흐림 등 날씨
+    const tempCelsius: string | null = (tempKelvin - 273.15).toFixed(); //섭씨
+    const condition: string | null = res.data.weather[0].main; //눈,비,흐림 등 날씨
 
-    return { tempCelsius, condition };
+    return { temperature: tempCelsius, condition };
   } catch (err) {
     console.error(err);
     throw err;
