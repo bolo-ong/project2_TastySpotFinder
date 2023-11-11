@@ -2,6 +2,8 @@ export interface RecommendationFoods {
   rain: string[];
   [key: string]: string[];
 }
+
+//최대 5글자, 그 이상은 SlotMachine 컴포넌트의 SlotItem의 width수정 필요
 export const recommendationFoods: RecommendationFoods = {
   rain: ["김치전", "해물파전", "감자전", "파전", "삼겹살"],
   0: ["떡만두국", "전골", "김치찌개"], // 0도 이하
