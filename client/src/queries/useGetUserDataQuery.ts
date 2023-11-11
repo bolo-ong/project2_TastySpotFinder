@@ -7,7 +7,7 @@ export const useGetUserDataQuery = () => {
     data: userData,
     isSuccess: getUserDataSuccess,
     isLoading: getUserDataLoading,
-  } = useQuery(["userData"], () => getUserData(), {
+  } = useQuery(["userData"], async () => await getUserData(), {
     refetchOnMount: false,
     refetchOnWindowFocus: false,
   });
