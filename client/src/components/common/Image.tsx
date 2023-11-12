@@ -23,6 +23,7 @@ export interface Props {
 
 type ImageWrapperProps = Pick<Props, "width" | "height" | "hoverable">;
 const ImageWrapper = styled.div<ImageWrapperProps>`
+  position: relative;
   width: ${({ width, theme }) =>
     width ? theme.pxToRem(parseInt(`${width}`)) : "100%"};
   height: ${({ height, theme }) =>
@@ -31,7 +32,7 @@ const ImageWrapper = styled.div<ImageWrapperProps>`
   ${({ hoverable }) =>
     hoverable &&
     `
-    &::after {
+    &:hover::after {
       content: "";
       cursor: pointer;
       position: absolute;
@@ -41,9 +42,6 @@ const ImageWrapper = styled.div<ImageWrapperProps>`
       height: 100%;
       border-radius: 100%;
       background-color: #220c0c;
-      opacity: 0;
-    }
-    &:hover::after {
       opacity: 0.2;
     }
     `}

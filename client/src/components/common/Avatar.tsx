@@ -30,7 +30,7 @@ const AvatarWrapper = styled.div<Props>`
   ${({ hoverable }) =>
     hoverable &&
     `
-    &::after {
+    &:hover::after {
       content: "";
       cursor: pointer;
       position: absolute;
@@ -40,9 +40,6 @@ const AvatarWrapper = styled.div<Props>`
       height: 100%;
       border-radius: 100%;
       background-color: #220c0c;
-      opacity: 0;
-    }
-    &:hover::after {
       opacity: 0.2;
     }
     `}
