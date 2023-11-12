@@ -3,7 +3,11 @@ import styled from "@emotion/styled";
 import { Image } from "components";
 import { theme } from "styles/theme";
 
-export const SearchBar = () => {
+interface Props {
+  placeholder?: string;
+}
+
+export const SearchBar = ({ placeholder }: Props) => {
   const [inputValue, setInputValue] = useState("");
 
   const handleSubmit = (e: FormEvent) => {
@@ -28,7 +32,7 @@ export const SearchBar = () => {
           <StyledInput
             value={inputValue}
             type="text"
-            placeholder={`placeholderText`}
+            placeholder={placeholder}
             onSubmit={handleSubmit}
             onChange={handleChange}
           />

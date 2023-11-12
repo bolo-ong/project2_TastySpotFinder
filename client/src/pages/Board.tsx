@@ -1,11 +1,12 @@
 import React from "react";
 import styled from "@emotion/styled";
-import { Navbar } from "components";
+import { Navbar, SearchBar } from "components";
 
 export const Board = () => {
   return (
     <Container>
       <Navbar />
+      <SearchBar />
     </Container>
   );
 };

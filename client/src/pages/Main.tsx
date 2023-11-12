@@ -8,7 +8,7 @@ export const Main = () => {
       <Wrapper>
         <SlotMachine />
       </Wrapper>
-      <SearchBar />
+      <SearchBar placeholder="추천받은 음식을 검색해 보세요!" />
     </Container>
   );
 };
