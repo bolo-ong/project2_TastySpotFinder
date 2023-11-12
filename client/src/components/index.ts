@@ -1,5 +1,6 @@
 export { Avatar } from "./common/Avatar";
 export { Button } from "./common/Button";
+export { Card } from "./common/Card";
 export { Image } from "./common/Image";
 export { Input } from "./common/Input";
 export { MenuItem } from "./common/MenuItem";
