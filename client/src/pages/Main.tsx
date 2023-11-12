@@ -1,25 +1,12 @@
 import styled from "@emotion/styled";
-import { keyframes } from "@emotion/react";
 import { Navbar, SearchBar, SlotMachine } from "components";
-import { theme } from "styles/theme";
-import { useGetWeatherData } from "hooks";
 
 export const Main = () => {
-  const { temperature, condition } = useGetWeatherData();
-  console.log(temperature);
-  console.log(condition);
-
   return (
     <Container>
       <Navbar />
       <Wrapper>
-        <span>오늘</span>
-        {condition ? (
-          <SlotMachine temperature={temperature} condition={condition} />
-        ) : (
-          <StyledSpan floatAnimation>???</StyledSpan>
-        )}
-        <span>어때요</span>
+        <SlotMachine />
       </Wrapper>
       <SearchBar />
     </Container>
@@ -44,25 +31,4 @@ const Wrapper = styled.div`
   height: 3.125rem;
   font-size: 2rem;
   font-weight: 600;
-`;
-
-const floatAnimation = keyframes`
-  0% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-10px);
-  }
-  100% {
-    transform: translateY(0);
-  }
-`;
-
-const StyledSpan = styled.span<{ floatAnimation: boolean }>`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 9.375rem;
-  color: ${theme.colors.main[5]};
-  animation: ${floatAnimation} 2s infinite;
 `;
