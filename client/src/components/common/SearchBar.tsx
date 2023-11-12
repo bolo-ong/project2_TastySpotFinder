@@ -3,10 +3,6 @@ import styled from "@emotion/styled";
 import { Image } from "components";
 import { theme } from "styles/theme";
 
-interface Props {
-  placeholder?: string;
-}
-
 export const SearchBar = ({ placeholder }: Props) => {
   const [inputValue, setInputValue] = useState("");
 
@@ -53,6 +49,10 @@ export const SearchBar = ({ placeholder }: Props) => {
     </Container>
   );
 };
+
+interface Props {
+  placeholder?: string;
+}
 
 const Container = styled.div`
   width: 35rem;

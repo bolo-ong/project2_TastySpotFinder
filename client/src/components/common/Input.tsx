@@ -3,19 +3,6 @@ import styled from "@emotion/styled";
 import { theme } from "styles/theme";
 import { ReactComponent as RequireMarker } from "assets/images/icon_required_marker.svg";
 
-export interface Props {
-  label?: string;
-  type?: string;
-  name?: string;
-  value?: string;
-  maxLength?: number;
-  placeholder?: string;
-  errorMessage?: string;
-  onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
-  onBlur?: (e: FocusEvent<HTMLInputElement>) => void;
-  ref?: React.Ref<HTMLInputElement>;
-  required?: boolean;
-}
 export const Input = React.forwardRef<HTMLInputElement, Props>(
   (
     {
@@ -61,6 +48,20 @@ export const Input = React.forwardRef<HTMLInputElement, Props>(
     );
   }
 );
+
+export interface Props {
+  label?: string;
+  type?: string;
+  name?: string;
+  value?: string;
+  maxLength?: number;
+  placeholder?: string;
+  errorMessage?: string;
+  onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
+  onBlur?: (e: FocusEvent<HTMLInputElement>) => void;
+  ref?: React.Ref<HTMLInputElement>;
+  required?: boolean;
+}
 
 const InputWrapper = styled.div`
   display: flex;
