@@ -9,6 +9,7 @@ import React, {
 import styled from "@emotion/styled";
 import { theme } from "styles/theme";
 import { Input, Button, Text } from "components";
+import { validateLink, validateTitle } from "constants/index";
 
 export const PostingForm = () => {
   const [values, setValues] = useState<Record<string, string>>({
@@ -28,25 +29,6 @@ export const PostingForm = () => {
       ref.current.focus();
     }
   }, []);
-
-  const validateLink = (value: string) => {
-    const regex1 = /^https:\/\/naver\.me\/[a-zA-Z0-9]/;
-    const regex2 = /^https:\/\/map\.naver\.com\/p\/[a-zA-Z0-9]/;
-
-    if (
-      !regex1.test(value.trim()) &&
-      !regex2.test(value.trim()) &&
-      value.trim()
-    ) {
-      return "올바른 양식이 아닙니다.";
-    }
-
-    return "";
-  };
-
-  const validateTitle = (value: string) => {
-    return value.trim() ? "" : "필수 입력값 입니다.";
-  };
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
