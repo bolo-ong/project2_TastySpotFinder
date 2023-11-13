@@ -2,16 +2,16 @@ import styled from "@emotion/styled";
 import { theme } from "styles/theme";
 import React from "react";
 
-export const MenuItem = ({ onClick, children, ...rest }: Props) => {
+export const MenuItem = ({ handleClick, children, ...rest }: Props) => {
   return (
-    <StyledMenuItem onClick={onClick} {...rest}>
+    <StyledMenuItem onClick={handleClick} {...rest}>
       {children}
     </StyledMenuItem>
   );
 };
 
 export interface Props {
-  onClick?: () => void;
+  handleClick?: () => void;
   children?: React.ReactNode;
 }
 
