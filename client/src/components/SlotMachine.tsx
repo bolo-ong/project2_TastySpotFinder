@@ -44,7 +44,7 @@ export const SlotMachine = () => {
       //날씨와 온도 데이터를 받아온 후 기존의 텍스트를 fadeout시키고, 새로운 텍스트를 fadein시킵니다.
       temperature && condition && setIsFadeOut(true);
     },
-    !isFadeOut ? 900 : null
+    !isFadeOut ? 1000 : null
   );
 
   return (
@@ -135,7 +135,8 @@ const SlotItem = styled.span<{
 
   animation: ${({ spinning }) => (spinning ? rotateAnimation : "none")}
     ${({ fadeIn }) => (fadeIn ? fadeInAnimation : "none")}
-    ${({ duration }) => (duration ? `${duration + 0.01}s` : "2s")} ease-in-out;
+    ${({ duration }) => (duration ? `${duration}s` : "2s")} ease-in-out;
+  animation-fill-mode: forwards;
 `;
 
 const StyledSpan = styled.span<{
@@ -146,4 +147,5 @@ const StyledSpan = styled.span<{
   width: 5.1875rem;
   animation: ${({ fadeOut }) => (fadeOut ? fadeOutAnimation : "none")}
     ${({ fadeIn }) => (fadeIn ? fadeInAnimation : "none")} 1s ease-in-out;
+  animation-fill-mode: forwards;
 `;

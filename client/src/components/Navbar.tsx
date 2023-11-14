@@ -7,7 +7,6 @@ import { Image, Avatar, Button, DropdownMenu, MenuItem } from "components";
 
 export const Navbar = () => {
   const { userData } = useGetUserDataQuery();
-  console.log(userData);
 
   const menuItems = [
     { component: <Link to="/">저장한 리스트</Link> },
@@ -58,9 +57,6 @@ export const Navbar = () => {
 };
 
 const Container = styled.div`
-  position: sticky;
-  z-index: 10;
-
   display: flex;
   align-items: center;
   justify-content: space-between;
