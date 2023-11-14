@@ -167,30 +167,28 @@ export async function crawlData(url: string): Promise<RestaurantType[]> {
         `//*[@id="app-root"]/div/div/div/div/div/div[3]/div[1]/ul/li`,
       ];
       let imgTabElementHandles;
-      let isFound = false;
-      while (!isFound) {
-        for (const selector of imgTabXpathSelector) {
-          imgTabElementHandles = await frame.$x(selector);
-          // imgTabElementHandles = await frame.waitForXPath(selector)
-          if (imgTabElementHandles.length === 9) {
-            let src;
-            for (let j = 0; j < 4; j++) {
-              await imgTabElementHandles[j].click();
-              await new Promise((resolve) => setTimeout(resolve, 300));
-              const imgElementHandles = await page.$x(
-                `/html/body/div[3]/div/div[1]/div/div/img | /html/body/div[3]/div/div[1]/div/div/video`
+
+      for (const selector of imgTabXpathSelector) {
+        imgTabElementHandles = await frame.$x(selector);
+        // imgTabElementHandles = await frame.waitForXPath(selector)
+        if (imgTabElementHandles.length === 9) {
+          let src;
+          for (let j = 0; j < 4; j++) {
+            await imgTabElementHandles[j].click();
+            await new Promise((resolve) => setTimeout(resolve, 300));
+            const imgElementHandles = await page.$x(
+              `/html/body/div[3]/div/div[1]/div/div/img | /html/body/div[3]/div/div[1]/div/div/video`
+            );
+            for (const imgElementHandle of imgElementHandles) {
+              src = await imgElementHandle.evaluate((element: Element) =>
+                element.getAttribute("src")
               );
-              for (const imgElementHandle of imgElementHandles) {
-                src = await imgElementHandle.evaluate((element: Element) =>
-                  element.getAttribute("src")
-                );
-              }
-              await imgDataArray.push(src);
-              await page.keyboard.press("Escape");
             }
-            isFound = true;
-            break;
+            await imgDataArray.push(src);
+            await page.keyboard.press("Escape");
           }
+
+          break;
         }
       }
 
