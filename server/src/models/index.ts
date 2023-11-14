@@ -1,4 +1,3 @@
-import { User } from "./User";
-import { Restaurant } from "./Restaurant";
-
-export { User, Restaurant };
+export { User, UserType } from "./User";
+export { Restaurant, RestaurantType } from "./Restaurant";
+export { RestaurantList, RestaurantListType } from "./RestaurantList";
