@@ -31,10 +31,8 @@ export const Navbar = () => {
       />
       <NavigationContainer>
         <NavItem to="/board">맛집보기</NavItem>
-        {userData === "Login information not found." && (
-          <NavItem to="/Login">로그인</NavItem>
-        )}
-        {userData?.profile_image && (
+
+        {userData ? (
           <>
             <DropdownMenu
               trigger={
@@ -50,6 +48,8 @@ export const Navbar = () => {
               맛집추천하기
             </Button>
           </>
+        ) : (
+          <NavItem to="/Login">로그인</NavItem>
         )}
       </NavigationContainer>
     </Container>

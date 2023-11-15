@@ -3,7 +3,7 @@ import styled from "@emotion/styled";
 import { Image } from "components";
 import { theme } from "styles/theme";
 
-export const SearchBar = ({ placeholder }: Props) => {
+export const SearchBar = ({ placeholder, ...rest }: Props) => {
   const [inputValue, setInputValue] = useState("");
 
   const handleSubmit = (e: FormEvent) => {
@@ -19,7 +19,7 @@ export const SearchBar = ({ placeholder }: Props) => {
   };
 
   return (
-    <Container>
+    <Container {...rest}>
       <form>
         <InputContainer>
           <ImageWrapper position="left">
