@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import { ReactComponent as DefaultProfile } from "assets/images/icon_default_profile.svg";
 
 export const Avatar = ({ size, hoverable, onClick, src, ...rest }: Props) => {
   return (
@@ -8,7 +9,11 @@ export const Avatar = ({ size, hoverable, onClick, src, ...rest }: Props) => {
       onClick={onClick}
       {...rest}
     >
-      <StyledAvatar src={src} alt="profile_img" />
+      {src ? (
+        <StyledAvatar src={src} />
+      ) : (
+        <DefaultProfile width="1.875rem" height="1.875rem" />
+      )}
     </AvatarWrapper>
   );
 };

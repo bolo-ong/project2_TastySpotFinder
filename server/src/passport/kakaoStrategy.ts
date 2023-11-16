@@ -21,17 +21,47 @@ export const kakaoStrategy = new KakaoStrategy(
     callbackURL: KAKAO_LOGIN_REDIRECT_URI,
   },
   async (accessToken, refreshToken, profile: KakaoProfile, done) => {
+    /*
+     * 카카오 프로필사진이 기본 프로필일 경우, 해당 URL은 404응답을 해주기 때문에,
+     * 기본 프로필인지 확인 후 DB에 저장하고, 기본 프로필인 경우 프론트에서 처리
+     */
+
+    const rawObject = JSON.parse(profile._raw);
+    const isDefaultImage: boolean =
+      rawObject?.kakao_account?.profile?.is_default_image;
+
     try {
       const existingUser = await User.findOne({ userId: profile.id });
       if (existingUser) {
-        return done(null, existingUser);
+        const updatedFields: Record<string, string> = {
+          displayName: profile.displayName,
+        };
+
+        // 카카오 프로필이 기본이미지가 아닐때만 저장
+        if (!isDefaultImage) {
+          updatedFields.profile_image = profile._json.properties.profile_image;
+        }
+
+        const updatedUser = await User.findOneAndUpdate(
+          { userId: profile.id },
+          { $set: updatedFields },
+          { new: true }
+        );
+
+        return done(null, updatedUser);
       } else {
-        const newUser = new User({
+        const newUserFields: Record<string, string> = {
           provider: "kakao",
           userId: profile.id,
           displayName: profile.displayName,
-          profile_image: profile._json.properties.profile_image,
-        });
+        };
+
+        // 카카오 프로필이 기본이미지가 아닐때만 저장
+        if (!isDefaultImage) {
+          newUserFields.profile_image = profile._json.properties.profile_image;
+        }
+
+        const newUser = new User(newUserFields);
         await newUser.save();
         return done(null, newUser);
       }
