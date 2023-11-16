@@ -69,6 +69,7 @@ const StyledInput = styled.input`
   font-weight: 700;
   padding: 0.625rem 3rem;
   color: ${theme.colors.main[5]};
+  background-color: ${theme.colors.pureWhite};
   outline: 0.0625rem solid ${theme.colors.gray[2]};
 
   ::placeholder {

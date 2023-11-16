@@ -76,6 +76,7 @@ const StyledInput = styled.input<Props>`
   font-size: 0.875rem;
   padding: 0 1.125rem;
   border-radius: 0.75rem;
+  background-color: ${theme.colors.pureWhite};
   outline: 0.0625rem solid ${theme.colors.gray[0]};
   ::placeholder {
     font-size: 0.875rem;
