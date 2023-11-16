@@ -10,10 +10,14 @@ import {
 const authRouter = express.Router();
 const CLIENT_URL = process.env.CLIENT_URL ?? "http://localhost:3000";
 
+//유저 데이터 조회
 authRouter.get("/user", getUser);
 
 //kakao
-authRouter.get("/kakao", passport.authenticate("kakao"));
+authRouter.get(
+  "/kakao",
+  passport.authenticate("kakao", { failureRedirect: CLIENT_URL })
+);
 authRouter.get(
   "/oauth/kakao",
   passport.authenticate("kakao", { failureRedirect: CLIENT_URL }),
