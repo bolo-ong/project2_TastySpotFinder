@@ -139,7 +139,7 @@ const variants: Record<string, VariantProps> = {
   outlined: {
     //default
     color: theme.colors.main[5],
-    backgroundColor: theme.colors.white,
+    backgroundColor: theme.colors.pureWhite,
     border: `.0625rem solid ${theme.colors.gray[3]}`,
     padding: `0 .9375rem`,
     //hover & focus
