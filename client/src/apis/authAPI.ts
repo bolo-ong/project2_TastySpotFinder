@@ -15,7 +15,9 @@ export const userLogOut = async (provider: string) => {
       const KAKAO_LOGOUT_URL = `https://kauth.kakao.com/oauth/logout?client_id=${process.env.REACT_APP_KAKAO_CLIENT_ID}&logout_redirect_uri=${process.env.REACT_APP_KAKAO_LOGOUT_REDIRECT_URI}`;
       window.location.href = `${KAKAO_LOGOUT_URL}`;
     } else {
-      const res = await axios.get(`/api/auth/logout/${provider}`);
+      const res = await axios.get(`/api/auth/logout/${provider}`, {
+        withCredentials: true,
+      });
       if (res.status === 200) {
         window.location.href = `/`;
       }
