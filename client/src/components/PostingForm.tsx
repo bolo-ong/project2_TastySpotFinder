@@ -1,17 +1,22 @@
 import React, {
   useRef,
-  useEffect,
   useState,
+  useEffect,
   ChangeEvent,
-  FocusEvent,
   FormEvent,
 } from "react";
 import styled from "@emotion/styled";
 import { theme } from "styles/theme";
+import { useToast } from "hooks";
+import { useNavigate } from "react-router-dom";
 import { Input, Button, Text } from "components";
-import { validateLink, validateTitle } from "constants/index";
+import { postRestaurantList, crawlRestaurant } from "apis/restaurantAPI";
+import { validateLink, validateRequired, validateErrorMessage } from "utils";
 
 export const PostingForm = () => {
+  const navigate = useNavigate();
+  const { showToast } = useToast();
+  const [isLoading, setIsLoading] = useState(false);
   const [values, setValues] = useState<Record<string, string>>({
     link: "",
     title: "",
@@ -42,36 +47,52 @@ export const PostingForm = () => {
       case "title":
         setErrorMessage((prev) => ({
           ...prev,
-          [name]: validateTitle(value),
+          [name]: validateRequired(value),
         }));
         break;
-      case "description":
-        break;
     }
   };
 
-  const handleBlur = (e: FocusEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-
-    if (!value.trim()) {
-      setErrorMessage((prev) => {
-        return { ...prev, [name]: "필수 입력값 입니다." };
-      });
-    }
-  };
-
-  const handleSubmit = (e: FormEvent) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
 
-    ["link", "title"].forEach((name) => {
-      if (!values[name].trim()) {
-        setErrorMessage((prev) => {
-          return { ...prev, [name]: "필수 입력값 입니다." };
-        });
-      }
-    });
+    //필수값인 link와 title체크
+    setErrorMessage((prev) => ({
+      ...prev,
+      link: validateLink(values.link),
+      title: validateRequired(values.title),
+    }));
 
-    //todo - 서버에 post요청
+    //validateErrorMessage 함수를 이용해서 에러메세지가 존재하는지 확인
+    if (validateErrorMessage(errorMessage)) {
+      try {
+        const data = {
+          title: values.title,
+          description: values.description,
+        };
+
+        const postRestaurantListId = await postRestaurantList(data);
+        postRestaurantListId && setIsLoading(true);
+
+        // 게시물 등록 요청 결과에 따라 메시지 출력
+        postRestaurantListId
+          ? showToast("게시물 등록 요청이 정상 처리되었습니다.")
+          : showToast("게시물 등록 요청에 오류가 발생했습니다.");
+
+        navigate(-1);
+
+        const crawlComplete =
+          postRestaurantListId &&
+          (await crawlRestaurant(values.link, postRestaurantListId));
+
+        // 게시물 등록 결과에 따라 메시지 출력
+        crawlComplete
+          ? showToast("게시물 등록이 완료되었습니다.")
+          : showToast("게시물 등록에 실패하였습니다.");
+      } catch (err) {
+        console.error(err);
+      }
+    }
   };
 
   return (
@@ -93,7 +114,6 @@ export const PostingForm = () => {
           value={values.link}
           placeholder="네이버 맛집 리스트 링크를 첨부해 주세요"
           onChange={handleChange}
-          onBlur={handleBlur}
           errorMessage={errorMessage.link}
           ref={ref}
           required
@@ -103,10 +123,8 @@ export const PostingForm = () => {
           type="text"
           name="title"
           value={values.title}
-          maxLength={30}
           placeholder="맛집 리스트의 제목을 입력해 주세요"
           onChange={handleChange}
-          onBlur={handleBlur}
           errorMessage={errorMessage.title}
           required
         />
@@ -115,15 +133,19 @@ export const PostingForm = () => {
           type="text"
           name="description"
           value={values.description}
-          maxLength={30}
           placeholder="나만의 리스트를 소개해 주세요"
           onChange={handleChange}
-          onBlur={handleBlur}
           errorMessage={errorMessage.description}
         />
-        <Button wide type="submit">
-          맛집 공유하기
-        </Button>
+        {isLoading ? (
+          <Button wide disabled>
+            잠시만 기다려 주세요
+          </Button>
+        ) : (
+          <Button wide type="submit">
+            맛집 공유하기
+          </Button>
+        )}
       </StyledForm>
     </>
   );
