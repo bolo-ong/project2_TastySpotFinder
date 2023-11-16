@@ -5,6 +5,8 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { Main, Board, LogIn, Posting } from "./pages";
 import { RecoilRoot } from "recoil";
+import { PublicRoute, PrivateRoute } from "routes";
+import { Toast, RedirectPage } from "components";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -14,28 +16,34 @@ const queryClient = new QueryClient({
   },
 });
 
-const App = () => (
-  <>
-    <QueryClientProvider client={queryClient}>
-      <RecoilRoot>
-        <ThemeProvider theme={theme}>
-          <GlobalStyle />
+const App = () => {
+  return (
+    <>
+      <QueryClientProvider client={queryClient}>
+        <RecoilRoot>
+          <ThemeProvider theme={theme}>
+            <GlobalStyle />
+            <Toast />
 
-          <Router>
-            <Routes>
-              <Route path="/" element={<Main />} />
-              <Route path="/board" element={<Board />} />
-              <Route path="/login" element={<LogIn />} />
-              <Route path="/posting" element={<Posting />} />
-              <Route path="*" element={<div>404</div>} />
-            </Routes>
-          </Router>
+            <Router>
+              <Routes>
+                <Route path="/" element={<Main />} />
+                <Route path="/board" element={<Board />} />
+                <Route path="/login" element={<LogIn />} />
+                <Route element={<PrivateRoute />}>
+                  <Route path="/posting" element={<Posting />} />
+                </Route>
+                <Route path="/redirect" element={<RedirectPage />} />
+                <Route path="*" element={<div>404</div>} />
+              </Routes>
+            </Router>
 
-          <ReactQueryDevtools initialIsOpen={false} />
-        </ThemeProvider>
-      </RecoilRoot>
-    </QueryClientProvider>
-  </>
-);
+            <ReactQueryDevtools initialIsOpen={false} />
+          </ThemeProvider>
+        </RecoilRoot>
+      </QueryClientProvider>
+    </>
+  );
+};
 
 export default App;

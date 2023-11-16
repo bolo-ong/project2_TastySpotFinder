@@ -1,13 +1,27 @@
 import styled from "@emotion/styled";
 import { SocialLogInButton } from "components";
+import { useLocation } from "react-router-dom";
 
 export const LogIn = () => {
+  const location = useLocation();
+  const prevPath = location.state?.prevPath;
+
+  const handleClick = () => {
+    localStorage.setItem("prevPath", prevPath);
+  };
+
   return (
     <Container>
       <SocialLogInButtonContainer>
-        <SocialLogInButton provider="naver">네이버 로그인</SocialLogInButton>
-        <SocialLogInButton provider="kakao">카카오 로그인</SocialLogInButton>
-        <SocialLogInButton provider="google">구글 로그인</SocialLogInButton>
+        <SocialLogInButton onClick={handleClick} provider="naver">
+          네이버 로그인
+        </SocialLogInButton>
+        <SocialLogInButton onClick={handleClick} provider="kakao">
+          카카오 로그인
+        </SocialLogInButton>
+        <SocialLogInButton onClick={handleClick} provider="google">
+          구글 로그인
+        </SocialLogInButton>
       </SocialLogInButtonContainer>
     </Container>
   );

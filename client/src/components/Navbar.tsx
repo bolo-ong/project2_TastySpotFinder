@@ -1,12 +1,13 @@
 import styled from "@emotion/styled";
 import { theme } from "styles/theme";
-import { Link } from "react-router-dom";
+import { useLocation, Link } from "react-router-dom";
 import { userLogOut } from "apis/authAPI";
 import { useGetUserDataQuery } from "queries/useGetUserDataQuery";
 import { Image, Avatar, Button, DropdownMenu, MenuItem } from "components";
 
 export const Navbar = () => {
   const { userData } = useGetUserDataQuery();
+  const location = useLocation();
 
   const menuItems = [
     { component: <Link to="/">저장한 리스트</Link> },
@@ -33,24 +34,24 @@ export const Navbar = () => {
         <NavItem to="/board">맛집보기</NavItem>
 
         {userData ? (
-          <>
-            <DropdownMenu
-              trigger={
-                <Avatar size="36" src={userData.profile_image} hoverable />
-              }
-            >
-              {menuItems.map((menuItem, idx) => (
-                <MenuItem key={idx}>{menuItem.component}</MenuItem>
-              ))}
-            </DropdownMenu>
-
-            <Button as={Link} to="/posting">
-              맛집추천하기
-            </Button>
-          </>
+          <DropdownMenu
+            trigger={
+              <Avatar size="36" src={userData.profile_image} hoverable />
+            }
+          >
+            {menuItems.map((menuItem, idx) => (
+              <MenuItem key={idx}>{menuItem.component}</MenuItem>
+            ))}
+          </DropdownMenu>
         ) : (
-          <NavItem to="/Login">로그인</NavItem>
+          <NavItem to="/Login" state={{ prevPath: location.pathname }}>
+            로그인
+          </NavItem>
         )}
+
+        <Button as={Link} to="/posting">
+          맛집추천하기
+        </Button>
       </NavigationContainer>
     </Container>
   );

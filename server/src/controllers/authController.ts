@@ -3,7 +3,7 @@ import { Request, Response } from "express";
 const CLIENT_URL = process.env.CLIENT_URL ?? "http://localhost:3000";
 
 export const authenticateUser = (req: Request, res: Response) => {
-  res.redirect(CLIENT_URL);
+  res.redirect(CLIENT_URL + "/redirect");
 };
 
 export const logOutUser = (req: Request, res: Response) => {
@@ -31,7 +31,5 @@ export const logOutKakao = async (req: Request, res: Response) => {
 export const getUser = (req: Request, res: Response) => {
   if (req.isAuthenticated()) {
     res.send(req.user);
-  } else {
-    res.send("Login information not found.");
   }
 };
