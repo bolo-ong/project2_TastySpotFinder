@@ -22,8 +22,8 @@ export const kakaoStrategy = new KakaoStrategy(
   },
   async (accessToken, refreshToken, profile: KakaoProfile, done) => {
     /*
-     * 카카오 프로필사진이 기본 프로필일 경우, 해당 URL은 404응답을 해주기 때문에,
-     * 기본 프로필인지 확인 후 DB에 저장하고, 기본 프로필인 경우 프론트에서 처리
+    카카오 프로필사진이 기본 프로필일 경우, 해당 URL은 404응답을 해주기 때문에,
+    기본 프로필인지 확인 후 DB에 저장하고, 기본 프로필인 경우 프론트에서 처리
      */
 
     const rawObject = JSON.parse(profile._raw);
