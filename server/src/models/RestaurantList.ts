@@ -1,10 +1,11 @@
-import { Schema, model } from "mongoose";
+import { Schema, model, Types } from "mongoose";
 
 interface RestaurantListType {
   title: string;
   description?: string;
   like: number;
   comments: Comment[];
+  writer: Types.ObjectId;
 }
 
 const restaurantListSchema = new Schema<RestaurantListType>(
@@ -12,6 +13,10 @@ const restaurantListSchema = new Schema<RestaurantListType>(
     title: { type: String, required: true },
     description: { type: String },
     like: { type: Number, default: 0 },
+    writer: {
+      type: Schema.Types.ObjectId,
+      ref: "User",
+    },
 
     comments: [
       {
