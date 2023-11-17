@@ -6,6 +6,7 @@ export const postRestaurantList = async (data: string | {}) => {
     return res.data;
   } catch (err) {
     console.error(err);
+    throw err;
   }
 };
 
@@ -21,5 +22,6 @@ export const crawlRestaurant = async (
     return res.data;
   } catch (err) {
     console.error(err);
+    throw err;
   }
 };

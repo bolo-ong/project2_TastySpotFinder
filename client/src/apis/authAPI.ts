@@ -6,6 +6,7 @@ export const getUserData = async () => {
     return res.data;
   } catch (err) {
     console.error(err);
+    throw err;
   }
 };
 
@@ -24,5 +25,6 @@ export const userLogOut = async (provider: string) => {
     }
   } catch (err) {
     console.error(err);
+    throw err;
   }
 };
