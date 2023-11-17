@@ -11,11 +11,13 @@ import {
 export const postRestaurantList = async (req: Request, res: Response) => {
   try {
     const { title, description } = req.body;
+    const userId = new mongoose.Types.ObjectId(req.user?.userId);
 
     const newRestaurantList: RestaurantListType = {
       title: title,
       description: description,
       like: 0,
+      writer: userId,
       comments: [],
     };
 
