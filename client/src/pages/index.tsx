@@ -1,6 +1,5 @@
-import { Main } from "./Main";
-import { Board } from "./Board";
-import { LogIn } from "./LogIn";
-import { Posting } from "./Posting";
-
-export { Main, Board, LogIn, Posting };
+export { Main } from "./Main";
+export { Board } from "./Board";
+export { LogIn } from "./LogIn";
+export { LoginRedirectPage } from "./LoginRedirectPage";
+export { Posting } from "./Posting";
