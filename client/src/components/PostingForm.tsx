@@ -16,6 +16,7 @@ import { validateLink, validateRequired, validateErrorMessage } from "utils";
 export const PostingForm = () => {
   const navigate = useNavigate();
   const { showToast } = useToast();
+
   const [isLoading, setIsLoading] = useState(false);
   const [values, setValues] = useState<Record<string, string>>({
     link: "",
