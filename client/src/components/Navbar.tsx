@@ -2,12 +2,13 @@ import styled from "@emotion/styled";
 import { theme } from "styles/theme";
 import { useLocation, Link } from "react-router-dom";
 import { userLogOut } from "apis/authAPI";
-import { useGetUserDataQuery } from "queries/useGetUserDataQuery";
+import { useGetUserProfileDataQuery } from "queries";
 import { Image, Avatar, Button, DropdownMenu, MenuItem } from "components";
 
 export const Navbar = () => {
-  const { userData } = useGetUserDataQuery();
   const location = useLocation();
+  const { userProfile } = useGetUserProfileDataQuery();
+  console.log(userProfile);
 
   const menuItems = [
     { component: <Link to="/">저장한 리스트</Link> },
@@ -15,7 +16,9 @@ export const Navbar = () => {
     { component: <Link to="#">나의 맛집</Link> },
     {
       component: (
-        <button onClick={() => userLogOut(userData.provider)}>로그아웃</button>
+        <button onClick={() => userLogOut(userProfile.provider)}>
+          로그아웃
+        </button>
       ),
     },
   ];
@@ -33,10 +36,10 @@ export const Navbar = () => {
       <NavigationContainer>
         <NavItem to="/board">맛집보기</NavItem>
 
-        {userData ? (
+        {userProfile?.profile_image ? (
           <DropdownMenu
             trigger={
-              <Avatar size="36" src={userData.profile_image} hoverable />
+              <Avatar size="36" src={userProfile.profile_image} hoverable />
             }
           >
             {menuItems.map((menuItem, idx) => (
