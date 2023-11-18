@@ -1,8 +1,15 @@
 import axios from "apis";
 
-export const getUserData = async () => {
+/**
+ * 유저 프로필 데이터를 받는 API
+ * 로그인 시 @returns {Promise<{ displayName: string, profile_image: string, provider: string }>}
+ * 비로그인 시 @returns {string} "Login required"
+ */
+export const getUserProfile = async () => {
   try {
-    const res = await axios.get(`/api/auth/user`, { withCredentials: true });
+    const res = await axios.get(`/api/auth/user/profile`, {
+      withCredentials: true,
+    });
     return res.data;
   } catch (err) {
     console.error(err);

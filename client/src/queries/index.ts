@@ -1,1 +1,1 @@
-export { useGetUserDataQuery } from "queries/useGetUserDataQuery";
+export { useGetUserProfileDataQuery } from "queries/useGetUserProfileDataQuery";

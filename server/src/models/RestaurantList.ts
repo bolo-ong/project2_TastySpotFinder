@@ -1,6 +1,7 @@
 import { Schema, model, Types } from "mongoose";
 
 interface RestaurantListType {
+  _id?: Types.ObjectId;
   title: string;
   description?: string;
   like: number;

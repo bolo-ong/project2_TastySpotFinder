@@ -1,6 +1,7 @@
 import { Schema, model, Types } from "mongoose";
 
 interface RestaurantType {
+  _id?: Types.ObjectId;
   name: string;
   category: string;
   location: string;

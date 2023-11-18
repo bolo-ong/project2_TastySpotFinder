@@ -2,6 +2,10 @@ import { useState, useEffect } from "react";
 import { getWeatherData } from "apis/weatherAPI";
 import { getLocation } from "utils";
 
+/**
+ * getLocation util 함수와 getWeatherData API를 사용해서 온도와 날씨를 return해줌
+ * @returns {{ temperature: string | null, condition: string | null }}
+ */
 export const useGetWeatherData = () => {
   const [temperature, setTemperature] = useState<string | null>(null);
   const [condition, setCondition] = useState<string | null>(null);

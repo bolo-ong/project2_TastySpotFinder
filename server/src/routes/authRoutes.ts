@@ -4,14 +4,14 @@ import {
   authenticateUser,
   logOutUser,
   logOutKakao,
-  getUser,
+  getUserProfile,
 } from "../controllers/authController";
 
 const authRouter = express.Router();
 const CLIENT_URL = process.env.CLIENT_URL ?? "http://localhost:3000";
 
 //유저 데이터 조회
-authRouter.get("/user", getUser);
+authRouter.get("/user/profile", getUserProfile);
 
 //kakao
 authRouter.get(

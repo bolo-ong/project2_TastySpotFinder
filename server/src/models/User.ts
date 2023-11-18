@@ -1,6 +1,7 @@
-import { Schema, model } from "mongoose";
+import { Schema, model, Types } from "mongoose";
 
 interface UserType {
+  _id?: Types.ObjectId;
   provider: string;
   userId: string;
   displayName: string;

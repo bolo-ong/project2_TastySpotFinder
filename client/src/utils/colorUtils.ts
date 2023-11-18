@@ -1,3 +1,8 @@
+/**
+ * 컬로코드를 파라미터로 받고, 밝은색으로 만들어줌
+ * @param {string} color (#RRGGBB)
+ * @returns {string}
+ */
 export const makeLightenColor = (color: string): string => {
   // 입력된 컬러 코드를 16진수 형식에서 파싱
   const r = parseInt(color.slice(1, 3), 16);
@@ -11,6 +16,11 @@ export const makeLightenColor = (color: string): string => {
   return lightenColor;
 };
 
+/**
+ * 컬로코드를 파라미터로 받고, 어두운색으로 만들어줌
+ * @param {string} color (#RRGGBB)
+ * @returns {string}
+ */
 export const makeDarkenColor = (color: string): string => {
   // 입력된 컬러 코드를 16진수 형식에서 파싱
   const r = parseInt(color.slice(1, 3), 16);
