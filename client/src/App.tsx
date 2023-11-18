@@ -3,10 +3,10 @@ import { theme, GlobalStyle } from "./styles";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
-import { Main, Board, LogIn, Posting } from "./pages";
+import { Main, Board, LogIn, Posting, LoginRedirectPage } from "./pages";
 import { RecoilRoot } from "recoil";
 import { PublicRoute, PrivateRoute } from "routes";
-import { Toast, RedirectPage } from "components";
+import { Toast } from "components";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -29,11 +29,13 @@ const App = () => {
               <Routes>
                 <Route path="/" element={<Main />} />
                 <Route path="/board" element={<Board />} />
-                <Route path="/login" element={<LogIn />} />
+                <Route element={<PublicRoute />}>
+                  <Route path="/login" element={<LogIn />} />
+                </Route>
                 <Route element={<PrivateRoute />}>
                   <Route path="/posting" element={<Posting />} />
                 </Route>
-                <Route path="/redirect" element={<RedirectPage />} />
+                <Route path="/redirect" element={<LoginRedirectPage />} />
                 <Route path="*" element={<div>404</div>} />
               </Routes>
             </Router>
