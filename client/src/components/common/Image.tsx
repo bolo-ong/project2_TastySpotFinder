@@ -6,6 +6,8 @@ export const Image = ({ width, height, name, extension, ...rest }: Props) => {
       <StyledImage
         src={require(`assets/images/${name}.${extension}`)}
         alt={name}
+        width={width}
+        height={height}
       />
     </ImageWrapper>
   );
@@ -47,7 +49,10 @@ const ImageWrapper = styled.div<ImageWrapperProps>`
     `}
 `;
 
-const StyledImage = styled.img`
-  width: 100%;
-  height: 100%;
+type StyledImageProps = Pick<Props, "width" | "height">;
+const StyledImage = styled.img<StyledImageProps>`
+  width: ${({ width, theme }) =>
+    width ? theme.pxToRem(parseInt(`${width}`)) : "100%"};
+  height: ${({ height, theme }) =>
+    height ? theme.pxToRem(parseInt(`${height}`)) : "100%"};
 `;
