@@ -4,6 +4,7 @@ interface RestaurantListType {
   _id?: Types.ObjectId;
   title: string;
   description?: string;
+  crawlURL: string;
   like: number;
   comments: Comment[];
   writer: Types.ObjectId;
@@ -13,6 +14,7 @@ const restaurantListSchema = new Schema<RestaurantListType>(
   {
     title: { type: String, required: true },
     description: { type: String },
+    crawlURL: { type: String },
     like: { type: Number, default: 0 },
     writer: {
       type: Schema.Types.ObjectId,
