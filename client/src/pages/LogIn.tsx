@@ -4,7 +4,7 @@ import { useLocation } from "react-router-dom";
 
 export const LogIn = () => {
   const location = useLocation();
-  const prevPath = location.state?.prevPath;
+  const prevPath = location.state ? location.state.prevPath : "/";
 
   const handleClick = () => {
     localStorage.setItem("prevPath", prevPath);
