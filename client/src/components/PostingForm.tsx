@@ -77,8 +77,8 @@ export const PostingForm = () => {
 
         // 게시물 등록 요청 결과에 따라 메시지 출력
         postRestaurantListId
-          ? showToast("게시물 등록 요청이 정상 처리되었습니다.")
-          : showToast("게시물 등록 요청에 오류가 발생했습니다.");
+          ? showToast("게시물 등록 요청이 정상 처리되었습니다.", "info")
+          : showToast("게시물 등록 요청에 오류가 발생했습니다.", "warning");
 
         navigate(-1);
 
@@ -88,8 +88,8 @@ export const PostingForm = () => {
 
         // 게시물 등록 결과에 따라 메시지 출력
         crawlComplete
-          ? showToast("게시물 등록이 완료되었습니다.")
-          : showToast("게시물 등록에 실패하였습니다.");
+          ? showToast("게시물 등록이 완료되었습니다.", "success")
+          : showToast("게시물 등록에 실패하였습니다.", "warning");
       } catch (err) {
         console.error(err);
       }
