@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 로그인 이전 페이지인 prevPath값으로 이동시켜줌
  */
 
-export const LoginRedirectPage = () => {
+export const LogInRedirectPage = () => {
   const navigate = useNavigate();
 
   useEffect(() => {

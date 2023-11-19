@@ -3,7 +3,7 @@ import { theme, GlobalStyle } from "./styles";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
-import { Main, Board, LogIn, Posting, LoginRedirectPage } from "./pages";
+import { Main, Board, LogIn, Posting, LogInRedirectPage } from "./pages";
 import { RecoilRoot } from "recoil";
 import { PublicRoute, PrivateRoute } from "routes";
 import { Toast } from "components";
@@ -35,7 +35,7 @@ const App = () => {
                 <Route element={<PrivateRoute />}>
                   <Route path="/posting" element={<Posting />} />
                 </Route>
-                <Route path="/redirect" element={<LoginRedirectPage />} />
+                <Route path="/redirect" element={<LogInRedirectPage />} />
                 <Route path="*" element={<div>404</div>} />
               </Routes>
             </Router>
