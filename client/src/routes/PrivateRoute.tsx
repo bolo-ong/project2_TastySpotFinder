@@ -12,7 +12,7 @@ export const PrivateRoute = () => {
         state: { prevPath: location.pathname },
         replace: true,
       });
-  }, []);
+  }, [userProfile]);
 
   return userProfile?.displayName ? <Outlet /> : null;
 };

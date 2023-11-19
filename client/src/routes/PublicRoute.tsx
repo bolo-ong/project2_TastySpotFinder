@@ -10,7 +10,7 @@ export const PublicRoute = () => {
       navigate("/", {
         replace: true,
       });
-  }, []);
+  }, [userProfile]);
 
   return userProfile === "Login required" ? <Outlet /> : null;
 };
