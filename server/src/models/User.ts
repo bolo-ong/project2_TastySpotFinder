@@ -6,6 +6,8 @@ interface UserType {
   userId: string;
   displayName: string;
   profile_image: string;
+  savedRestaurantLists: Types.ObjectId[];
+  savedRestaurants: Types.ObjectId[];
 }
 
 const userSchema = new Schema<UserType>(
@@ -14,6 +16,10 @@ const userSchema = new Schema<UserType>(
     userId: { type: String },
     displayName: { type: String },
     profile_image: { type: String },
+    savedRestaurantLists: [
+      { type: Schema.Types.ObjectId, ref: "RestaurantList" },
+    ],
+    savedRestaurants: [{ type: Schema.Types.ObjectId, ref: "Restaurant" }],
   },
   {
     timestamps: true,

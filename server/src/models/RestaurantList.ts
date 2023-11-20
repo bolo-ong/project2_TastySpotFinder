@@ -6,8 +6,9 @@ interface RestaurantListType {
   description?: string;
   crawlURL: string;
   like: number;
-  comments: Comment[];
   writer: Types.ObjectId;
+  savedByUsers?: Types.ObjectId[];
+  comments?: Comment[];
 }
 
 const restaurantListSchema = new Schema<RestaurantListType>(
@@ -20,6 +21,7 @@ const restaurantListSchema = new Schema<RestaurantListType>(
       type: Schema.Types.ObjectId,
       ref: "User",
     },
+    savedByUsers: [{ type: Schema.Types.ObjectId, ref: "User" }],
 
     comments: [
       {
