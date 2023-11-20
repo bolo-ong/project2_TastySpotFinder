@@ -12,7 +12,7 @@ export const useGetUserProfileDataQuery = () => {
     data: userProfile,
     isSuccess: getUserProfileDataSuccess,
     isLoading: getUserProfileDataLoading,
-  } = useQuery(["userProfile"], async () => await getUserProfile(), {
+  } = useQuery(["userProfile"], getUserProfile, {
     refetchOnMount: false,
     refetchOnWindowFocus: false,
   });
