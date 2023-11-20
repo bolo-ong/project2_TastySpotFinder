@@ -27,3 +27,25 @@ export const crawlRestaurant = async (
     throw err;
   }
 };
+
+export const getRestaurantList = async (page: number) => {
+  try {
+    const res = await axios.get(
+      `/api/restaurant/getRestaurantList?page=${page}`
+    );
+    return res.data;
+  } catch (err) {
+    console.error(err);
+    throw err;
+  }
+};
+
+export const getRestaurant = async (page: number) => {
+  try {
+    const res = await axios.get(`/api/restaurant/getRestaurant?page=${page}`);
+    return res.data;
+  } catch (err) {
+    console.error(err);
+    throw err;
+  }
+};
