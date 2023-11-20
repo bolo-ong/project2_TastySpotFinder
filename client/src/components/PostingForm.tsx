@@ -66,6 +66,7 @@ export const PostingForm = () => {
 
     //validateErrorMessage 함수를 이용해서 에러메세지가 존재하는지 확인
     if (validateErrorMessage(errorMessage)) {
+      setIsLoading(true);
       try {
         const data = {
           title: values.title,
@@ -73,12 +74,10 @@ export const PostingForm = () => {
         };
 
         const postRestaurantListId = await postRestaurantList(data);
-        postRestaurantListId && setIsLoading(true);
-
         // 게시물 등록 요청 결과에 따라 메시지 출력
         postRestaurantListId
-          ? showToast("게시물 등록 요청이 정상 처리되었습니다.", "info")
-          : showToast("게시물 등록 요청에 오류가 발생했습니다.", "warning");
+          ? showToast("요청이 정상 처리되었습니다.", "info")
+          : showToast("요청에 오류가 발생했습니다.", "warning");
 
         navigate(-1);
 
@@ -90,6 +89,8 @@ export const PostingForm = () => {
         crawlComplete
           ? showToast("게시물 등록이 완료되었습니다.", "success")
           : showToast("게시물 등록에 실패하였습니다.", "warning");
+
+        setIsLoading(false);
       } catch (err) {
         console.error(err);
       }
