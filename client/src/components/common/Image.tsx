@@ -19,6 +19,7 @@ export interface Props {
   width?: string | number;
   height?: string | number;
   hoverable?: boolean;
+  onClick?: () => void;
   as?: React.ElementType;
   to?: string;
 }
