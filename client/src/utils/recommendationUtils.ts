@@ -22,7 +22,7 @@ export const getRecommendationFoods = (
   //recommendationFoods의 키값인 온도와, 파라미터로 받아온 temperature를 find메서드로 비교한 후 키값 생성
   const tempKeys = Object.keys(recommendationFoods);
   const tempKey =
-    tempKeys.find((key) => parseInt(temperature) < parseInt(key)) ?? "25";
+    tempKeys.find((key) => parseInt(temperature) <= parseInt(key)) ?? "25";
   const recommendationFoodArray = recommendationFoods[tempKey];
 
   return getRandomFood(recommendationFoodArray);
