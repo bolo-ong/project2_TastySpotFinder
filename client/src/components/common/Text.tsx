@@ -19,6 +19,7 @@ export const Text = styled.span<Props>`
     hoverable &&
     `
     &:hover {
+      cursor:pointer;
         color: ${
           color ? makeLightenColor(color) : makeLightenColor(theme.colors.black)
         };
