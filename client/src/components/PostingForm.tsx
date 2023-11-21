@@ -79,7 +79,7 @@ export const PostingForm = () => {
           ? showToast("요청이 정상 처리되었습니다.", "info")
           : showToast("요청에 오류가 발생했습니다.", "warning");
 
-        navigate(-1);
+        navigate("/");
 
         const crawlComplete =
           postRestaurantListId &&
