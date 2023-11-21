@@ -10,7 +10,6 @@ interface RestaurantType {
   img: string[];
   count?: number;
   like?: number;
-  restaurantLists?: Types.ObjectId[];
   savedByUsers?: Types.ObjectId[];
   comments?: Comment[];
 }
@@ -25,7 +24,6 @@ const restaurantSchema = new Schema<RestaurantType>(
     img: [{ type: String }],
     count: { type: Number, default: 1 },
     like: { type: Number, default: 0 },
-    restaurantLists: [{ type: Schema.Types.ObjectId, ref: "RestaurantList" }],
     savedByUsers: [{ type: Schema.Types.ObjectId, ref: "User" }],
 
     comments: [
