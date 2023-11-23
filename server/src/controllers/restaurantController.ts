@@ -88,7 +88,7 @@ export const getRestaurantList = async (req: Request, res: Response) => {
 
   try {
     const restaurantList = await RestaurantList.find()
-
+      .sort({ createdAt: -1 })
       .skip((page - 1) * pageSize + skipCount)
       .limit(pageSize)
       .exec();
