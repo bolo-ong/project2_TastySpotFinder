@@ -1,6 +1,19 @@
 import styled from "@emotion/styled";
 import { theme } from "styles/theme";
 
+export interface Props {
+  variant?: "filled" | "warning" | "outlined";
+  size?: "lg" | "md" | "sm";
+  type?: "button" | "submit" | "reset";
+  wide?: boolean;
+  disabled?: boolean;
+  children?: React.ReactNode;
+  startIcon?: React.ReactNode;
+  endIcon?: React.ReactNode;
+  as?: React.ElementType;
+  to?: string;
+}
+
 export const Button = ({
   variant = "filled",
   size = "md",
@@ -27,19 +40,6 @@ export const Button = ({
     </StyledButton>
   );
 };
-
-export interface Props {
-  variant?: "filled" | "warning" | "outlined";
-  size?: "lg" | "md" | "sm";
-  type?: "button" | "submit" | "reset";
-  wide?: boolean;
-  disabled?: boolean;
-  children?: React.ReactNode;
-  startIcon?: React.ReactNode;
-  endIcon?: React.ReactNode;
-  as?: React.ElementType;
-  to?: string;
-}
 
 const StyledButton = styled.button<Props>`
   display: flex;

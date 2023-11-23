@@ -1,7 +1,12 @@
 import styled from "@emotion/styled";
+import { theme } from "styles/theme";
 import React, { useRef } from "react";
 import { useEscape } from "hooks";
-import { theme } from "styles/theme";
+
+export interface Props {
+  children: React.ReactNode;
+  onCloseDropdown: () => void;
+}
 
 export const DropdownMenuGroup = ({
   children,
@@ -20,11 +25,6 @@ export const DropdownMenuGroup = ({
     </StyledUl>
   );
 };
-
-export interface Props {
-  children: React.ReactNode;
-  onCloseDropdown: () => void;
-}
 
 const StyledUl = styled.ul`
   z-index: 2;

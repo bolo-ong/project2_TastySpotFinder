@@ -1,29 +1,25 @@
 import styled from "@emotion/styled";
-import { Text, Image } from "components";
 import { theme } from "styles/theme";
 import { useState } from "react";
 import { useToast } from "hooks";
+import { RestaurantList } from "types";
+import { Text, Image, Card } from "components";
 
 export interface Props {
-  children: React.ReactNode;
+  restaurantLists: RestaurantList[][];
   handleFetchNextPage: () => void;
-  lastPage: number;
-  currentPage: number;
-  currentPageItem: [];
-  setCurrentPage: (num: number) => void;
 }
 
 export const Carousel = ({
-  children,
   handleFetchNextPage,
-  lastPage,
-  currentPage,
-  currentPageItem,
-  setCurrentPage,
+  restaurantLists,
   ...rest
 }: Props) => {
   const { showToast } = useToast();
   const [translateX, setTranslateX] = useState<number>(0);
+  const [currentPage, setCurrentPage] = useState<number>(1);
+  const currentPageItem: RestaurantList[] = restaurantLists[currentPage - 1];
+  const lastPage: number = restaurantLists.length || 1;
 
   const nextPage = () => {
     if (lastPage >= currentPage) {
@@ -42,6 +38,8 @@ export const Carousel = ({
     if (currentPage !== 1) {
       setCurrentPage(currentPage - 1);
       translateX < 100 ? setTranslateX(0) : setTranslateX(translateX - 100);
+    } else {
+      showToast("첫번째 목록입니다.", "info");
     }
   };
 
@@ -53,7 +51,7 @@ export const Carousel = ({
         width={36}
         height={36}
         onClick={previousPage}
-        hoverable
+        hoverable={currentPage === 1 ? false : true}
       />
       <CarouselWithTextContainer>
         <TextContainer>
@@ -66,7 +64,17 @@ export const Carousel = ({
         </TextContainer>
         <CarouselContainer>
           <Wrapper style={{ transform: `translateX(-${translateX}%)` }}>
-            {children}
+            {restaurantLists &&
+              restaurantLists.map((page) =>
+                page.map((restaurantList: RestaurantList) => (
+                  <Card
+                    key={restaurantList._id}
+                    title={restaurantList.title}
+                    content={restaurantList.description}
+                    src={restaurantList.thumbnail}
+                  />
+                ))
+              )}
           </Wrapper>
         </CarouselContainer>
       </CarouselWithTextContainer>
@@ -76,7 +84,7 @@ export const Carousel = ({
         width={36}
         height={36}
         onClick={nextPage}
-        hoverable
+        hoverable={lastPage >= currentPage ? true : false}
       />
     </Container>
   );

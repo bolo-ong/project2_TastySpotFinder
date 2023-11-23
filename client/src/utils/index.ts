@@ -1,8 +1,8 @@
-export { getLocation } from "utils/locationUtils";
-export { getRecommendationFoods } from "utils/recommendationUtils";
-export { makeLightenColor, makeDarkenColor } from "utils/colorUtils";
+export { getLocation } from "./locationUtils";
+export { getRecommendationFoods } from "./recommendationUtils";
+export { makeLightenColor, makeDarkenColor } from "./colorUtils";
 export {
   validateLink,
   validateRequired,
   validateErrorMessage,
-} from "utils/validationUtils";
+} from "./validationUtils";

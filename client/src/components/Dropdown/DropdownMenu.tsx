@@ -2,6 +2,11 @@ import styled from "@emotion/styled";
 import React, { useState } from "react";
 import { DropdownMenuGroup } from "./index";
 
+export interface Props {
+  trigger: React.ReactElement;
+  children: React.ReactNode;
+}
+
 export const DropdownMenu = ({ trigger, children, ...rest }: Props) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
@@ -20,11 +25,6 @@ export const DropdownMenu = ({ trigger, children, ...rest }: Props) => {
     </>
   );
 };
-
-export interface Props {
-  trigger: React.ReactElement;
-  children: React.ReactNode;
-}
 
 const Container = styled.div`
   display: flex;

@@ -1,6 +1,13 @@
 import styled from "@emotion/styled";
 import { ReactComponent as DefaultProfile } from "assets/images/icon_default_profile.svg";
 
+export interface Props {
+  size?: string | number;
+  src?: string;
+  hoverable?: boolean;
+  onClick?: () => void;
+}
+
 export const Avatar = ({ size, hoverable, onClick, src, ...rest }: Props) => {
   return (
     <AvatarWrapper
@@ -17,13 +24,6 @@ export const Avatar = ({ size, hoverable, onClick, src, ...rest }: Props) => {
     </AvatarWrapper>
   );
 };
-
-export interface Props {
-  size?: string | number;
-  src?: string;
-  hoverable?: boolean;
-  onClick?: () => void;
-}
 
 const AvatarWrapper = styled.div<Props>`
   position: relative;

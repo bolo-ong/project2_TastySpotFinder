@@ -1,11 +1,11 @@
 import styled from "@emotion/styled";
+import { theme } from "styles/theme";
 import { keyframes } from "@emotion/react";
 import { useRecoilState } from "recoil";
 import { toastState, ToastState } from "recoil/atoms";
 import { Portal, Image } from "components";
 import { useEffect } from "react";
 import { useToast } from "hooks";
-import { theme } from "styles/theme";
 
 export const Toast = () => {
   const [toast] = useRecoilState(toastState);

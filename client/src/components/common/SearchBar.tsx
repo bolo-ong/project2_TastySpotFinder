@@ -1,7 +1,11 @@
 import React, { FormEvent, ChangeEvent, useState } from "react";
 import styled from "@emotion/styled";
-import { Image } from "components";
 import { theme } from "styles/theme";
+import { Image } from "components";
+
+interface Props {
+  placeholder?: string;
+}
 
 export const SearchBar = ({ placeholder, ...rest }: Props) => {
   const [inputValue, setInputValue] = useState("");
@@ -49,10 +53,6 @@ export const SearchBar = ({ placeholder, ...rest }: Props) => {
     </Container>
   );
 };
-
-interface Props {
-  placeholder?: string;
-}
 
 const Container = styled.div`
   width: 35rem;

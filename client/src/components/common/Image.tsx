@@ -1,5 +1,16 @@
 import styled from "@emotion/styled";
 
+export interface Props {
+  name: string;
+  extension: string;
+  width?: string | number;
+  height?: string | number;
+  hoverable?: boolean;
+  onClick?: () => void;
+  as?: React.ElementType;
+  to?: string;
+}
+
 export const Image = ({ width, height, name, extension, ...rest }: Props) => {
   return (
     <ImageWrapper width={width} height={height} {...rest}>
@@ -12,17 +23,6 @@ export const Image = ({ width, height, name, extension, ...rest }: Props) => {
     </ImageWrapper>
   );
 };
-
-export interface Props {
-  name: string;
-  extension: string;
-  width?: string | number;
-  height?: string | number;
-  hoverable?: boolean;
-  onClick?: () => void;
-  as?: React.ElementType;
-  to?: string;
-}
 
 type ImageWrapperProps = Pick<Props, "width" | "height" | "hoverable">;
 const ImageWrapper = styled.div<ImageWrapperProps>`

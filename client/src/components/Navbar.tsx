@@ -7,7 +7,8 @@ import { Image, Avatar, Button, DropdownMenu, MenuItem } from "components";
 
 export const Navbar = () => {
   const location = useLocation();
-  const { userProfile } = useGetUserProfileDataQuery();
+  const { userProfile, getUserProfileDataSuccess } =
+    useGetUserProfileDataQuery();
   console.log(userProfile);
 
   const menuItems = [
@@ -36,20 +37,24 @@ export const Navbar = () => {
       <NavigationContainer>
         <NavItem to="/board">맛집보기</NavItem>
 
-        {userProfile?.profile_image ? (
-          <DropdownMenu
-            trigger={
-              <Avatar size="36" src={userProfile.profile_image} hoverable />
-            }
-          >
-            {menuItems.map((menuItem, idx) => (
-              <MenuItem key={idx}>{menuItem.component}</MenuItem>
-            ))}
-          </DropdownMenu>
+        {getUserProfileDataSuccess ? (
+          userProfile?.profile_image ? (
+            <DropdownMenu
+              trigger={
+                <Avatar size="36" src={userProfile.profile_image} hoverable />
+              }
+            >
+              {menuItems.map((menuItem, idx) => (
+                <MenuItem key={idx}>{menuItem.component}</MenuItem>
+              ))}
+            </DropdownMenu>
+          ) : (
+            <NavItem to="/Login" state={{ prevPath: location.pathname }}>
+              로그인
+            </NavItem>
+          )
         ) : (
-          <NavItem to="/Login" state={{ prevPath: location.pathname }}>
-            로그인
-          </NavItem>
+          <></>
         )}
 
         <Button as={Link} to="/posting">

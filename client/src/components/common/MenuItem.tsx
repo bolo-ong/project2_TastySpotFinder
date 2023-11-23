@@ -1,6 +1,10 @@
 import styled from "@emotion/styled";
 import { theme } from "styles/theme";
-import React from "react";
+
+export interface Props {
+  handleClick?: () => void;
+  children?: React.ReactNode;
+}
 
 export const MenuItem = ({ handleClick, children, ...rest }: Props) => {
   return (
@@ -9,11 +13,6 @@ export const MenuItem = ({ handleClick, children, ...rest }: Props) => {
     </StyledMenuItem>
   );
 };
-
-export interface Props {
-  handleClick?: () => void;
-  children?: React.ReactNode;
-}
 
 const StyledMenuItem = styled.li`
   display: flex;

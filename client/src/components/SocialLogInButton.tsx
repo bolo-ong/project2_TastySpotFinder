@@ -1,7 +1,15 @@
 import styled from "@emotion/styled";
+import { theme } from "styles/theme";
 import { Link } from "react-router-dom";
 import { Image } from "components";
-import { theme } from "styles/theme";
+
+export interface Props {
+  provider: "kakao" | "google" | "naver";
+  children?: React.ReactNode;
+  onClick?: () => void;
+  as?: React.ElementType;
+  to?: string;
+}
 
 export const SocialLogInButton = ({
   children,
@@ -24,14 +32,6 @@ export const SocialLogInButton = ({
     </StyledSocialLogInButton>
   );
 };
-
-export interface Props {
-  provider: "kakao" | "google" | "naver";
-  children?: React.ReactNode;
-  onClick?: () => void;
-  as?: React.ElementType;
-  to?: string;
-}
 
 const StyledSocialLogInButton = styled.button<Props>`
   display: flex;
