@@ -3,13 +3,14 @@ import { useGetRestaurantQuery } from "queries";
 import { Restaurant } from "types";
 
 export const RestaurantCarousel = () => {
-  const { data, fetchNextPage } = useGetRestaurantQuery();
+  const { data, fetchNextPage, hasNextPage } = useGetRestaurantQuery();
   const restaurants: Restaurant[][] = data?.pages || [];
 
   return (
     <Carousel
       carouselItem={restaurants}
       handleFetchNextPage={fetchNextPage}
+      hasNextPage={Boolean(hasNextPage) && true}
       title="맛집"
     >
       {restaurants &&

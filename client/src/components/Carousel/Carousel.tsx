@@ -8,6 +8,7 @@ export interface Props {
   children: React.ReactNode;
   carouselItem: Object[][];
   handleFetchNextPage: () => void;
+  hasNextPage: boolean;
   title: string;
 }
 
@@ -15,6 +16,7 @@ export const Carousel = ({
   children,
   handleFetchNextPage,
   carouselItem,
+  hasNextPage,
   title,
   ...rest
 }: Props) => {
@@ -22,7 +24,9 @@ export const Carousel = ({
   const [translateX, setTranslateX] = useState<number>(0);
   const [currentPage, setCurrentPage] = useState<number>(1);
   const currentPageItem: Object[] = carouselItem[currentPage - 1];
-  const slidItem: number = currentPage === 1 ? 4 : currentPageItem?.length;
+  const nextSlidCount: number = currentPage === 1 ? 4 : currentPageItem?.length;
+  const prevSlidCount: number =
+    currentPage === 2 ? 4 : carouselItem[currentPage - 2]?.length;
   const lastPage: number = carouselItem.length + 1 || 2;
 
   //다음 슬라이드를 기다리지 않도록 처음에 2개의 페이지를 받아오기 때문에 초기에 LastPage가 currentPage보다 1 높음
@@ -30,21 +34,25 @@ export const Carousel = ({
     if (lastPage - 1 === currentPage) {
       handleFetchNextPage();
       setCurrentPage(currentPage + 1);
-      setTranslateX(translateX + slidItem * 25);
+      setTranslateX(translateX + nextSlidCount * 25);
     } else if (lastPage > currentPage) {
       setCurrentPage(currentPage + 1);
-      setTranslateX(translateX + slidItem * 25);
-    } else {
+      setTranslateX(translateX + nextSlidCount * 25);
+    }
+
+    if (!hasNextPage && !nextSlidCount) {
       showToast("마지막 목록입니다.", "info");
     }
   };
 
-  const previousPage = () => {
+  const prevPage = () => {
     if (currentPage === 1) {
       showToast("첫번째 목록입니다.", "info");
     } else {
       setCurrentPage(currentPage - 1);
-      translateX < 100 ? setTranslateX(0) : setTranslateX(translateX - 100);
+      translateX < 100
+        ? setTranslateX(0)
+        : setTranslateX(translateX - prevSlidCount * 25);
     }
   };
 
@@ -55,8 +63,8 @@ export const Carousel = ({
         extension="svg"
         width={36}
         height={36}
-        onClick={previousPage}
-        hoverable={currentPage === 1 ? false : true}
+        onClick={prevPage}
+        hoverable={currentPage !== 1}
       />
       <CarouselWithTextContainer>
         <TextContainer>
@@ -79,7 +87,7 @@ export const Carousel = ({
         width={36}
         height={36}
         onClick={nextPage}
-        hoverable={lastPage >= currentPage ? true : false}
+        hoverable={hasNextPage || Boolean(nextSlidCount)}
       />
     </Container>
   );
