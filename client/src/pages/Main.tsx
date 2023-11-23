@@ -1,5 +1,11 @@
 import styled from "@emotion/styled";
-import { Navbar, SearchBar, SlotMachine } from "components";
+import {
+  Navbar,
+  SearchBar,
+  SlotMachine,
+  RestaurantListCarousel,
+  RestaurantCarousel,
+} from "components";
 
 export const Main = () => {
   return (
@@ -9,6 +15,10 @@ export const Main = () => {
         <SlotMachine />
       </Wrapper>
       <SearchBar placeholder="추천받은 음식을 검색해 보세요!" />
+      <CarouselContainer>
+        <RestaurantListCarousel />
+        <RestaurantCarousel />
+      </CarouselContainer>
     </Container>
   );
 };
@@ -31,4 +41,15 @@ const Wrapper = styled.div`
   height: 3.125rem;
   font-size: 2rem;
   font-weight: 600;
+`;
+
+const CarouselContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  width: 80rem;
+  gap: 3.5rem;
+  margin-top: 16rem;
 `;

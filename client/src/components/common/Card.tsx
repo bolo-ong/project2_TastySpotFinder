@@ -1,11 +1,17 @@
 import styled from "@emotion/styled";
+import { theme } from "styles/theme";
 import { Link } from "react-router-dom";
 import { Text } from "components";
-import { theme } from "styles/theme";
 
-export const Card = ({ title, content, src }: Props) => {
+export interface Props {
+  title: string;
+  content?: string;
+  src?: string | string[];
+}
+
+export const Card = ({ title, content, src, ...rest }: Props) => {
   return (
-    <Container to="">
+    <Container to="" {...rest}>
       <ImageWrapper>
         {Array.isArray(src) ? (
           <StyledImgContainer>
@@ -24,12 +30,6 @@ export const Card = ({ title, content, src }: Props) => {
     </Container>
   );
 };
-
-export interface Props {
-  title: string;
-  content: string;
-  src?: string | string[];
-}
 
 const Container = styled(Link)`
   cursor: pointer;
@@ -83,6 +83,8 @@ const StyledImg = styled.img`
 `;
 
 const TextContainer = styled.div`
+  width: 15.9375rem;
+  height: 2.375rem;
   display: flex;
   flex-direction: column;
   padding: 0 0.25rem;

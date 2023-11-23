@@ -1,6 +1,7 @@
 import express from "express";
 import {
   postRestaurantList,
+  getRestaurantList,
   getRestaurant,
   crawlRestaurant,
 } from "../controllers/restaurantController";
@@ -10,6 +11,7 @@ const restaurantRouter = express.Router();
 
 restaurantRouter.post("/", isAuthenticated, postRestaurantList);
 restaurantRouter.post("/crawl", crawlRestaurant);
-restaurantRouter.get("/", getRestaurant);
+restaurantRouter.get("/getRestaurantList", getRestaurantList);
+restaurantRouter.get("/getRestaurant", getRestaurant);
 
 export default restaurantRouter;

@@ -1,1 +1,3 @@
-export { useGetUserProfileDataQuery } from "queries/useGetUserProfileDataQuery";
+export { useGetRestaurantListQuery } from "./useGetRestaurantListQuery";
+export { useGetRestaurantQuery } from "./useGetRestaurantQuery";
+export { useGetUserProfileDataQuery } from "./useGetUserProfileDataQuery";

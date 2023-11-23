@@ -8,6 +8,11 @@ export { Portal } from "./common/Portal";
 export { SearchBar } from "./common/SearchBar";
 export { Text } from "./common/Text";
 
+export {
+  Carousel,
+  RestaurantCarousel,
+  RestaurantListCarousel,
+} from "./Carousel";
 export { DropdownMenu, DropdownMenuGroup } from "./Dropdown";
 export { PostingForm } from "./PostingForm";
 export { Navbar } from "./Navbar";
