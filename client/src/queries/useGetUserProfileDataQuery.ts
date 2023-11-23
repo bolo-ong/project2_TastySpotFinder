@@ -12,11 +12,7 @@ export const useGetUserProfileDataQuery = () => {
     data: userProfile,
     isSuccess: getUserProfileDataSuccess,
     isLoading: getUserProfileDataLoading,
-  } = useQuery(["userProfile"], getUserProfile, {
-    refetchOnMount: false,
-    refetchOnWindowFocus: false,
-  });
-
+  } = useQuery(["userProfile"], getUserProfile);
   return {
     getUserProfileDataError,
     userProfile,

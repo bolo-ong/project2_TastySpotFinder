@@ -17,9 +17,6 @@ export const useGetRestaurantListQuery = () => {
     {
       getNextPageParam: (lastPage, pages) =>
         lastPage.length < 4 ? undefined : pages.length + 1,
-
-      refetchOnMount: false,
-      refetchOnWindowFocus: false,
     }
   );
 
