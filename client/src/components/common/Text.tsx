@@ -15,6 +15,11 @@ export const Text = styled.span<Props>`
   color: ${({ color, theme }) => color || theme.colors.black};
   transition: color 0.2s ease-in-out;
 
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  word-break: keep-all;
+
   ${({ hoverable, color, theme }) =>
     hoverable &&
     `
@@ -24,5 +29,5 @@ export const Text = styled.span<Props>`
           color ? makeLightenColor(color) : makeLightenColor(theme.colors.black)
         };
     }
-  `}
+  `};
 `;

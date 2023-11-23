@@ -10,3 +10,17 @@ export interface RestaurantList {
   savedByUsers?: string[];
   comments?: Comment[];
 }
+
+export interface Restaurant {
+  _id?: string;
+  name: string;
+  category: string;
+  location: string;
+  contact: string;
+  menu: string[];
+  img: string[];
+  count?: number;
+  like?: number;
+  savedByUsers?: string[];
+  comments?: Comment[];
+}

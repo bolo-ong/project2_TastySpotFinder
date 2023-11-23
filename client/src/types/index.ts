@@ -1,1 +1,1 @@
-export type { RestaurantList } from "./restaurantList";
+export type { RestaurantList, Restaurant } from "./restaurant";
