@@ -66,7 +66,9 @@ export const crawlRestaurant = async (req: Request, res: Response) => {
               restaurants: restaurantIds,
               thumbnail: restaurants
                 .map((restaurant) => restaurant.img[0])
-                .filter((thumbnail) => thumbnail !== null),
+                .filter((thumbnail) => thumbnail !== null)
+                .filter(Boolean)
+                .slice(0, 4),
             },
           }
         ));
