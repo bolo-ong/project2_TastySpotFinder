@@ -17,7 +17,7 @@ const restaurantListSchema = new Schema<RestaurantListType>(
   {
     title: { type: String, required: true },
     description: { type: String },
-    thumbnail: [{ type: String, maxlength: 4 }],
+    thumbnail: [{ type: String }],
     crawlURL: { type: String },
     like: { type: Number, default: 0 },
     writer: {
