@@ -1,7 +1,6 @@
 import styled from "@emotion/styled";
 import { theme } from "styles/theme";
 import { useState } from "react";
-import { useToast } from "hooks";
 import { Text, Image } from "components";
 
 export interface Props {
@@ -20,7 +19,6 @@ export const Carousel = ({
   title,
   ...rest
 }: Props) => {
-  const { showToast } = useToast();
   const [translateX, setTranslateX] = useState<number>(0);
   const [currentPage, setCurrentPage] = useState<number>(1);
   const currentPageItem: Object[] = carouselItem[currentPage - 1];
@@ -39,33 +37,30 @@ export const Carousel = ({
       setCurrentPage(currentPage + 1);
       setTranslateX(translateX + nextSlidCount * 25);
     }
-
-    if (!hasNextPage && !nextSlidCount) {
-      showToast("마지막 목록입니다.", "info");
-    }
   };
 
   const prevPage = () => {
-    if (currentPage === 1) {
-      showToast("첫번째 목록입니다.", "info");
-    } else {
-      setCurrentPage(currentPage - 1);
-      translateX < 100
-        ? setTranslateX(0)
-        : setTranslateX(translateX - prevSlidCount * 25);
-    }
+    setCurrentPage(currentPage - 1);
+    translateX < 100
+      ? setTranslateX(0)
+      : setTranslateX(translateX - prevSlidCount * 25);
   };
 
   return (
     <Container>
-      <Image
-        name="icon_arrow_left"
-        extension="svg"
-        width={36}
-        height={36}
-        onClick={prevPage}
-        hoverable={currentPage !== 1}
-      />
+      <ImageWrapper>
+        {currentPage !== 1 && (
+          <Image
+            name="icon_arrow_left"
+            extension="svg"
+            width={36}
+            height={36}
+            onClick={prevPage}
+            hoverable
+          />
+        )}
+      </ImageWrapper>
+
       <CarouselWithTextContainer>
         <TextContainer>
           <Text size={18} weight={800}>
@@ -81,14 +76,19 @@ export const Carousel = ({
           </Wrapper>
         </CarouselContainer>
       </CarouselWithTextContainer>
-      <Image
-        name="icon_arrow_right"
-        extension="svg"
-        width={36}
-        height={36}
-        onClick={nextPage}
-        hoverable={hasNextPage || Boolean(nextSlidCount)}
-      />
+
+      <ImageWrapper>
+        {(hasNextPage || Boolean(nextSlidCount)) && (
+          <Image
+            name="icon_arrow_right"
+            extension="svg"
+            width={36}
+            height={36}
+            onClick={nextPage}
+            hoverable
+          />
+        )}
+      </ImageWrapper>
     </Container>
   );
 };
@@ -127,4 +127,9 @@ const Wrapper = styled.ul`
   & > * {
     margin-right: 1.25rem;
   }
+`;
+
+const ImageWrapper = styled.div`
+  width: 2.25rem;
+  height: 2.25rem;
 `;
