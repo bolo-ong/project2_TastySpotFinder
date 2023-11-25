@@ -16,12 +16,13 @@ export const RestaurantListCarousel = () => {
       {restaurantLists &&
         restaurantLists.map((page) =>
           page.map((restaurantList: RestaurantList) => (
-            <Card
-              key={restaurantList._id}
-              title={restaurantList.title}
-              content={restaurantList.description}
-              src={restaurantList.thumbnail}
-            />
+            <li key={restaurantList._id}>
+              <Card
+                title={restaurantList.title}
+                content={restaurantList.description}
+                src={restaurantList.thumbnail}
+              />
+            </li>
           ))
         )}
     </Carousel>
