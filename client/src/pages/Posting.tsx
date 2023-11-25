@@ -4,9 +4,9 @@ import { PostingForm } from "components";
 export const Posting = () => {
   return (
     <Container>
-      <FormContainer>
+      <Wrapper>
         <PostingForm />
-      </FormContainer>
+      </Wrapper>
     </Container>
   );
 };
@@ -18,7 +18,7 @@ const Container = styled.div`
   min-height: 100%;
 `;
 
-const FormContainer = styled.div`
+const Wrapper = styled.div`
   min-width: 20rem;
   padding: 2.5rem 1.25rem;
   box-shadow: 0px 2px 10px rgba(63, 71, 77, 0.25);

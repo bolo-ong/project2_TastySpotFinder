@@ -48,7 +48,7 @@ export const SlotMachine = () => {
   );
 
   return (
-    <>
+    <Container>
       {isFadeOut && temperature ? (
         <StyledSpan fadeIn>
           {condition === "rain"
@@ -82,7 +82,7 @@ export const SlotMachine = () => {
         </SlotItem>
       )}
       <span>어때요?</span>
-    </>
+    </Container>
   );
 };
 
@@ -120,6 +120,16 @@ const rotateAnimation = keyframes`
     transform: translateY(-100%) scale(0.3);
     opacity: 0;
   }
+`;
+
+const Container = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  height: 3.125rem;
+  font-size: 2rem;
+  font-weight: 600;
 `;
 
 const SlotItem = styled.span<{
