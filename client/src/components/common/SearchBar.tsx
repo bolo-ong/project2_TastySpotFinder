@@ -39,12 +39,7 @@ export const SearchBar = ({ placeholder, ...rest }: Props) => {
           {inputValue && (
             <ImageWrapper position="right" onClick={handleClick}>
               <ClearIconWrapper>
-                <Image
-                  name="icon_clear"
-                  extension="svg"
-                  height={16}
-                  hoverable
-                />
+                <Image name="icon_clear" extension="svg" height={16} />
               </ClearIconWrapper>
             </ImageWrapper>
           )}
@@ -98,6 +93,10 @@ const ImageWrapper = styled.div<{ position?: string }>`
 const ClearIconWrapper = styled.div`
   position: relative;
   padding: 0.25rem;
-  border-radius: 6.25rem;
+  border-radius: 50%;
   background-color: #848c93;
+
+  &:hover {
+    filter: brightness(0.9);
+  }
 `;

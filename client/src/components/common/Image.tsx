@@ -43,7 +43,7 @@ const ImageWrapper = styled.div<ImageWrapperProps>`
       left: 0;
       width: 100%;
       height: 100%;
-      border-radius: 100%;
+      border-radius: 50%;
       background-color: #220c0c;
       opacity: 0.2;
     }
