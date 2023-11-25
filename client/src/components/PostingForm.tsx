@@ -98,7 +98,7 @@ export const PostingForm = () => {
   };
 
   return (
-    <>
+    <Container>
       <TitleWrapper>
         <Text size={24} weight={600}>
           맛집 공유하기
@@ -149,9 +149,15 @@ export const PostingForm = () => {
           </Button>
         )}
       </StyledForm>
-    </>
+    </Container>
   );
 };
+
+const Container = styled.div`
+  min-width: 20rem;
+  padding: 2.5rem 1.25rem;
+  box-shadow: 0px 2px 10px rgba(63, 71, 77, 0.25);
+`;
 
 const StyledForm = styled.form`
   display: flex;
