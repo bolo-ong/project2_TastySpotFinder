@@ -14,3 +14,10 @@ export const toastState = atom<ToastState>({
     message: "",
   },
 });
+
+export const activeTabState = atom({
+  key: "activeTab",
+  default: {
+    title: "한번에 보기",
+  },
+});

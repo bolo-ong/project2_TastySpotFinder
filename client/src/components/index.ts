@@ -6,6 +6,7 @@ export { Input } from "./common/Input";
 export { MenuItem } from "./common/MenuItem";
 export { Portal } from "./common/Portal";
 export { SearchBar } from "./common/SearchBar";
+export { Tab } from "./common/Tab";
 export { Text } from "./common/Text";
 
 export {
