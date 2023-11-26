@@ -2,16 +2,17 @@ import React, {
   useRef,
   useState,
   useEffect,
-  ChangeEvent,
   FormEvent,
+  ChangeEvent,
+  useCallback,
 } from "react";
 import styled from "@emotion/styled";
 import { theme } from "styles/theme";
 import { useToast } from "hooks";
 import { useNavigate } from "react-router-dom";
 import { Input, Button, Text } from "components";
+import { validateLink, validateRequired } from "utils";
 import { postRestaurantList, crawlRestaurant } from "apis/restaurantAPI";
-import { validateLink, validateRequired, validateErrorMessage } from "utils";
 
 export const PostingForm = () => {
   const navigate = useNavigate();
@@ -28,6 +29,7 @@ export const PostingForm = () => {
     title: "",
     description: "",
   });
+  const isError = validateLink(values.link) || validateRequired(values.title);
 
   const ref = useRef<HTMLInputElement>(null);
   useEffect(() => {
@@ -36,7 +38,7 @@ export const PostingForm = () => {
     }
   }, []);
 
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+  const handleChange = useCallback((e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
 
     setValues((prev) => ({ ...prev, [name]: value }));
@@ -52,7 +54,7 @@ export const PostingForm = () => {
         }));
         break;
     }
-  };
+  }, []);
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
@@ -64,8 +66,7 @@ export const PostingForm = () => {
       title: validateRequired(values.title),
     }));
 
-    //validateErrorMessage 함수를 이용해서 에러메세지가 존재하는지 확인
-    if (validateErrorMessage(errorMessage)) {
+    if (!isError) {
       setIsLoading(true);
       try {
         const data = {
@@ -92,6 +93,8 @@ export const PostingForm = () => {
 
         setIsLoading(false);
       } catch (err) {
+        setIsLoading(false);
+        showToast("게시물 등록에 실패하였습니다.", "warning");
         console.error(err);
       }
     }
