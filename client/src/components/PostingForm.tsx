@@ -70,6 +70,7 @@ export const PostingForm = () => {
       setIsLoading(true);
       try {
         const data = {
+          link: values.link,
           title: values.title,
           description: values.description,
         };
