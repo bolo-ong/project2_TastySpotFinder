@@ -1,4 +1,4 @@
-import React, { FormEvent, ChangeEvent, useState } from "react";
+import React, { FormEvent, useState } from "react";
 import styled from "@emotion/styled";
 import { theme } from "styles/theme";
 import { Image } from "components";
@@ -14,14 +14,6 @@ export const SearchBar = ({ placeholder, ...rest }: Props) => {
     //inputValue.replace(/ /g, '') === '' 일 땐 submit안되게
   };
 
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setInputValue(e.target.value);
-  };
-
-  const handleClick = () => {
-    setInputValue("");
-  };
-
   return (
     <Container {...rest}>
       <form>
@@ -34,10 +26,10 @@ export const SearchBar = ({ placeholder, ...rest }: Props) => {
             type="text"
             placeholder={placeholder}
             onSubmit={handleSubmit}
-            onChange={handleChange}
+            onChange={(e) => setInputValue(e.target.value)}
           />
           {inputValue && (
-            <ImageWrapper position="right" onClick={handleClick}>
+            <ImageWrapper position="right" onClick={() => setInputValue("")}>
               <ClearIconWrapper>
                 <Image name="icon_clear" extension="svg" height={16} />
               </ClearIconWrapper>
