@@ -28,11 +28,13 @@ export const crawlRestaurant = async (
   }
 };
 
-export const getRestaurantList = async (page: number) => {
+export const getRestaurantList = async (page: number, sortType?: string) => {
   try {
-    const res = await axios.get(
-      `/api/restaurant/getRestaurantList?page=${page}`
-    );
+    let url = `/api/restaurant/getRestaurantList?page=${page}`;
+    if (sortType) {
+      url += `&sortType=${sortType}`;
+    }
+    const res = await axios.get(url);
     return res.data;
   } catch (err) {
     console.error(err);
@@ -40,9 +42,13 @@ export const getRestaurantList = async (page: number) => {
   }
 };
 
-export const getRestaurant = async (page: number) => {
+export const getRestaurant = async (page: number, sortType?: string) => {
   try {
-    const res = await axios.get(`/api/restaurant/getRestaurant?page=${page}`);
+    let url = `/api/restaurant/getRestaurant?page=${page}`;
+    if (sortType) {
+      url += `&sortType=${sortType}`;
+    }
+    const res = await axios.get(url);
     return res.data;
   } catch (err) {
     console.error(err);

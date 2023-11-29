@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+import mongoose, { Aggregate, PipelineStage } from "mongoose";
 import { Request, Response } from "express";
 import { crawlData } from "../utils/crawler";
 import {
@@ -102,19 +102,48 @@ export const getRestaurantList = async (req: Request, res: Response) => {
 };
 
 export const getRestaurant = async (req: Request, res: Response) => {
-  //처음에 8개의 데이터를 보내주고, 이후 4개씩 보내줌
   const page = parseInt(req.query.page as string) || 1;
   const pageSize = page === 1 ? 8 : 4;
   const skipCount = page === 1 ? 0 : 4;
 
+  const sortType = req.query.sortType as string;
+  console.log(sortType);
   try {
-    const restaurant = await Restaurant.find()
+    let sortAggregate: PipelineStage[] = [];
 
-      .skip((page - 1) * pageSize + skipCount)
-      .limit(pageSize)
-      .exec();
+    switch (sortType) {
+      case "최신순":
+        sortAggregate = [{ $sort: { updatedAt: -1, _id: 1 } }];
+        break;
+      case "찜 많은순":
+        sortAggregate = [
+          { $match: { savedByUsers: { $exists: true } } },
+          { $addFields: { savedByUsersCount: { $size: "$savedByUsers" } } },
+          { $sort: { savedByUsersCount: -1, _id: 1 } },
+        ];
+        break;
+      case "추천 많은순":
+        sortAggregate = [{ $sort: { count: -1, _id: 1 } }];
+        break;
+      case "리뷰 많은순":
+        sortAggregate = [
+          { $match: { comments: { $exists: true } } },
+          { $addFields: { commentsCount: { $size: "$comments" } } },
+          { $sort: { commentsCount: -1, _id: 1 } },
+        ];
+        break;
+      default:
+        sortAggregate = [{ $sort: { updatedAt: -1, _id: 1 } }];
+        break;
+    }
 
-    res.status(200).json(restaurant);
+    const restaurants = await Restaurant.aggregate([
+      ...sortAggregate,
+      { $skip: (page - 1) * pageSize + skipCount },
+      { $limit: pageSize },
+    ]);
+
+    res.status(200).json(restaurants);
   } catch (error) {
     res.status(500).json({ message: "Server Error" });
   }
