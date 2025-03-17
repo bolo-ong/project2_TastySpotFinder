@@ -67,5 +67,13 @@ export const theme: Theme = {
       "#444343",
     ],
   },
-  pxToRem: (px) => `${px / 16}rem`,
+  pxToRem: (px: number | string) => {
+    // px가 문자열일때 처리
+    if (typeof px === "string") {
+      const numericPx = parseFloat(px);
+      return `${numericPx / 16}rem`;
+    } else {
+      return `${px / 16}rem`;
+    }
+  },
 };

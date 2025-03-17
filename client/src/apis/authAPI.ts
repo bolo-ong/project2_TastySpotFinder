@@ -2,7 +2,6 @@ import axios from "apis";
 
 /**
  * 유저 프로필 데이터를 받는 API
- * 로그인 시 @returns {Promise<{ displayName: string, profile_image: string, provider: string }>}
  * 비로그인 시 @returns {string} "Login required"
  */
 export const getUserProfile = async () => {

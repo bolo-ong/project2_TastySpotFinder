@@ -36,6 +36,7 @@ export const GlobalStyle = () => {
         }
         a.active {
           color: ${theme.colors.main[5]};
+          cursor: default;
         }
         button {
           padding: 0;
@@ -64,6 +65,11 @@ export const GlobalStyle = () => {
           background: none;
           border: none;
           resize: none;
+        }
+
+        input::placeholder,
+        textarea::placeholder {
+          color: ${theme.colors.gray[6]};
         }
       `}
     />

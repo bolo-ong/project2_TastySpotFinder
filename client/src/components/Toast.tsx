@@ -8,6 +8,7 @@ import { useEffect } from "react";
 import { useToast } from "hooks";
 
 export const Toast = () => {
+  const id = new Date().getTime().toString();
   const [toast] = useRecoilState(toastState);
   const { hideToast } = useToast();
   const { isOpen, variant, message } = toast;
@@ -21,14 +22,14 @@ export const Toast = () => {
         clearTimeout(timer);
       };
     }
-  }, [isOpen]);
+  }, [id]);
 
   return (
     <>
       {isOpen && (
         <Portal>
           <Container>
-            <ToastItem variant={variant}>
+            <ToastItem key={id} variant={variant}>
               <Image
                 name={`icon_${variant}_circle`}
                 extension="svg"
@@ -69,6 +70,8 @@ const Container = styled.div`
   bottom: 5%;
   left: 50%;
   transform: translateX(-50%);
+
+  z-index: 100000;
 `;
 
 const ToastItem = styled.div<{ variant: ToastState["variant"] }>`

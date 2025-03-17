@@ -12,6 +12,6 @@ declare module "@emotion/react" {
       warning: string[];
       gray: string[];
     };
-    pxToRem: (px: number) => string;
+    pxToRem: (px: number | string) => string;
   }
 }

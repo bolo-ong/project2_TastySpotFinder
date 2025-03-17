@@ -15,9 +15,9 @@ export const toastState = atom<ToastState>({
   },
 });
 
-export const activeTabState = atom({
-  key: "activeTab",
+export const InfinityScrollRestaurantState = atom({
+  key: "InfinityScrollRestaurantState",
   default: {
-    title: "한번에 보기",
+    title: "",
   },
 });

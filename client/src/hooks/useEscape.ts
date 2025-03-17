@@ -6,12 +6,12 @@ import { useEffect, RefObject } from "react";
  * @param {RefObject<HTMLElement | null>} ref - 외부 영역 클릭 감지를 위한 RefObject
  */
 export const useEscape = (
-  callback: () => void,
+  callback?: () => void,
   ref?: RefObject<HTMLElement | null>
 ) => {
   // ESC를 누르면 콜백함수 실행
   const handleKeyDown = (e: KeyboardEvent) => {
-    if (e.key === "Escape") {
+    if (e.key === "Escape" && callback) {
       callback();
     }
   };
@@ -22,20 +22,25 @@ export const useEscape = (
       ref &&
       ref.current &&
       ref.current.parentElement &&
-      !ref.current.parentElement.contains(e.target as Node)
+      !ref.current.parentElement.contains(e.target as Node) &&
+      callback
     ) {
       callback();
     }
   };
 
   useEffect(() => {
-    document.addEventListener("keydown", handleKeyDown);
+    if (callback) {
+      document.addEventListener("keydown", handleKeyDown);
+    }
     if (ref) {
       document.addEventListener("mousedown", handleClick);
     }
 
     return () => {
-      document.removeEventListener("keydown", handleKeyDown);
+      if (callback) {
+        document.removeEventListener("keydown", handleKeyDown);
+      }
       if (ref) {
         document.removeEventListener("mousedown", handleClick);
       }

@@ -5,6 +5,7 @@ import {
   SlotMachine,
   RestaurantListCarousel,
   RestaurantCarousel,
+  Footer,
 } from "components";
 
 export const Main = () => {
@@ -23,6 +24,7 @@ export const Main = () => {
           <RestaurantCarousel />
         </CarouselContainer>
       </Container>
+      <Footer />
     </PageContainer>
   );
 };
@@ -43,7 +45,7 @@ const Container = styled.div`
   align-items: center;
 
   width: 80rem;
-  margin: 0 auto;
+  margin: 0 auto 10rem auto;
 `;
 
 const Wrapper = styled.div`

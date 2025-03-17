@@ -1,12 +1,39 @@
-import { Request, Response } from "express";
+import { Request, Response, NextFunction } from "express";
 
 const CLIENT_URL = process.env.CLIENT_URL ?? "http://localhost:3000";
 
-export const authenticateUser = (req: Request, res: Response) => {
+export const authenticateUser = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
   try {
-    res.redirect(CLIENT_URL + "/redirect");
-  } catch (err) {
-    res.status(500);
+    if (!req.user) {
+      console.error("User data not available after authentication");
+      return res.redirect(`${CLIENT_URL}`);
+    }
+
+    // 세션 저장 완료를 기다림
+    await new Promise<void>((resolve, reject) => {
+      req.session.save((err) => {
+        if (err) {
+          console.error("Session save error:", err);
+          reject(err);
+        } else {
+          resolve();
+        }
+      });
+    });
+
+    console.log("Authentication successful:", {
+      sessionID: req.sessionID,
+      user: req.user,
+    });
+
+    res.redirect(CLIENT_URL);
+  } catch (error) {
+    console.error("Authentication error:", error);
+    res.redirect(`${CLIENT_URL}`);
   }
 };
 
@@ -44,15 +71,25 @@ export const getUserProfile = (req: Request, res: Response) => {
   try {
     if (req.isAuthenticated()) {
       const userProfile = {
+        _id: req.user._id,
         displayName: req.user.displayName,
         profile_image: req.user.profile_image,
         provider: req.user.provider,
+        savedRestaurantLists: req.user.savedRestaurantLists,
+        savedRestaurants: req.user.savedRestaurants,
+        reviewCount: req.user.reviewCount,
+        receivedLikes: req.user.receivedLikes,
+        role: req.user.role,
+        ban: req.user.ban,
+        recommendedRestaurantListsCount:
+          req.user.recommendedRestaurantListsCount,
+        recommendedRestaurantsCount: req.user.recommendedRestaurantsCount,
       };
-      res.send(userProfile);
+      return res.status(200).send(userProfile);
     } else {
-      res.send("Login required");
+      return res.status(200).send("Login required");
     }
   } catch (err) {
-    res.status(500);
+    return res.status(500).json({ message: "Internal server error" });
   }
 };

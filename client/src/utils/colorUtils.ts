@@ -1,5 +1,5 @@
 /**
- * 컬로코드를 파라미터로 받고, 밝은색으로 만들어줌
+ * 컬러코드를 파라미터로 받고, 밝은색으로 만들어줌
  * @param {string} color (#RRGGBB)
  * @returns {string}
  */
@@ -17,7 +17,7 @@ export const makeLightenColor = (color: string): string => {
 };
 
 /**
- * 컬로코드를 파라미터로 받고, 어두운색으로 만들어줌
+ * 컬러코드를 파라미터로 받고, 어두운색으로 만들어줌
  * @param {string} color (#RRGGBB)
  * @returns {string}
  */

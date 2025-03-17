@@ -9,8 +9,10 @@ interface RestaurantListType {
   like: number;
   writer: Types.ObjectId;
   restaurants?: Types.ObjectId[];
-  savedByUsers?: Types.ObjectId[];
-  comments?: Comment[];
+  reviewCount?: number;
+  reportedBy?: { userId: Types.ObjectId; reportedAt: Date }[];
+
+  isBlinded?: boolean;
 }
 
 const restaurantListSchema = new Schema<RestaurantListType>(
@@ -19,23 +21,20 @@ const restaurantListSchema = new Schema<RestaurantListType>(
     description: { type: String },
     thumbnail: [{ type: String }],
     crawlURL: { type: String },
-    like: { type: Number, default: 0 },
+    like: { type: Number, default: 0 }, // 받은 좋아요 수
     writer: {
       type: Schema.Types.ObjectId,
       ref: "User",
     },
-    restaurants: [{ type: Schema.Types.ObjectId, ref: "Restaurant" }],
-    savedByUsers: [{ type: Schema.Types.ObjectId, ref: "User" }],
-
-    comments: [
+    restaurants: [{ type: Schema.Types.ObjectId, ref: "Restaurant" }], // 이 리스트에 포함된 식당들
+    reviewCount: { type: Number, default: 0 }, // 받은 리뷰 수
+    reportedBy: [
       {
-        user: { type: String },
-        text: { type: String },
-      },
-      {
-        timestamps: true,
+        userId: { type: Schema.Types.ObjectId, ref: "User" },
+        reportedAt: { type: Date },
       },
     ],
+    isBlinded: { type: Boolean, default: false },
   },
   {
     timestamps: true,

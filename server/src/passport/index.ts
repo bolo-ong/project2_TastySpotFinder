@@ -15,7 +15,7 @@ passport.deserializeUser(
     User.findOne({ userId: user })
       .then((user: UserType | null) => {
         done(null, user);
-        console.log("deserialize", user);
+        // console.log("deserialize", user);
       })
       .catch((err) => {
         done(err, null);

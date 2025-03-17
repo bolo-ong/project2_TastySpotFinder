@@ -13,11 +13,11 @@ export const LogIn = () => {
   return (
     <Container>
       <SocialLogInButtonContainer>
-        <SocialLogInButton onClick={handleClick} provider="naver">
-          네이버 로그인
+        <SocialLogInButton onClick={handleClick} provider="naver" disabled>
+          네이버 로그인 (준비중)
         </SocialLogInButton>
-        <SocialLogInButton onClick={handleClick} provider="kakao">
-          카카오 로그인
+        <SocialLogInButton onClick={handleClick} provider="kakao" disabled>
+          카카오 로그인 (준비중)
         </SocialLogInButton>
         <SocialLogInButton onClick={handleClick} provider="google">
           구글 로그인

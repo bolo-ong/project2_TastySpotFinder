@@ -2,6 +2,7 @@ import styled from "@emotion/styled";
 import { theme } from "styles/theme";
 import { useState } from "react";
 import { Text, Image } from "components";
+import { Link } from "react-router-dom";
 
 export interface Props {
   children: React.ReactNode;
@@ -9,6 +10,7 @@ export interface Props {
   handleFetchNextPage: () => void;
   hasNextPage: boolean;
   title: string;
+  path: string;
 }
 
 export const Carousel = ({
@@ -17,6 +19,7 @@ export const Carousel = ({
   carouselItem,
   hasNextPage,
   title,
+  path,
   ...rest
 }: Props) => {
   const [translateX, setTranslateX] = useState<number>(0);
@@ -63,12 +66,16 @@ export const Carousel = ({
 
       <CarouselWithTextContainer>
         <TextContainer>
-          <Text size={18} weight={800}>
-            {title}
-          </Text>
-          <Text size={16} weight={600} color={theme.colors.main[5]} hoverable>
-            더보기
-          </Text>
+          <Link to={path}>
+            <Text size={18} weight={800}>
+              {title}
+            </Text>
+          </Link>
+          <Link to={path}>
+            <Text size={16} weight={600} color={theme.colors.main[5]} hoverable>
+              더보기
+            </Text>
+          </Link>
         </TextContainer>
         <CarouselContainer>
           <Wrapper style={{ transform: `translateX(-${translateX}%)` }}>
@@ -104,7 +111,7 @@ const CarouselWithTextContainer = styled.div`
   display: flex;
   flex-direction: column;
   width: 68.75rem;
-  gap: 1.25rem;
+  gap: 1rem;
   margin: 0 0.5rem 0 1.75rem;
   padding-bottom: 3.125rem;
   border-bottom: 0.125rem solid ${theme.colors.gray};

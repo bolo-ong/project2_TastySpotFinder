@@ -1,0 +1,10 @@
+export { Board } from "./Board";
+export { LocationPolicy } from "./LocationPolicy";
+export { LogIn } from "./LogIn";
+export { LogInRedirectPage } from "./LogInRedirectPage";
+export { Main } from "./Main";
+export { MyPage } from "./MyPage";
+export { Posting } from "./Posting";
+export { PrivacyPolicy } from "./PrivacyPolicy";
+export { RestaurantDetail } from "./RestaurantDetail";
+export { RestaurantListDetail } from "./RestaurantListDetail";

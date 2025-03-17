@@ -1,13 +1,14 @@
 import styled from "@emotion/styled";
-import { useInterval, useGetWeatherData } from "hooks";
+import { useInterval } from "hooks";
+import { useGetWeatherDataQuery } from "queries";
 import { getRecommendationFoods } from "utils";
 import { recommendationFoods } from "constants/recommendationFoods";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { keyframes } from "@emotion/react";
 import { Link } from "react-router-dom";
 
 export const SlotMachine = () => {
-  const { temperature, condition } = useGetWeatherData();
+  const { temperature, condition } = useGetWeatherDataQuery();
   const [recommendationFood, setRecommendationFood] = useState<string | null>(
     null
   );
@@ -39,30 +40,34 @@ export const SlotMachine = () => {
     !recommendationFood ? animationDuration * 1000 : null
   );
 
-  useInterval(
-    () => {
-      //날씨와 온도 데이터를 받아온 후 기존의 텍스트를 fadeout시키고, 새로운 텍스트를 fadein시킵니다.
-      temperature && condition && setIsFadeOut(true);
-    },
-    !isFadeOut ? 1000 : null
-  );
+  const getWeatherText = () => {
+    // 초기 1초 동안은 무조건 "오늘" 표시
+    if (!temperature || !condition) return "오늘";
+
+    // 1초 후에도 데이터가 없다면 위치 정보 거부로 간주
+    const temp = parseInt(temperature);
+    if (condition === "rain") return "비올땐";
+    if (temp < 0) return "뜨끈한";
+    if (temp <= 10) return "따뜻한";
+    if (temp <= 25) return "맛있는";
+    return "더울땐";
+  };
+
+  // 위치정보와 날씨 데이터를 기다리기 위한 타이머 추가
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      if (temperature && condition) {
+        setIsFadeOut(true);
+      }
+    }, 1000); // 1초 후에 체크
+
+    return () => clearTimeout(timer);
+  }, [temperature, condition]);
 
   return (
     <Container>
-      {isFadeOut && temperature ? (
-        <StyledSpan fadeIn>
-          {condition === "rain"
-            ? "비올땐"
-            : parseInt(temperature) < 0
-            ? "뜨끈한"
-            : parseInt(temperature) <= 10
-            ? "따뜻한"
-            : parseInt(temperature) <= 25
-            ? "무난한"
-            : "더울땐"}
-        </StyledSpan>
-      ) : condition ? (
-        <StyledSpan fadeOut>오늘</StyledSpan>
+      {isFadeOut ? (
+        <StyledSpan fadeIn>{getWeatherText()}</StyledSpan>
       ) : (
         <StyledSpan>오늘</StyledSpan>
       )}
@@ -74,7 +79,14 @@ export const SlotMachine = () => {
           duration={animationDuration}
           style={{ cursor: "pointer" }}
         >
-          <Link to="/">{recommendationFood}</Link>
+          <Link
+            to={{
+              pathname: "/board",
+              search: `?search=${recommendationFood}`,
+            }}
+          >
+            {recommendationFood}
+          </Link>
         </SlotItem>
       ) : (
         <SlotItem key={randomFoodIndex} spinning duration={animationDuration}>
@@ -140,6 +152,7 @@ const SlotItem = styled.span<{
   display: flex;
   justify-content: center;
   align-items: center;
+  color: ${({ theme }) => theme.colors.main[5]};
 
   width: 9.375rem;
 
