@@ -8,7 +8,9 @@ ENV \
     PUPPETEER_CACHE_DIR=/app/.cache/puppeteer \
     PUPPETEER_EXECUTABLE_PATH=/usr/bin/google-chrome-stable \
     # 타임아웃 설정 증가
-    PUPPETEER_TIMEOUT=120000
+    PUPPETEER_TIMEOUT=180000 \
+    # Node.js 메모리 한도 증가
+    NODE_OPTIONS=--max-old-space-size=4096
 
 # Upgrade npm to a compatible version
 RUN npm install -g npm@10.2.4 && npm cache clean --force
@@ -73,6 +75,9 @@ RUN google-chrome-stable --version || echo "Chrome not installed correctly" \
     && mkdir -p /tmp/.X11-unix && chmod 1777 /tmp/.X11-unix \
     && mkdir -p /tmp/puppeteer && chmod 777 /tmp/puppeteer \
     && mkdir -p /app/.cache && chmod -R 777 /app/.cache
+
+# 메모리 설정을 위한 추가 디렉토리
+RUN mkdir -p /dev/shm && chmod 777 /dev/shm
 
 WORKDIR /app
 
