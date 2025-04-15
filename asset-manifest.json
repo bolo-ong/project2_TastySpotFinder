@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.js": "/project2_TastySpotFinder/static/js/main.4e36870e.js",
+    "main.js": "/project2_TastySpotFinder/static/js/main.dfc0d69b.js",
     "static/js/787.c4e7f8f9.chunk.js": "/project2_TastySpotFinder/static/js/787.c4e7f8f9.chunk.js",
     "static/media/logo_naver_map.svg": "/project2_TastySpotFinder/static/media/logo_naver_map.4b143a6eb07724655a43.svg",
     "static/media/logo_google.svg": "/project2_TastySpotFinder/static/media/logo_google.70939c8e6b6f8ba30c4e.svg",
@@ -34,10 +34,10 @@
     "static/media/icon_restaurant.svg": "/project2_TastySpotFinder/static/media/icon_restaurant.6ca595ef238dfa1aca4a.svg",
     "static/media/icon_delete.svg": "/project2_TastySpotFinder/static/media/icon_delete.888c5c073e11d2317936.svg",
     "static/media/icon_arrow_back.svg": "/project2_TastySpotFinder/static/media/icon_arrow_back.58acb58c0d6bedac27e8.svg",
-    "main.4e36870e.js.map": "/project2_TastySpotFinder/static/js/main.4e36870e.js.map",
+    "main.dfc0d69b.js.map": "/project2_TastySpotFinder/static/js/main.dfc0d69b.js.map",
     "787.c4e7f8f9.chunk.js.map": "/project2_TastySpotFinder/static/js/787.c4e7f8f9.chunk.js.map"
   },
   "entrypoints": [
-    "static/js/main.4e36870e.js"
+    "static/js/main.dfc0d69b.js"
   ]
 }
