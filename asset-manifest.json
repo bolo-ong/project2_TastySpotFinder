@@ -1,0 +1,43 @@
+{
+  "files": {
+    "main.js": "/project2_TastySpotFinder/static/js/main.5fadac90.js",
+    "static/js/787.c4e7f8f9.chunk.js": "/project2_TastySpotFinder/static/js/787.c4e7f8f9.chunk.js",
+    "static/media/logo_naver_map.svg": "/project2_TastySpotFinder/static/media/logo_naver_map.4b143a6eb07724655a43.svg",
+    "static/media/logo_google.svg": "/project2_TastySpotFinder/static/media/logo_google.70939c8e6b6f8ba30c4e.svg",
+    "static/media/icon_spinner.svg": "/project2_TastySpotFinder/static/media/icon_spinner.f26aaeaf27c09467edf204c7548c1581.svg",
+    "static/media/logo_main.png": "/project2_TastySpotFinder/static/media/logo_main.7902ccfc07da52d43fd0.png",
+    "index.html": "/project2_TastySpotFinder/index.html",
+    "static/media/icon_star_filled.svg": "/project2_TastySpotFinder/static/media/icon_star_filled.2c12fdc74f62a586095d.svg",
+    "static/media/icon_share.svg": "/project2_TastySpotFinder/static/media/icon_share.d0b204a203cc6e0a8428.svg",
+    "static/media/icon_scroll_to_top.svg": "/project2_TastySpotFinder/static/media/icon_scroll_to_top.925d734e671461f4cd81.svg",
+    "static/media/logo_naver.svg": "/project2_TastySpotFinder/static/media/logo_naver.cb3b8260447c0c80964d.svg",
+    "static/media/icon_star_half.svg": "/project2_TastySpotFinder/static/media/icon_star_half.110742f5e701cde28afa.svg",
+    "static/media/icon_arrow_down.svg": "/project2_TastySpotFinder/static/media/icon_arrow_down.0d4bd4909e6e158bd761.svg",
+    "static/media/icon_more.svg": "/project2_TastySpotFinder/static/media/icon_more.514380d69089d14dd14f.svg",
+    "static/media/icon_default_profile.svg": "/project2_TastySpotFinder/static/media/icon_default_profile.f921fe2d229a9a785cfe85a991c99072.svg",
+    "static/media/icon_star_empty.svg": "/project2_TastySpotFinder/static/media/icon_star_empty.d7a98ad59481b8adb577.svg",
+    "static/media/logo_kakao.svg": "/project2_TastySpotFinder/static/media/logo_kakao.a9bffd1bb8be07112ee7.svg",
+    "static/media/icon_search.svg": "/project2_TastySpotFinder/static/media/icon_search.610ccdf84901e114ee24.svg",
+    "static/media/icon_contact.svg": "/project2_TastySpotFinder/static/media/icon_contact.3a83405ef64a9aaaa34f.svg",
+    "static/media/icon_location.svg": "/project2_TastySpotFinder/static/media/icon_location.198564410340373a2a38a6571a5ea394.svg",
+    "static/media/icon_info_circle.svg": "/project2_TastySpotFinder/static/media/icon_info_circle.a1843f1ec703d8fddddf.svg",
+    "static/media/icon_success_circle.svg": "/project2_TastySpotFinder/static/media/icon_success_circle.a2c6822a0bacffc40118.svg",
+    "static/media/icon_warning_circle.svg": "/project2_TastySpotFinder/static/media/icon_warning_circle.70d35fdab5dc2698f92c.svg",
+    "static/media/icon_sort_down.svg": "/project2_TastySpotFinder/static/media/icon_sort_down.6d45f57eff08211e26ad.svg",
+    "static/media/icon_clear.svg": "/project2_TastySpotFinder/static/media/icon_clear.7d83d47908cb18e6b0bf.svg",
+    "static/media/icon_sort_up.svg": "/project2_TastySpotFinder/static/media/icon_sort_up.816b1bfd37d9533752cd.svg",
+    "static/media/icon_bookmarker.svg": "/project2_TastySpotFinder/static/media/icon_bookmarker.9e73b6d06b6837612565.svg",
+    "static/media/icon_bookmarker_filled.svg": "/project2_TastySpotFinder/static/media/icon_bookmarker_filled.831dcbec79cc877d0da4.svg",
+    "static/media/icon_arrow_right.svg": "/project2_TastySpotFinder/static/media/icon_arrow_right.466298e42eba130798f4.svg",
+    "static/media/icon_arrow_left.svg": "/project2_TastySpotFinder/static/media/icon_arrow_left.ae79923d68dae909b87e.svg",
+    "static/media/icon_required_marker.svg": "/project2_TastySpotFinder/static/media/icon_required_marker.db59f96341c1da642613179c3e14462f.svg",
+    "static/media/icon_restaurant.svg": "/project2_TastySpotFinder/static/media/icon_restaurant.6ca595ef238dfa1aca4a.svg",
+    "static/media/icon_delete.svg": "/project2_TastySpotFinder/static/media/icon_delete.888c5c073e11d2317936.svg",
+    "static/media/icon_arrow_back.svg": "/project2_TastySpotFinder/static/media/icon_arrow_back.58acb58c0d6bedac27e8.svg",
+    "main.5fadac90.js.map": "/project2_TastySpotFinder/static/js/main.5fadac90.js.map",
+    "787.c4e7f8f9.chunk.js.map": "/project2_TastySpotFinder/static/js/787.c4e7f8f9.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/js/main.5fadac90.js"
+  ]
+}
